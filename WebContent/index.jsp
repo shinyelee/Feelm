@@ -133,7 +133,7 @@
 <!-- 메인 콘텐츠 -->
 
 <!-- 푸터 -->
-	<footer>
+	<footer style="background-color: #222222; color: #ffffff">
 		<div class="container"><br>
 			<div class="row">
 				<div class="col-sm-3" style="text-align: center;"><h5>Copyright &copy; 2020</h5><h5>이미연(MiYeon Lee)</h5></div>
