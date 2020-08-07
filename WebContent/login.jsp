@@ -20,7 +20,7 @@
 		}
 		a, a:hover {
 			color: #ffffff;
-			}
+		}
 	</style>
 </head>
 <body>
@@ -29,22 +29,23 @@
 
 	<!-- 로그인 양식 -->
 	<div class="container"> <!-- 로그인창 레이아웃 설정이라고 생각하면 됨 -->
-		<div class="col-lg-4"></div>
+		<div class="col-lg-6 col-lg-offset-3">
 			<div class="jumbotron" style="padding-top: 20px;">
 			 	<form method="post" action="loginAction.jsp"> <!-- 해당 페이지로 정보 전송 -->
 			 		<h3 style="text-align: center:">로그인이 필요합니다.</h3> <!-- 가운데 정렬 -->
 			 		<!-- 아이디, 비밀번호 입력창 -->
 			 		<div class="form-group"> <!-- 아이디 == userID -->
-			 			<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">	
+			 			<input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="userID" maxlength="25">	
 			 		</div>
 			 		<div class="form-group"> <!-- 비밀번호 == userPassword -->
-			 			<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20">	
+			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="25">	
 			 		</div>
 			 		<!-- 로그인 버튼 -->
 			 		<input type="submit" class="btn btn-danger form-control" value="로그인">
-			 		<a href="join.jsp">* 아직 Moviehere의 회원이 아닙니다.</a>
+			 		<a href="join.jsp">* 아직 Moviehere의 회원이 아니신가요?</a>
 			 	</form>
 			</div>
+		</div>
 	</div>
 	
 <!-- 푸터 -->

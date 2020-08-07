@@ -17,6 +17,9 @@
 			text-shadow: black 0.2em 0.2em 0.2em;
 			color: white;
 		}
+		a, a:hover {
+			color: #ffffff;
+		}
 	</style>
 </head>
 <body>

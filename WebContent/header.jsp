@@ -31,7 +31,7 @@
 				%>
 				<!-- 아이디 == null이면 로그인 필요하므로 로그인 버튼 보이게 함 -->
 					<form class="navbar-form navbar-right">
-						<button type="submit" class="btn btn-danger">로그인</button>
+						<a class="btn btn-danger" href="review.jsp">로그인</a></button>
 					</form>
 				<%		
 					// } else {

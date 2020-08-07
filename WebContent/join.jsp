@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Moviehere | jogin</title>
+	<title>Moviehere | join</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/custom.css">
@@ -20,7 +20,7 @@
 		}
 		a, a:hover {
 			color: #ffffff;
-			}
+		}
 	</style>
 </head>
 <body>
@@ -29,19 +29,19 @@
 
 	<!-- 회원가입 양식 -->
 	<div class="container">
-		<div class="col-lg-4"></div>
+		<div class="col-lg-6 col-lg-offset-3">
 			<div class="jumbotron" style="padding-top: 20px;">
 			 	<form method="post" action="joinAction.jsp"> <!-- 데이터를 joinAction.jsp로 보냄 -->
 			 		<h3 style="text-align: center:">회원가입이 필요합니다.</h3>
 			 		<!-- 아이디, 비밀번호, 이름, 성별, 이메일 입력창 -->
 			 		<div class="form-group">
-			 			<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">	
+			 			<input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="userID" maxlength="25">	
 			 		</div>
 			 		<div class="form-group">
-			 			<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20">	
+			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="25">	
 			 		</div>
 			 		<div class="form-group"> <!-- 이름 입력란 추가 -->
-			 			<input type="text" class="form-control" placeholder="이름" name="userName" maxlength="20">	
+			 			<input type="text" class="form-control" placeholder="이름/닉네임을 입력해주세요" name="userName" maxlength="25">	
 			 		</div>
 			 		<div class="form-group" style="text-align: center;"> <!-- 성별 선택 버튼 추가 -->
 			 			<div class="btn-group" data-toggle="buttons">
@@ -54,13 +54,14 @@
 			 			</div>
 			 		</div>
 			 		<div class="form-group"> <!-- 이메일 입력란 추가 -->
-			 			<input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="20">	
+			 			<input type="email" class="form-control" placeholder="이메일 주소를 입력해주세요" name="userEmail" maxlength="50">	
 			 		</div>
 			 		<!-- 회원가입 버튼 -->
 			 		<input type="submit" class="btn btn-danger form-control" value="회원가입">
-			 		<a href="login.jsp">* 이미 Moviehere의 회원입니다.</a>
+			 		<a href="login.jsp">* 이미 Moviehere의 회원이신가요?</a>
 			 	</form>
 			</div>
+		</div>
 	</div>
 	
 <!-- 푸터 -->
