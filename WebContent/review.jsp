@@ -10,12 +10,20 @@
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/custom.css">
+	<!-- 하이퍼링크로 인해 제목이 밑줄 친 파란색으로 표시되는 것 방지 -->
+	<style type="text/css">
+		a, a:hover {
+			color: #000000;
+			text-decoration: none;
+			}
+	</style>
 </head>
 <body>
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
+
 <!-- 한줄리뷰 등록창 -->
-<section class="container">
+<div class="container">
 	<form method="get" action="index.jsp" class="form-inline mt-3">
 	<!-- 장르 드롭다운 -->
 		<select name="movieGenre" class="form-control mx-1 mt-2">
@@ -31,14 +39,9 @@
 		<a class="btn btn-default mx-1 mt-2" data-toggle="modal" href="#registerModal">등록</a>
 		<a class="btn btn-default mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	</form>
-</section>
-<!-- 한줄평 양식 만들어보기 -->
-
-
-<section class="container">
-</section>
-
-
+	<!-- 등록된 리뷰 양식 -->
+	<jsp:include page="reviewThumbnail.jsp" flush="false" />
+</div>
 <!-- 페이지네이션 -->
 <section class="container">
 	<ul class="pagination justify-content-center mt-3">
@@ -75,7 +78,7 @@
 					<div class="form-row">
 						<div class="form-group col-sm-12">
 							<label>한줄감상</label>
-							<input type="text" name="shortReview" class="form-control" maxlength="50" placeholder="최대 50자까지 작성 가능합니다.">
+							<input type="text" name="shortReview" class="form-control" maxlength="25" placeholder="최대 25자까지 작성 가능합니다.">
 						</div>
 						<div class="form-group col-sm-12">
 							<label>장문감상</label>
@@ -102,11 +105,11 @@
 			<div class="modal-body">
 				<form action="reviewReportAction.jsp" method="post">
 					<div class="form-row">
-						<div class="form-group col-sm-9">
+						<div class="form-group col-sm-8">
 							<label>글제목</label>
-							<input type="text" name="reportTitle" class="form-control" maxlength="50">
+							<input type="text" name="reportTitle" class="form-control" maxlength="25">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-sm-4">
 							<label>아이디</label>
 							<input type="text" name="userID" class="form-control" maxlength="50">
 						</div>

@@ -22,8 +22,9 @@
 					<li class="nav-item"><a class="nav-link" href="index.jsp">MovieHere</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">영화소개</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">영화예매</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">영화리뷰</a></li>
+					<li class="nav-item"><a class="nav-link" href="review.jsp">영화리뷰</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
 				</ul>
 				<%
 					// if(userID == null) {
