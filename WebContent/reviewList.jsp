@@ -19,14 +19,14 @@
 						%>
 						<!-- 자기 글은 공감할 수 없도록 삭제 버튼 보이게 함
 						<th colspan="1" style="text-align: center;">
-							<button type="button" class="btn btn-default btn-xs">삭제</button>
+							<button type="button" class="btn btn-default btn-xs"><a onclick="return confirm('게시글을 삭제합니다.')" href="reviewDeleteAction.jsp?reviewID=">삭제</a></button>
 						</th> -->
 						<%		
 						// } else {
 						%>
 						<!-- 다른 사람 글은 공감할 수 있도록 공감 버튼 보이게 함 -->
 						<th colspan="1" style="text-align: center;">
-							<button type="button" class="btn btn-default btn-xs">0 공감</button>
+							<button type="button" class="btn btn-default btn-xs"><a onclick="return confirm('게시글에 공감합니다.')" href="reviewLikeAction.jsp?reviewID=">공감</a></button>
 						</th>
 						<%		
 						// }

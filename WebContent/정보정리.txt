@@ -1,14 +1,20 @@
-index.jsp
-
 메인=index.jsp
+내비게이션바=header.jsp
+푸터=footer.jsp
+
 회원가입=join.jsp
+회원가입처리=joinAction.jsp
 로그인=login.jsp
+로그인처리=loginAction.jsp
+로그아웃처리=logoutAction.jsp
 내정보=myPage.jsp
 
 영화리뷰=review.jsp
-리뷰모음=reviewThumbnail.jsp
+등록된리뷰보기=reviewList.jsp
 리뷰등록처리=reviewRegisterAction.jsp
 리뷰신고처리=reviewReportAction.jsp
+리뷰공감처리=reviewLikeAction.jsp
+리뷰삭제처리=reviewDeleteAction.jsp
 
 영화제목=movieTitle
 별점=movieScore

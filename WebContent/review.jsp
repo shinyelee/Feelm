@@ -40,7 +40,7 @@
 		<a class="btn btn-default mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	</form>
 	<!-- 등록된 리뷰 양식 -->
-	<jsp:include page="reviewThumbnail.jsp" flush="false" />
+	<jsp:include page="reviewList.jsp" flush="false" />
 </div>
 <!-- 페이지네이션 -->
 <section class="container">

@@ -31,14 +31,14 @@
 				%>
 				<!-- 아이디 == null이면 로그인 필요하므로 로그인 버튼 보이게 함 -->
 					<form class="navbar-form navbar-right">
-						<a class="btn btn-danger" href="review.jsp">로그인</a></button>
+						<a class="btn btn-danger" href="login.jsp">로그인</a></button>
 					</form>
 				<%		
 					// } else {
 				%>
-				<!-- 아이디 != null이면 로그인 된 상태이므로 로그아웃 버튼 보이게 함 -->
+				<!-- 아이디 != null이면 로그인 된 상태이므로 내정보 버튼 보이게 함 -->
 				<!-- <form class="navbar-form navbar-right">
-						<button type="submit" class="btn btn-danger">로그아웃</button>
+						<button type="submit" class="btn btn-danger">내정보</button>
 					</form> -->
 				<%		
 					// }
