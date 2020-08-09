@@ -6,8 +6,6 @@ public class UserDTO {
 	// 정보은닉화 위해 private 사용
 	private String userID;
 	private String userPassword;
-	private String userName;
-	private String userGender;
 	private String userEmail;
 	private String userEmailHash;
 	private boolean userEmailChecked;
@@ -23,18 +21,6 @@ public class UserDTO {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getUserGender() {
-		return userGender;
-	}
-	public void setUserGender(String userGender) {
-		this.userGender = userGender;
 	}
 	public String getUserEmail() {
 		return userEmail;
@@ -56,20 +42,17 @@ public class UserDTO {
 	}
 	// 생성자: 초기화O, 입력O, 출력X(반환 선언X, 리턴값 반환X) 클래스와 동일한 이름의 메소드
 	// 생성자 2개 만듦 -> 유저 인스턴스 처리
-	public UserDTO() {	
+	public UserDTO() { // 빈 생성자
 	}
 	// alt+shift+s -> o -> OK
-	public UserDTO(String userID, String userPassword, String userName, String userGender, String userEmail,
+	public UserDTO(String userID, String userPassword, String userEmail,
 				   String userEmailHash, boolean userEmailChecked) {
 		super();
 		this.userID = userID;
 		this.userPassword = userPassword;
-		this.userName = userName;
-		this.userGender = userGender;
 		this.userEmail = userEmail;
 		this.userEmailHash = userEmailHash;
 		this.userEmailChecked = userEmailChecked;
 	}
-	
 	
 }

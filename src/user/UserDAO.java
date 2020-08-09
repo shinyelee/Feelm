@@ -49,7 +49,7 @@ public class UserDAO {
 	}
 	
 	public int join(UserDTO user) { // 회원가입 수행하는 함수
-		String SQL = "insert into user values (?, ?, ?, ?, ?, false)";
+		String SQL = "insert into user values (?, ?, ?, ?, false)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -58,10 +58,8 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user.getUserID()); // ?1 (아이디)
 			pstmt.setString(2, user.getUserPassword()); // ?2 (비밀번호)
-			pstmt.setString(3, user.getUserName()); // ?3 (이름)
-			pstmt.setString(4, user.getUserGender()); // ?4 (성별)
-			pstmt.setString(5, user.getUserEmail()); // ?5 (이메일)
-			pstmt.setString(6, user.getUserEmailHash()); // false (이메일해시)
+			pstmt.setString(3, user.getUserEmail()); // ?3 (이메일)
+			pstmt.setString(4, user.getUserEmailHash()); // ?4 (이메일해시)
 			return pstmt.executeUpdate(); // 쿼리문 실행(데이터 삽입or삭제) 후 결과값 rs에 저장ㄴㄱ
 		} catch (Exception e) {
 			e.printStackTrace();

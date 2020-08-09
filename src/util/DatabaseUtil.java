@@ -7,7 +7,7 @@ public class DatabaseUtil {
 
 	public static Connection getConnection() { // DB 연결상태 관리
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/moviehere"; // DB주소
+			String dbURL = "jdbc:mysql://localhost:3306/moviehere?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"; // DB주소
 			String dbID = "root"; // DB 아이디
 			String dbPassword = "1234"; // DB 비밀번호
 			Class.forName("com.mysql.jdbc.Driver"); // Driver 불러옴

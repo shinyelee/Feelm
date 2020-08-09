@@ -33,27 +33,14 @@
 			<div class="jumbotron" style="padding-top: 20px;">
 			 	<form method="post" action="joinAction.jsp"> <!-- 데이터를 joinAction.jsp로 보냄 -->
 			 		<h3 style="text-align: center:">회원가입이 필요합니다.</h3>
-			 		<!-- 아이디, 비밀번호, 이름, 성별, 이메일 입력창 -->
+			 		<!-- 아이디, 비밀번호, 이메일 입력창 -->
 			 		<div class="form-group">
 			 			<input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="userID" maxlength="25">	
 			 		</div>
 			 		<div class="form-group">
 			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="25">	
 			 		</div>
-			 		<div class="form-group"> <!-- 이름 입력란 추가 -->
-			 			<input type="text" class="form-control" placeholder="이름/닉네임을 입력해주세요" name="userName" maxlength="25">	
-			 		</div>
-			 		<div class="form-group" style="text-align: center;"> <!-- 성별 선택 버튼 추가 -->
-			 			<div class="btn-group" data-toggle="buttons">
-			 				<label class="btn btn-danger active"> <!-- active 써 넣어서 성별 기본값을 남자로 설정 -->
-			 					<input type="radio" name="userGender" autocomplete="off" value="남자" checked>남자
-			 				</label>
-			 				<label class="btn btn-danger">
-			 					<input type="radio" name="userGender" autocomplete="off" value="여자" checked>여자
-			 				</label>
-			 			</div>
-			 		</div>
-			 		<div class="form-group"> <!-- 이메일 입력란 추가 -->
+			 		<div class="form-group">
 			 			<input type="email" class="form-control" placeholder="이메일 주소를 입력해주세요" name="userEmail" maxlength="50">	
 			 		</div>
 			 		<!-- 회원가입 버튼 -->
