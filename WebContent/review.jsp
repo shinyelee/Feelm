@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="user.UserDAO"%>
+<%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,34 @@
 	</style>
 </head>
 <body>
+
+<%
+
+	String userID = null;
+	if(session.getAttribute("userID") != null) {
+		userID = (String) session.getAttribute("userID");
+	}
+	if(userID == null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인이 필요합니다.');");
+		script.println("location.href = 'login.jsp'");
+		script.println("</script>");
+		script.close();	
+	}
+
+	boolean emailChecked = new UserDAO().getUserEmailChecked(userID);
+	if(emailChecked == false) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("location.href = 'emailSendConfirm.jsp'");
+		script.println("</script>");
+		script.close();		
+		return;
+	}
+
+%>
+
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
 

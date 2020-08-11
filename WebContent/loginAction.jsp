@@ -1,58 +1,80 @@
+<!-- joinAction.jsp 복붙 후 수정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="user.UserDAO" %> <!-- user 패키지의 UserDAO 불러옴(클래스 사용) -->
-<%@ page import="java.io.PrintWriter" %> <!-- 자바스크립트 사용 -->
-<% request.setCharacterEncoding("UTF-8"); %> <!-- 한글 깨짐 방지 -->
-<jsp:useBean id="user" class="user.User" scope="page" /> <!-- User 클래스를 자바빈즈로 사용 -->
-<jsp:setProperty name="user" property="userID" />
-<jsp:setProperty name="user" property="userPassword" /> <!-- 로그인 페이지에서 넘어온 사용자 ID 저장 -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Moviehere | loginAction</title>
-</head>
-<body>
-	<%  // 로그인 기능 구현
+<%@ page import="user.UserDTO" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="util.SHA256" %>
+<%@ page import="java.io.PrintWriter" %>
+
+	<% 
+		request.setCharacterEncoding("UTF-8");
+		// 이미 로그인 된 경우 중복 막아줌
 		String userID = null;
-		if (session.getAttribute("userID") != null) {
+		if(session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
-		if (userID != null) {
+		if(userID != null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('이미 로그인이 되어 있습니다.')"); 
-			script.println("location.href = 'index.jsp'"); 
+			script.println("alert('이미 로그인이 되어 있습니다.');");
+			script.println("location.href = 'index.jsp'");
 			script.println("</script>");
+			script.close();		
+			return;
+		}
+		// 로그인 처리
+		String userPassword = null;
+		// 사용자가 아이디 입력했으면 userID에 데이터 담아줌
+		if (request.getParameter("userID") != null) {
+			userID = (String) request.getParameter("userID");
+			System.out.println(userID);
+		}
+		if (request.getParameter("userPassword") != null) {
+			userPassword = (String) request.getParameter("userPassword");
+			System.out.println(userPassword);
 		}
 		
-		UserDAO userDAO = new UserDAO();
-		int result = userDAO.login(user.getUserID(), user.getUserPassword()); // 로그인 시도
-		if (result == 1) { // 1 -> 로그인 성공
-			session.setAttribute("userID", user.getUserID()); // 세션값 부여
-			PrintWriter script = response.getWriter(); // 자바스크립트 문장 실행
-			script.println("<script>");
-			script.println("alert('로그인에 성공했습니다.')"); // 작성한 문구가 쓰여진 알림창을 띄움
-			script.println("location.href = 'index.jsp'"); // 메인 페이지로 이동
-			script.println("</script>");
-		} else if (result == 0) { // 0 -> 비밀번호 다름
+		if (userID == null || userPassword == null || userID.equals("") || userPassword.equals("")) {
+			// 만약 아이디, 비밀번호 중 어느 하나라도 빈 값이 있으면
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('비밀번호가 다릅니다.')");
-			script.println("history.back()"); // 로그인에 실패했으므로 이전 페이지(로그인 창)로 돌려보냄
+			script.println("alert('입력이 안 된 사항이 있습니다.')");
+			script.println("history.back()"); // 다음 단계로 넘어가지 않고 로그인창에 머무름
 			script.println("</script>");
-		} else if (result == -1) { // -1 -> 아이디 다름
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('존재하지 않는 아이디입니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		} else if (result == -2) { // -2 -> DB 오류
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('데이터베이스 오류가 발생했습니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		}
+			script.close();
+			} else { // 아이디와 비밀번호 모두 입력
+			    UserDAO userDAO = new UserDAO(); // userDAO 객체로 선언
+				int result = userDAO.login(userID, userPassword);
+				if (result == 1) { // 아이디와 비밀번호 일치
+					session.setAttribute("userID", userID); // 세션값 부여
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('로그인 되었습니다.')");
+					script.println("location.href = 'index.jsp'");
+					script.println("</script>");
+					script.close();
+				} else if (result == 0){ // 비밀번호 불일치
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('비밀번호가 일치하지 않습니다.')");
+					script.println("history.back()");
+					script.println("</script>");
+					script.close();
+				} else if (result == -1){ // 아이디 불일치
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('존재하지 않는 아이디입니다.')");
+					script.println("history.back()");
+					script.println("</script>");
+					script.close();
+				} else if (result == -2){ // 데이터베이스 오류
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('데이터베이스 오류가 발생했습니다.')");
+					script.println("history.back()");
+					script.println("</script>");
+					script.close();
+					// return; 넣으면 오류뜨므로 삭제
+				} 
+			}
 	%>
-</html>

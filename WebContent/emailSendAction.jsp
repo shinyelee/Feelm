@@ -43,7 +43,7 @@
 		String from = "구글아이디@gmail.com"; // 인증메일 발송하는 아이디
 		String to = userDAO.getUserEmail(userID); // 인증메일 받는 아이디(신규유저)
 		String subject = "Moviehere 가입 확인 이메일입니다.";
-		String content = "다음 링크를 클릭해 이메일 인증을 완료하세요." +
+		String content = "다음 링크를 클릭해 인증을 완료하세요." +
 			"<a href='" + host + "emailCheckAction.jsp?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		
 		// 구글 SMTP 서버에 접속하기 위한 정보, 정해져 있는 값 그대로 넣으면 됨
@@ -110,11 +110,11 @@
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
 
-	<!-- 로그인 양식 -->
-	<div class="container"> <!-- 로그인창 레이아웃 설정이라고 생각하면 됨 -->
+	<!-- 이메일 확인 요청 문구 -->
+	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3">
-			<div class="alert alert-success mt-4" role="alert">
-				메일을 확인해주세요. 메일 인증 후 회원가입이 완료됩니다.
+			<div class="alert alert-danger mt-4" role="alert">
+				이메일 인증 후 회원가입이 완료됩니다. 인증 메일을 확인해주세요.
 			</div>
 		</div>
 	</div>

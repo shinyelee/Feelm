@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="user.UserDAO"%>
+<%@ page import="java.io.PrintWriter"%>
 	<header>
 		<!-- 내비게이션 바 -->
 		<nav class="navbar navbar-expand-lg navbar-inverse navbar-fixed-top">
@@ -24,31 +25,26 @@
 					<li class="nav-item"><a class="nav-link" href="#">영화예매</a></li>
 					<li class="nav-item"><a class="nav-link" href="review.jsp">영화리뷰</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
 				</ul>
-				<%
-					// if(userID == null) {
-				%>
-				<!-- 아이디 == null이면 로그인 필요하므로 로그인 버튼 보이게 함 -->
 					<form class="navbar-form navbar-right">
-						<a class="btn btn-danger" href="login.jsp">로그인</a></button>
+						<div class="dropdown">
+							<button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">회원메뉴<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="login.jsp">로그인</a></li>
+									<li><a href="logoutAction.jsp">로그아웃</a></li>
+									<li><a href="myPage.jsp">회원정보</a></li>
+								</ul>
+						</div>
 					</form>
-				<%		
-					// } else {
-				%>
-				<!-- 아이디 != null이면 로그인 된 상태이므로 내정보 버튼 보이게 함 -->
-				<!-- <form class="navbar-form navbar-right">
-						<button type="submit" class="btn btn-danger">내정보</button>
-					</form> -->
-				<%		
-					// }
-				%>
+					
 				<!-- 검색창 -->
 				<form class="navbar-form mr-auto">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="영화 제목을 입력하세요!">
 					</div>
-					<button type="submit" class="btn btn-default">검색</button>
+					<button type="submit" class="btn btn-default">
+						<span class="glyphicon glyphicon-search"></span>검색
+					</button>
 				</form>
 			</div>
 		</nav>
