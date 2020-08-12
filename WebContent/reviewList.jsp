@@ -26,7 +26,7 @@
 						%>
 						<!-- 다른 사람 글은 공감할 수 있도록 공감 버튼 보이게 함 -->
 						<th colspan="1" style="text-align: center;">
-							<button type="button" class="btn btn-default btn-xs"><a onclick="return confirm('게시글에 공감합니다.')" href="reviewLikeAction.jsp?reviewID=">공감</a></button>
+							<button type="button" class="btn btn-default btn-xs"><a onclick="return confirm('게시글에 공감합니다.')" href="reviewLikeAction.jsp?reviewID="><span class="glyphicon glyphicon-heart"></span>공감</a></button>
 						</th>
 						<%		
 						// }

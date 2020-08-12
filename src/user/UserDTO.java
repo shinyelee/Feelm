@@ -9,7 +9,7 @@ public class UserDTO {
 	private String userEmail;
 	private String userEmailHash;
 	private boolean userEmailChecked;
-	// alt+shift+s -> r -> all -> OK
+	// alt+shift+s -> r -> Select All -> OK
 	public String getUserID() {
 		return userID;
 	}
@@ -54,5 +54,4 @@ public class UserDTO {
 		this.userEmailHash = userEmailHash;
 		this.userEmailChecked = userEmailChecked;
 	}
-	
 }

@@ -28,11 +28,11 @@
 				</ul>
 					<form class="navbar-form navbar-right">
 						<div class="dropdown">
-							<button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">회원메뉴<span class="caret"></span></button>
+							<button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">설정 <span class="caret"></span></button>
 								<ul class="dropdown-menu">
-									<li><a href="login.jsp">로그인</a></li>
-									<li><a href="logoutAction.jsp">로그아웃</a></li>
-									<li><a href="myPage.jsp">회원정보</a></li>
+									<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+									<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+									<li><a href="myPage.jsp"><span class="glyphicon glyphicon-cog"></span> 회원정보</a></li>
 								</ul>
 						</div>
 					</form>
