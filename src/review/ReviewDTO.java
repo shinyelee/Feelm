@@ -1,9 +1,7 @@
 package review;
 //DTO(Data Transfer Object): JSP와 MySQL이 서로 데이터를 전달하는 단위(≒자바빈즈)
 public class ReviewDTO {
-	// DB와 동일한 순서로 작성
-	// 멤버변수는 private, getter(), setter()
-	// 정보은닉화 위해 private 사용
+	
 	int reviewID; // 리뷰 글번호
 	String userID; // 아이디
 	String movieTitle; // 영화제목
@@ -12,6 +10,7 @@ public class ReviewDTO {
 	String movieScore; // 리뷰별점
 	String reviewDate; // 리뷰날짜
 	int likeCount; // 리뷰공감
+	
 	// alt+shift+s -> r -> Select All -> OK
 	public int getReviewID() {
 		return reviewID;

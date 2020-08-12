@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="user.UserDTO" %>
-<%@ page import="user.UserDAO" %>
+<%@ page import="review.ReviewDTO" %>
+<%@ page import="review.ReviewDAO" %>
 <%@ page import="util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 
@@ -9,9 +9,8 @@
 		request.setCharacterEncoding("UTF-8");
 		String userID = null; // 로그인 상태
 		// 사용자가 아이디 입력했으면 userID에 데이터 담아줌
-		if (request.getParameter("userID") != null) {
-			userID = (String) request.getParameter("userID");
-			System.out.println(userID);
+		if (session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
 		}
 		
 		if (userID == null) { // 만약 로그인 안 된 상태라면
@@ -50,7 +49,7 @@
 		}
 		
 		if (movieTitle == null || shortReview == null || fullReview == null || movieScore == null || reviewDate == null || 
-			movieTitle.equals("") || shortReview.equals("") || fullReview.equals("") || movieScore.equals("")|| reviewDate.equals("")) {
+			shortReview.equals("") || fullReview.equals("")) {
 			// 만약 어느 하나라도 빈 값이 있으면
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -58,24 +57,26 @@
 			script.println("history.back()");
 			script.println("</script>");
 			script.close();
-			// return; 넣으면 오류뜨므로 삭제
-			ReviewDAO reviewDAO = new ReviewDAO(); // reviewDAO 객체로 선언
-			// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
-			int result = reviewDAO.write(new ReviewDTO(0, userID, movieTitle, shortReview, fullReview, movieScore, reviewDate, 0));
-			if (result == -1) {
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('리뷰 등록에 실패했습니다.')");
-				script.println("history.back()");
-				script.println("</script>");
-				script.close();
-			} else {
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('리뷰가 등록되었습니다.')");
-				script.println("location.href = 'review.jsp'");
-				script.println("</script>");
-				script.close();
-			} // return; 넣으면 오류뜨므로 삭제
+			return;
+		}
+		ReviewDAO reviewDAO = new ReviewDAO(); // reviewDAO 객체로 선언
+		// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
+		int result = reviewDAO.write(new ReviewDTO(0, userID, movieTitle, shortReview, fullReview, movieScore, reviewDate, 0));
+		if (result == -1) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('리뷰 등록에 실패했습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+			script.close();
+			return;
+		} else {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('리뷰가 등록되었습니다.')");
+			script.println("location.href = 'review.jsp'");
+			script.println("</script>");
+			script.close();
+			return;
 		}
 	%>
