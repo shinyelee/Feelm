@@ -26,9 +26,8 @@
 	</style>
 </head>
 <body>
-
 <%
-
+	request.setCharacterEncoding("UTF-8");
 	String userID = null;
 	if(session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
@@ -39,21 +38,10 @@
 		script.println("alert('이미 로그인이 되어 있습니다.');");
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
-		script.close();	
-	}
-
-	boolean emailChecked = new UserDAO().getUserEmailChecked(userID);
-	if(emailChecked == false) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("location.href = 'emailSendConfirm.jsp'");
-		script.println("</script>");
-		script.close();		
+		script.close();
 		return;
 	}
-
 %>
-
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
 
@@ -65,12 +53,19 @@
 			 		<h3 style="text-align: center:">회원가입이 필요합니다.</h3>
 			 		<!-- 아이디, 비밀번호, 이메일 입력창 -->
 			 		<div class="form-group">
+			 			<label>아이디</label>
 			 			<input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="userID" maxlength="25">	
 			 		</div>
 			 		<div class="form-group">
+			 			<label>비밀번호</label>
 			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="25">	
 			 		</div>
 			 		<div class="form-group">
+			 			<label>휴대전화</label>
+			 			<input type="text" class="form-control" placeholder="휴대전화번호를 입력해주세요" name="userPhone" maxlength="25">	
+			 		</div>
+			 		<div class="form-group">
+			 			<label>이메일</label>
 			 			<input type="email" class="form-control" placeholder="이메일 주소를 입력해주세요" name="userEmail" maxlength="50">	
 			 		</div>
 			 		<!-- 회원가입 버튼 -->

@@ -21,9 +21,8 @@
 	</style>
 </head>
 <body>
-
 <%
-
+	request.setCharacterEncoding("UTF-8");	
 	String userID = null;
 	if(session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
@@ -34,9 +33,9 @@
 		script.println("alert('로그인이 필요합니다.');");
 		script.println("location.href = 'login.jsp'");
 		script.println("</script>");
-		script.close();	
+		script.close();
+		return;
 	}
-
 	boolean emailChecked = new UserDAO().getUserEmailChecked(userID);
 	if(emailChecked == false) {
 		PrintWriter script = response.getWriter();
@@ -46,21 +45,27 @@
 		script.close();		
 		return;
 	}
-
 %>
-
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
-
-<!-- 한줄리뷰 등록창 -->
+<!-- 한줄리뷰 목록 -->
 <div class="container">
-	<form method="get" action="index.jsp" class="form-inline mt-3">
+	<form method="get" action="reviewAction.jsp" class="form-inline mt-3">
 	<!-- 장르 드롭다운 -->
 		<select name="movieGenre" class="form-control mx-1 mt-2">
-			<option value="장르1">장르1</option>
-			<option value="장르2">장르2</option>
-			<option value="장르3">장르3</option>
-			<option value="장르4">장르4</option>
+			<option value="전체">전체</option>
+			<option value="드라마/멜로">드라마/멜로</option>
+			<option value="가족/코미디">가족/코미디</option>
+			<option value="느와르/액션">느와르/액션</option>
+			<option value="스릴러/공포">스릴러/공포</option>
+			<option value="SF/판타지">SF/판타지</option>
+			<option value="애니메이션">애니메이션</option>
+			<option value="다큐멘터리">다큐멘터리</option>
+		</select>
+		<!-- 최신/추천 드롭다운 -->
+		<select name="searchType" class="form-control mx-1 mt-2">
+			<option value="최신순">최신순</option>
+			<option value="추천순">추천순</option>
 		</select>
 		<!-- 검색창 -->
 		<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요.">
@@ -69,8 +74,63 @@
 		<a class="btn btn-default mx-1 mt-2" data-toggle="modal" href="#registerModal">등록</a>
 		<a class="btn btn-default mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	</form>
-	<!-- 등록된 리뷰 양식 -->
-	<jsp:include page="reviewList.jsp" flush="false" />
+</div>
+<%
+/*	ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
+	reviewList = new ReviewDAO().getList(movieGenre, searchType, search, pageNumber);
+	if(reviewList != null) {
+		for(int i = 0; i < reviewList.size(); i++) {
+			if(i == 5) break;
+			ReviewDTO review = reviewList.get(i);
+		}
+	} */
+%>
+<!-- 등록된 리뷰 양식 -->
+<br>
+<div class="container">
+	<div class="row">
+			<table class="table table-default" style="border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<!-- 영화제목 -->
+						<th colspan="10" style="text-align: center;">다만 악에서 구하소서&nbsp;<small>&nbsp;(느와르/액션)</small></th>
+						<!-- 별점 -->
+						<th colspan="1" style="text-align: center;">
+							<span style="color: red;">3 ★★★☆☆</span>
+						</th>
+						<%
+							//if(userID != null && userID.equals(user.getUserID())) { // 접속한 userID가 빈 값이 아닌 로그인 상태인 동시에 작성자와 일치할 때
+						%>
+						<!-- 자기 글은 공감할 수 없도록 삭제 버튼 보이게 함
+						<th colspan="1" style="text-align: center;">
+							<button type="button" class="btn btn-default btn-xs"><a onclick="return confirm('게시글을 삭제합니다.')" href="reviewDeleteAction.jsp?reviewID=">삭제</a></button>
+						</th> -->
+						<%		
+							//} else {
+						%>
+						<!-- 다른 사람 글은 공감할 수 있도록 공감 버튼 보이게 함 -->
+						<th colspan="1" style="text-align: center;">
+							<button type="button" class="btn btn-default btn-xs"><a onclick="return confirm('게시글에 공감합니다.')" href="reviewLikeAction.jsp?reviewID=">0 공감</a></button>
+						</th>
+						<%	
+							//}
+						%>
+					</tr>
+					<tr>
+						<!-- 한줄감상, 작성자, 작성일 -->
+						<td colspan="10" style="text-align: center;">신명난 카메라와 캐릭터, 언뜻언뜻 기시감.</td>
+						<td colspan="1" style="text-align: center;">박평식</td>
+						<td colspan="1" style="text-align: center;">20-08-05</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr> <!-- 장문감상 -->
+						<td colspan="12" style="text-align: left;">신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감.</td>
+					</tr>
+				</tbody>
+		</table>
+	</div>
+</div>	
 </div>
 <!-- 페이지네이션 -->
 <section class="container">
@@ -88,11 +148,22 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form action="reviewRegisterAction.jsp" method="post">
-					<div class="form-row">
-						<div class="form-group col-sm-9">
+				<form action="reviewAction.jsp" method="post">
+						<div class="form-group col-sm-12">
 							<label>영화제목</label>
 							<input type="text" name="movieTitle" class="form-control" maxlength="50">
+						</div>
+						<div class="form-group col-sm-3">
+							<label>장르</label>
+							<select name="movieGenre" class="form-control">
+								<option value="드라마/멜로" selected>드라마/멜로</option>
+								<option value="가족/코미디">가족/코미디</option>
+								<option value="느와르/액션">느와르/액션</option>
+								<option value="스릴러/공포">스릴러/공포</option>
+								<option value="SF/판타지">SF/판타지</option>
+								<option value="애니메이션">애니메이션</option>
+								<option value="다큐멘터리">다큐멘터리</option>
+							</select>
 						</div>
 						<div class="form-group col-sm-3">
 							<label>별점</label>
@@ -104,8 +175,14 @@
 								<option value="star5">★★★★★</option>
 							</select>
 						</div>
-					</div>
-					<div class="form-row">
+						<div class="form-group col-sm-3">
+							<label>작성자</label>
+								<input type="text" name="userID" class="form-control" maxlength="25">
+						</div>
+						<div class="form-group col-sm-3">
+							<label>작성일</label>
+								<input type="text" name="reviewDate" class="form-control" maxlength="25">
+						</div>
 						<div class="form-group col-sm-12">
 							<label>한줄감상</label>
 							<input type="text" name="shortReview" class="form-control" maxlength="25" placeholder="최대 25자까지 작성 가능합니다.">
@@ -113,12 +190,9 @@
 						<div class="form-group col-sm-12">
 							<label>장문감상</label>
 							<textarea name="fullReview" class="form-control" maxlength="2000" placeholder="최대 2000자까지 작성 가능합니다." style="height: 250px;"></textarea>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-default" data-dismiss="modal">등록</button> 
-					</div>
+						</div>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-default" data-dismiss="modal">등록</button> 
 				</form>
 			</div>
 		</div>
@@ -129,31 +203,21 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modal">리뷰 신고</h5>
+				<h5 class="modal-title" style="text-align: center;" id="modal">리뷰 신고</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="close"></button>
 			</div>
 			<div class="modal-body">
 				<form action="reviewReportAction.jsp" method="post">
-					<div class="form-row">
-						<div class="form-group col-sm-8">
-							<label>글제목</label>
-							<input type="text" name="reportTitle" class="form-control" maxlength="25">
-						</div>
-						<div class="form-group col-sm-4">
-							<label>아이디</label>
-							<input type="text" name="userID" class="form-control" maxlength="50">
-						</div>
+					<div class="form-group col-sm-12">
+						<label>글제목</label>
+						<input type="text" name="reportTitle" class="form-control" maxlength="25">
 					</div>
-					<div class="form-row">
-						<div class="form-group col-sm-12">
-							<label>신고내용</label>
-							<textarea name="reportContent" class="form-control" maxlength="500" placeholder="최대 500자까지 작성 가능합니다. 신고 내용을 구체적으로 적어주세요." style="height: 125px;"></textarea>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-default" data-dismiss="modal">접수</button> 
-						</div>
-					</div>
+					<div class="form-group col-sm-12">
+						<label>신고내용</label>
+						<textarea name="reportContent" class="form-control" maxlength="500" placeholder="최대 500자까지 작성 가능합니다. 신고 내용을 구체적으로 적어주세요." style="height: 125px;"></textarea>
+					</div>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-default" data-dismiss="modal">접수</button> 
 				</form>
 			</div>
 		</div>
@@ -165,5 +229,6 @@
 	<script src="./js/jquery-3.5.1.min.js"></script>
 	<script src="./js/popper.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
+	
 </body>
 </html>

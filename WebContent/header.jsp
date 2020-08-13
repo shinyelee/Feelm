@@ -27,13 +27,17 @@
 					<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
 				</ul>
 					<form class="navbar-form navbar-right">
-						<div class="dropdown">
-							<button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">설정 <span class="caret"></span></button>
-								<ul class="dropdown-menu">
-									<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-									<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
-									<li><a href="myPage.jsp"><span class="glyphicon glyphicon-cog"></span> 회원정보</a></li>
-								</ul>
+						<div class="btn-group">
+							<button type="button" class="btn btn-danger">설정</button>
+							<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+						    	<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in" /> 로그인</a></li>
+						    	<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out" /> 로그아웃</a></li>
+						    	<li><a href="join.jsp"><span class="glyphicon glyphicon-ok" /> 회원가입</a></li>
+						    	<li><a href="myPage.jsp"><span class="glyphicon glyphicon-user" /> 회원정보</a></li>
+							</ul>
 						</div>
 					</form>
 					

@@ -11,7 +11,6 @@
 
 	<%
 		request.setCharacterEncoding("UTF-8");
-	
 		UserDAO userDAO = new UserDAO(); // 변수 만듦
 		String userID = null;
 		if (session.getAttribute("userID") != null) {
@@ -74,7 +73,7 @@
 		    e.printStackTrace(); // 출력
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('오류가 발생했습니다..');");
+			script.println("alert('이미 가입된 이메일이거나 주소가 올바르지 않습니다.');");
 			script.println("history.back();"); // 이전 페이지로 돌려보냄
 			script.println("</script>");
 			script.close();		

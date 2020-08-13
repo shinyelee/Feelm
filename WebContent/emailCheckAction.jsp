@@ -6,11 +6,9 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-
 	String code = request.getParameter("code"); // 메일 인증 위한 해시 코드
 	UserDAO userDAO = new UserDAO();
 	String userID = null;
-
 	if (session.getAttribute("userID") != null) { // 로그인 한 상태면 세션 부여
 		userID = (String) session.getAttribute("userID");
 	}
@@ -24,7 +22,6 @@
 		script.close();
 		// return;
 	}
-
 	String userEmail = userDAO.getUserEmail(userID);
 	boolean rightCode = (new SHA256().getSHA256(userEmail).equals(code)) ? true : false;
 	if (rightCode == true) { // 인증 성공시
@@ -45,5 +42,4 @@
 		script.close();		
 		// return;
 	}
-
 %>

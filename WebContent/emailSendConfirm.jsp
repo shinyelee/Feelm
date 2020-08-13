@@ -26,9 +26,8 @@
 	</style>
 </head>
 <body>
-
 <%
-
+	request.setCharacterEncoding("UTF-8");
 	String userID = null;
 	if(session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
@@ -37,14 +36,12 @@
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인이 필요합니다.');");
-		script.println("location.href = 'login.jsp'");
+		script.println("location.href = 'login.jsp';");
 		script.println("</script>");
-		script.close();		
+		script.close();
 		return;
 	}
-
 %>
-
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
 

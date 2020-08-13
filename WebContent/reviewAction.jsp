@@ -17,7 +17,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('로그인이 필요합니다.')");
-			script.println("history.back()"); // 다음 단계로 넘어가지 않고 회원가입창에 머무름
+			script.println("location.href = 'login.jsp'"); // 로그인 페이지로.
 			script.println("</script>");
 			script.close();
 			return;
@@ -27,6 +27,7 @@
 		// userID는 위에서 정의함
 		// reviewDate는 자동 0이니 제외
 		String movieTitle = null;
+		String movieGenre = null;
 		String shortReview = null;
 		String fullReview = null;
 		String movieScore = null;
@@ -34,6 +35,9 @@
 		
 		if (request.getParameter("movieTitle") != null) {
 			movieTitle = request.getParameter("movieTitle");
+		}
+		if (request.getParameter("movieGenre") != null) {
+			movieGenre = request.getParameter("movieGenre");
 		}
 		if (request.getParameter("shortReview") != null) {
 			shortReview = request.getParameter("shortReview");
@@ -48,8 +52,8 @@
 			reviewDate = request.getParameter("reviewDate");
 		}
 		
-		if (movieTitle == null || shortReview == null || fullReview == null || movieScore == null || reviewDate == null || 
-			shortReview.equals("") || fullReview.equals("")) {
+		if (movieTitle == null || movieGenre == null || shortReview == null || fullReview == null || movieScore == null || reviewDate == null || 
+			movieTitle.equals("") || movieGenre.equals("") || shortReview.equals("") || fullReview.equals("") || movieScore.equals("") || reviewDate.equals("")) {
 			// 만약 어느 하나라도 빈 값이 있으면
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -61,7 +65,7 @@
 		}
 		ReviewDAO reviewDAO = new ReviewDAO(); // reviewDAO 객체로 선언
 		// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
-		int result = reviewDAO.write(new ReviewDTO(0, userID, movieTitle, shortReview, fullReview, movieScore, reviewDate, 0));
+		int result = reviewDAO.write(new ReviewDTO(0, userID, movieTitle, movieGenre, shortReview, fullReview, movieScore, reviewDate, 0));
 		if (result == -1) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

@@ -22,7 +22,7 @@ public class UserDAO {
 				if(rs.getString(1).equals(userPassword)) {// userPassword까지 DB 내 정보와 일치하면
 					return 1; // 로그인 성공
 				} else { // userPassword가 DB 내 정보와 불일치하면
-					return 0; // 로그인 실패
+					return 0; // 비밀번호 불일치 -> 로그인 실패
 				}
 			}
 			return -1; // userID가 DB에 없으면(불일치) -> 로그인 실패
@@ -49,7 +49,7 @@ public class UserDAO {
 	}
 	
 	public int join(UserDTO user) { // 회원가입 수행하는 함수
-		String SQL = "insert into user values (?, ?, ?, ?, false)";
+		String SQL = "insert into user values (?, ?, ?, ?, ?, false)"; // 이메일체크 제외
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -58,8 +58,9 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user.getUserID()); // ?1 (아이디)
 			pstmt.setString(2, user.getUserPassword()); // ?2 (비밀번호)
-			pstmt.setString(3, user.getUserEmail()); // ?3 (이메일)
-			pstmt.setString(4, user.getUserEmailHash()); // ?4 (이메일해시)
+			pstmt.setString(3, user.getUserPhone()); // ?3 (휴대전화)
+			pstmt.setString(4, user.getUserEmail()); // ?4 (이메일)
+			pstmt.setString(5, user.getUserEmailHash()); // ?5 (이메일해시)
 			return pstmt.executeUpdate(); // 쿼리문 실행(데이터 삽입or삭제) 후 결과값 rs에 저장ㄴㄱ
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +164,7 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(SQL); // SQL 세팅
 			pstmt.setString(1, userID); // ? (아이디)
 			pstmt.executeUpdate();
-			return true;
+            return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -10,7 +10,7 @@ import util.DatabaseUtil;
 public class ReviewDAO {
 	
 	public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
-		String SQL = "insert into review values (null, ?, ?, ?, ?, ?, ?, 0)"; // DB와 DTO 순서에 맞춤
+		String SQL = "insert into review values (null, ?, ?, ?, ?, ?, ?, ?, 0)"; // null은 reviewID, 0은likey
 		Connection conn = null; // 자바와 DB 연결
 		PreparedStatement pstmt = null; // 특정한 SQL문 수행하도록 하는 클래스 
 		ResultSet rs = null; // SQL문 수행 후 나온 결과값 처리(?에 데이터 대입)
@@ -20,10 +20,11 @@ public class ReviewDAO {
 			// reviewID와 likeCount 제외 -> ? 6개
 			pstmt.setString(1, reviewDTO.getUserID()); // ?에 아이디 대입
 			pstmt.setString(2, reviewDTO.getMovieTitle()); // ?에 영화제목 대입
-			pstmt.setString(3, reviewDTO.getShortReview()); // ?에 한줄리뷰 대입
-			pstmt.setString(4, reviewDTO.getFullReview()); // ?에 장문리뷰 대입
-			pstmt.setString(5, reviewDTO.getMovieScore()); // ?에 리뷰별점 대입
-			pstmt.setString(6, reviewDTO.getReviewDate()); // ?에 리뷰날짜 대입
+			pstmt.setString(3, reviewDTO.getMovieGenre()); // ?에 한줄리뷰 대입
+			pstmt.setString(4, reviewDTO.getShortReview()); // ?에 한줄리뷰 대입
+			pstmt.setString(5, reviewDTO.getFullReview()); // ?에 장문리뷰 대입
+			pstmt.setString(6, reviewDTO.getMovieScore()); // ?에 리뷰별점 대입
+			pstmt.setString(7, reviewDTO.getReviewDate()); // ?에 리뷰날짜 대입
 			return pstmt.executeUpdate();
 		} catch (Exception e) { // 예외 발생하면
 			e.printStackTrace(); // 오류 출력
@@ -46,4 +47,64 @@ public class ReviewDAO {
 		}
 		return -1; // DB 꺼져있거나 오류
 	}
+	
+/*	public ArrayList<ReviewDTO> getList (String reviewDivide, String searchType, String search, int pageNumber) {
+		if(reviewDivide.equals("전체")) {
+			reviewDivide = "";
+		}
+		ArrayList<ReviewDTO> reviewList = null; // 
+			String SQL = "";
+			Connection conn = null; // 
+			PreparedStatement pstmt = null; // 
+			ResultSet rs = null; // 
+			try {
+				if(searchType.equals("최신순")) {
+					SQL = "select * from review where reviewDivide like ? and concat(userID, movieTitle, shortReview, fullReview) like "
+							+ "? order by reviewID desc limit" + pageNumber * 5 + ", " + pageNumber * 5 + 6;
+				} else if (searchType.equals("추천순")) {
+					SQL = "select * from review where reviewDivide like ? and concat(userID, movieTitle, shortReview, fullReview) like "
+							+ "? order by likeCount desc limit" + pageNumber * 5 + ", " + pageNumber * 5 + 6;
+				}
+				conn = DatabaseUtil.getConnection(); // 
+				pstmt = conn.prepareStatement(SQL); // 
+				pstmt.setString(1, "%" + reviewDivide + "%"); // 
+				pstmt.setString(2, "%" + reviewDivide + "%"); // 
+				rs = pstmt.executeQuery(); // 
+				reviewList = new ArrayList<ReviewDTO>();
+				while (rs.next()) { // SQL
+					ReviewDTO review = new ReviewDTO(
+						rs.getInt(1), // 
+						rs.getString(2), // 
+						rs.getString(3), // 
+						rs.getString(4), // 
+						rs.getString(5), // 
+						rs.getString(6), // 
+						rs.getString(7), // 
+						rs.getString(8), //
+						rs.getInt(9), // 
+					);
+					reviewList.add(review);
+				}
+			} catch (Exception e) { // 
+				e.printStackTrace(); // 
+			} finally { // conn, pstmt, rs
+				try {
+					if(conn != null) conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					if(pstmt != null) pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					if(rs != null) rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return reviewList;
+		}
+	} */
 }
