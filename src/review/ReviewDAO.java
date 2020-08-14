@@ -1,21 +1,35 @@
 package review;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import util.DatabaseUtil;
+//import util.ArrayList;
+//import util.DatabaseUtil;
 
 // UserDAO에서 일부 복붙 후 수정
 public class ReviewDAO {
 	
-	public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
-		String SQL = "insert into review values (null, ?, ?, ?, ?, ?, ?, ?, 0)"; // null은 reviewID, 0은likey
-		Connection conn = null; // 자바와 DB 연결
-		PreparedStatement pstmt = null; // 특정한 SQL문 수행하도록 하는 클래스 
-		ResultSet rs = null; // SQL문 수행 후 나온 결과값 처리(?에 데이터 대입)
+	private Connection conn; // 자바와 DB 연결
+	private ResultSet rs; // SQL문 수행 후 나온 결과값 처리(?에 데이터 대입)
+	
+	public ReviewDAO() {
 		try {
-			conn = DatabaseUtil.getConnection(); // DatabaseUtil 통해 Connection 객체 초기화
+			String dbURL = "jdbc:mysql://localhost:3306/moviehere";
+			String dbID = "root";
+			String dbPassword = "1234";
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
+		PreparedStatement pstmt = null; // 특정한 SQL문 수행하도록 하는 클래스 
+		try {
+			String SQL = "insert into review values (null, ?, ?, ?, ?, ?, ?, ?, 0)"; // null은 reviewID, 0은likey
+			//conn = DatabaseUtil.getConnection(); // DatabaseUtil 통해 Connection 객체 초기화
 			pstmt = conn.prepareStatement(SQL); // SQL문 실행 준비
 			// reviewID와 likeCount 제외 -> ? 6개
 			pstmt.setString(1, reviewDTO.getUserID()); // ?에 아이디 대입
@@ -28,19 +42,10 @@ public class ReviewDAO {
 			return pstmt.executeUpdate();
 		} catch (Exception e) { // 예외 발생하면
 			e.printStackTrace(); // 오류 출력
-		} finally { // conn, pstmt, rs 자원 해제
-			try {
-				if(conn != null) conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		} finally {
 			try {
 				if(pstmt != null) pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
-				if(rs != null) rs.close();
+				if(conn != null) conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

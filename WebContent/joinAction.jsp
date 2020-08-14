@@ -42,9 +42,9 @@
 			script.println("</script>");
 			script.close();
 			return;
-		} else {
-		UserDAO userDAO = new UserDAO(); // userDAO 객체로 선언
-		// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
+		} else { // 다 입력했으면
+			UserDAO userDAO = new UserDAO(); // userDAO 객체로 선언
+			// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
 			int result = userDAO.join(new UserDTO(userID, userPassword, userPhone, userEmail, SHA256.getSHA256(userEmail), false));
 			if (result == -1) { // 입력사항 다 채웠으나 아이디 중복으로 회원가입 불가한 경우
 				PrintWriter script = response.getWriter();
