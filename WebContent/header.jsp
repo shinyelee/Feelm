@@ -31,7 +31,7 @@
 							<button type="button" class="btn btn-danger">설정</button>
 							<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
 								<span class="caret"></span>
-							</button>
+							</button>&nbsp;&nbsp;&nbsp;
 							<ul class="dropdown-menu" role="menu">
 						    	<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in" /> 로그인</a></li>
 						    	<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out" /> 로그아웃</a></li>

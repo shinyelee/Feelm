@@ -1,5 +1,3 @@
-*깃허브에 저장할 때 Gmail.java와 emailCheckAction.jsp에 구글메일/비밀번호 정보 지우고 넣기
-
 메인=index.jsp
 내비게이션바=header.jsp
 푸터=footer.jsp
