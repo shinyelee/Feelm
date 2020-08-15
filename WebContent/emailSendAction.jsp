@@ -39,7 +39,7 @@
 		
 		// 사용자에게 보내는 이메일 메시지
 		String host = "http://localhost:8088/Moviehere/"; // 로컬호스트 주소
-		String from = "구글ID@gmail.com"; // 인증메일 발송하는 아이디
+		String from = "구글ID"; // 인증메일 발송하는 아이디
 		String to = userDAO.getUserEmail(userID); // 인증메일 받는 아이디(신규유저)
 		String subject = "Moviehere 가입 확인 이메일입니다.";
 		String content = "다음 링크를 클릭해 인증을 완료하세요." +
@@ -74,7 +74,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('이미 가입된 이메일이거나 주소가 올바르지 않습니다.')");
-			script.println("history.back();"); // 이전 페이지로 돌려보냄
+			script.println("history.back()"); // 이전 페이지로 돌려보냄
 			script.println("</script>");
 			script.close();		
 		    return;

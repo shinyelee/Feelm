@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="review.ReviewDTO" %>
 <%@ page import="review.ReviewDAO" %>
-<%//@ page import="util.SHA256" %>
+<%@ page import="util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 
 	<% 
@@ -22,7 +22,7 @@
 			script.close();
 			return;
 		}
-		request.setCharacterEncoding("UTF-8");
+		
 		// ?에 해당하는 항목들
 		// reviewID는 자동+1 증가하니 제외
 		// userID는 위에서 정의함
@@ -63,7 +63,7 @@
 			script.println("</script>");
 			script.close();
 			return;
-		} else {
+		}
 			ReviewDAO reviewDAO = new ReviewDAO(); // reviewDAO 객체로 선언
 			// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
 			int result = reviewDAO.write(new ReviewDTO(0, userID, movieTitle, movieGenre, shortReview, fullReview, movieScore, reviewDate, 0));
@@ -84,5 +84,4 @@
 				script.close();
 				return;
 			}
-		}
 	%>

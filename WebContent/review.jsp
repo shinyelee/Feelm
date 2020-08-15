@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO"%>
+<%@ page import="review.ReviewDAO"%>
+<%@ page import="review.ReviewDTO"%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter"%>
+<%@ page import="java.net.URLEncoder" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +27,27 @@
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");	
+	String movieGenre = "전체"; // 검색창 기본 정렬 순서
+	String searchType = "최신순";
+	String search = "";
+	int pageNumber = 0;
+	if(request.getParameter("movieGenre") != null) {
+		movieGenre = request.getParameter("movieGenre");
+	}
+	if(request.getParameter("searchType") != null) {
+		searchType = request.getParameter("searchType");
+	}
+	if(request.getParameter("search") != null) {
+		search = request.getParameter("search");
+	}
+	if(request.getParameter("pageNumber") != null) {
+		try {
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		} catch (Exception e) {
+			System.out.println("검색 페이지 번호 오류");
+		}
+	}
+	
 	String userID = null;
 	if(session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
@@ -30,7 +55,7 @@
 	if(userID == null) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요합니다.');");
+		script.println("alert('로그인이 필요합니다.')");
 		script.println("location.href = 'login.jsp'");
 		script.println("</script>");
 		script.close();
@@ -51,39 +76,39 @@
 <!-- 한줄리뷰 목록 -->
 <div class="container">
 	<form method="get" action="reviewAction.jsp" class="form-inline mt-3">
-	<!-- 장르 드롭다운 -->
+		<!-- 장르 드롭다운 -->
 		<select name="movieGenre" class="form-control mx-1 mt-2">
 			<option value="전체">전체</option>
-			<option value="드라마/멜로">드라마/멜로</option>
-			<option value="가족/코미디">가족/코미디</option>
-			<option value="느와르/액션">느와르/액션</option>
-			<option value="스릴러/공포">스릴러/공포</option>
-			<option value="SF/판타지">SF/판타지</option>
-			<option value="애니메이션">애니메이션</option>
-			<option value="다큐멘터리">다큐멘터리</option>
+			<option value="드라마/멜로" <% if(movieGenre.equals("드라마/멜로")) out.println("selected"); %>>드라마/멜로</option>
+			<option value="가족/코미디" <% if(movieGenre.equals("가족/코미디")) out.println("selected"); %>>가족/코미디</option>
+			<option value="느와르/액션" <% if(movieGenre.equals("느와르/액션")) out.println("selected"); %>>느와르/액션</option>
+			<option value="스릴러/공포" <% if(movieGenre.equals("스릴러/공포")) out.println("selected"); %>>스릴러/공포</option>
+			<option value="SF/판타지" <% if(movieGenre.equals("SF/판타지")) out.println("selected"); %>>SF/판타지</option>
+			<option value="애니메이션" <% if(movieGenre.equals("애니메이션")) out.println("selected"); %>>애니메이션</option>
+			<option value="다큐멘터리" <% if(movieGenre.equals("다큐멘터리")) out.println("selected"); %>>다큐멘터리</option>
 		</select>
-		<!-- 최신/추천 드롭다운 -->
+		<!-- 최신/공감 드롭다운 -->
 		<select name="searchType" class="form-control mx-1 mt-2">
 			<option value="최신순">최신순</option>
-			<option value="추천순">추천순</option>
+			<option value="공감순" <% if(searchType.equals("공감순")) out.println("selected"); %>>공감순</option>
 		</select>
 		<!-- 검색창 -->
-		<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요.">
-		<!-- 검색, 작성, 신고 버튼 -->
-		<button type="submit" class="btn btn-default mx-1 mt-2">검색</button>
+		<input type="text" name="search" class="form-control mx-1 mt-2" value="<%=search %>" placeholder="리뷰를 검색해보세요!">
+		<button type="submit" class="btn btn-default mx-1 mt-2">
+			<span class="glyphicon glyphicon-search"></span>검색
+		</button>
+		<!-- 작성, 신고 버튼 -->
 		<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#registerModal">등록</a>
 		<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	</form>
 </div>
 <%
-/*	ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
+	ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
 	reviewList = new ReviewDAO().getList(movieGenre, searchType, search, pageNumber);
 	if(reviewList != null) {
 		for(int i = 0; i < reviewList.size(); i++) {
 			if(i == 5) break;
 			ReviewDTO review = reviewList.get(i);
-		}
-	} */
 %>
 <!-- 등록된 리뷰 양식 -->
 <br>
@@ -93,32 +118,36 @@
 				<thead>
 					<tr>
 						<!-- 영화제목 -->
-						<th colspan="10" style="text-align: center;">다만 악에서 구하소서&nbsp;<small>&nbsp;(느와르/액션)</small></th>
+						<th colspan="10" style="text-align: center;"><%=review.getMovieTitle() %>&nbsp;<small>&nbsp;<%=review.getMovieGenre() %></small></th>
 						<!-- 별점 -->
 						<th colspan="1" style="text-align: center;">
-							<span style="color: red;">★★★☆☆</span>
+							<span style="color: red;"><%=review.getMovieScore() %></span>
 						</th>
-						
-						<!-- 다른 사람 글은 공감할 수 있도록 공감 버튼 보이게 함 -->
+						<!-- 다른 사람 리뷰에 공감하기 -->
 						<th colspan="1" style="text-align: center;">
-							<button type="button" class="btn btn-default btn-xs"><a onclick="return confirm('게시글에 공감합니다.')" href="likeAction.jsp?reviewID=">0 공감</a></button>
+							<button type="button" class="btn btn-default btn-xs">
+								<a onclick="return confirm('게시글에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>공감</a>
+							</button>
 						</th>
 					</tr>
 					<tr>
 						<!-- 한줄감상, 작성자, 작성일 -->
-						<td colspan="10" style="text-align: center;">신명난 카메라와 캐릭터, 언뜻언뜻 기시감.</td>
-						<td colspan="1" style="text-align: center;">박평식</td>
-						<td colspan="1" style="text-align: center;">20-08-05</td>
+						<td colspan="10" style="text-align: center;"><%=review.getShortReview() %></td>
+						<td colspan="1" style="text-align: center;"><%=review.getUserID() %></td>
+						<td colspan="1" style="text-align: center;"><%=review.getReviewDate() %></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr> <!-- 장문감상 -->
-						<td colspan="12" style="text-align: left;">신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감. 신명난 카메라와 캐릭터, 언뜻언뜻 기시감.</td>
+						<td colspan="12" style="text-align: left;"><%=review.getFullReview() %></td>
 					</tr>
 				</tbody>
 		</table>
 	</div>
-</div>	
+<%
+		}
+	}
+%>
 </div>
 <!-- 페이지네이션 -->
 <section class="container">
@@ -165,11 +194,11 @@
 						</div>
 						<div class="form-group col-sm-3">
 							<label>작성자</label>
-								<input type="text" name="userID" class="form-control" maxlength="20">
+							<input type="text" name="userID" class="form-control" maxlength="20">
 						</div>
 						<div class="form-group col-sm-3">
 							<label>작성일</label>
-								<input type="text" name="reviewDate" class="form-control" maxlength="20">
+							<input type="text" name="reviewDate" class="form-control" maxlength="20">
 						</div>
 					</div>	
 						<div class="form-group col-sm-12">
@@ -178,7 +207,7 @@
 						</div>
 						<div class="form-group col-sm-12">
 							<label>장문감상</label>
-							<textarea name="fullReview" class="form-control" maxlength="2048" placeholder="최대 2048자까지 작성 가능합니다." style="height: 250px;"></textarea>
+							<textarea type="text" name="fullReview" class="form-control" maxlength="2048" placeholder="최대 2048자까지 작성 가능합니다." style="height: 250px;"></textarea>
 						</div>&nbsp;&nbsp;&nbsp;
 					<div class="modal-footer">	
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>

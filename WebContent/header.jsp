@@ -33,19 +33,16 @@
 								<span class="caret"></span>
 							</button>&nbsp;&nbsp;&nbsp;
 							<ul class="dropdown-menu" role="menu">
-						    	<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in" /> 로그인</a></li>
-						    	<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out" /> 로그아웃</a></li>
-						    	<li><a href="join.jsp"><span class="glyphicon glyphicon-ok" /> 회원가입</a></li>
-						    	<li><a href="myPage.jsp"><span class="glyphicon glyphicon-user" /> 회원정보</a></li>
+						    	<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						    	<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+						    	<li><a href="join.jsp"><span class="glyphicon glyphicon-ok"></span> 회원가입</a></li>
+						    	<li><a href="myPage.jsp"><span class="glyphicon glyphicon-user"></span> 회원정보</a></li>
 							</ul>
 						</div>
-					</form>
-					
+					</form>	
 				<!-- 검색창 -->
-				<form class="navbar-form mr-auto">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="영화 제목을 입력하세요!">
-					</div>
+				<form action="review.jsp" method="get" class="navbar-form mr-auto">
+					<input type="text" name="search" class="form-control" placeholder="리뷰를 검색해보세요!">
 					<button type="submit" class="btn btn-default">
 						<span class="glyphicon glyphicon-search"></span>검색
 					</button>

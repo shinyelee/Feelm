@@ -35,7 +35,7 @@
 	if(userID != null) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('이미 로그인이 되어 있습니다.');");
+		script.println("alert('이미 로그인이 되어 있습니다.')");
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
 		script.close();

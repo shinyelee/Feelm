@@ -54,8 +54,8 @@
 		}
 		// 관리자에게 보내는 이메일 메시지
 		String host = "http://localhost:8088/Moviehere/"; // 로컬호스트 주소
-		String from = "구글ID0213@gmail.com"; // 신고메일 발송하는 아이디(총 관리자)
-		String to = "네이버ID@naver.com"; // 신고메일 받는 아이디(게시판 관리자)
+		String from = "구글ID"; // 신고메일 발송하는 아이디(총 관리자)
+		String to = "네이버ID"; // 신고메일 받는 아이디(게시판 관리자)
 		String subject = "Moviehere에서 신고 메일이 접수되었습니다.";
 		String content = "신고자: " + userID +
 						 "<br>신고 제목: " + reportTitle +
