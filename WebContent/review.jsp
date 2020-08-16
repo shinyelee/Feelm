@@ -22,6 +22,9 @@
 			color: #000000;
 			text-decoration: none;
 		}
+		table th {
+  			background-color: #eeeeee;
+		}
 	</style>
 </head>
 <body>
@@ -75,7 +78,7 @@
 <jsp:include page="header.jsp" flush="false" />
 <!-- 한줄리뷰 목록 -->
 <div class="container">
-	<form method="get" action="reviewAction.jsp" class="form-inline mt-3">
+	<form method="get" action="review.jsp" class="form-inline mt-3">
 		<!-- 장르 드롭다운 -->
 		<select name="movieGenre" class="form-control mx-1 mt-2">
 			<option value="전체">전체</option>
@@ -102,32 +105,47 @@
 		<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	</form>
 </div>
+<br>
 <%
 	ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
 	reviewList = new ReviewDAO().getList(movieGenre, searchType, search, pageNumber);
-	if(reviewList != null) {
+	if(reviewList != null)
 		for(int i = 0; i < reviewList.size(); i++) {
 			if(i == 5) break;
 			ReviewDTO review = reviewList.get(i);
 %>
 <!-- 등록된 리뷰 양식 -->
-<br>
 <div class="container">
 	<div class="row">
 			<table class="table table-default" style="border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<!-- 영화제목 -->
-						<th colspan="10" style="text-align: center;"><%=review.getMovieTitle() %>&nbsp;<small>&nbsp;<%=review.getMovieGenre() %></small></th>
+						<!-- 영화제목, 장르 -->
+						<th colspan="10" style="text-align: center;"><%=review.getMovieTitle() %>&nbsp;<small>&nbsp;(<%=review.getMovieGenre() %>)</small></th>
 						<!-- 별점 -->
 						<th colspan="1" style="text-align: center;">
 							<span style="color: red;"><%=review.getMovieScore() %></span>
 						</th>
 						<!-- 다른 사람 리뷰에 공감하기 -->
 						<th colspan="1" style="text-align: center;">
+							<%
+ 								if(userID.equals(review.getUserID())) {
+							%>
 							<button type="button" class="btn btn-default btn-xs">
-								<a onclick="return confirm('게시글에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>공감</a>
+								<a href="reviewUpdate.jsp?reviewID=<%=review.getReviewID() %>">수정</a>
 							</button>
+							<button type="button" class="btn btn-default btn-xs">
+								<a onclick="return confirm('게시글을 삭제합니다.')" href="reviewDeleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
+							</button>
+							<%
+								} else {
+							%>
+							<button type="button" class="btn btn-default btn-xs">
+								<a onclick="return confirm('게시글에 공감합니다.')" href="reviewLikeAction.jsp?reviewID=<%=review.getReviewID() %>"><span class="glyphicon glyphicon-log-in"></span><%=review.getLikeCount() %></a>
+							</button>
+							<%
+								}
+							%>
 						</th>
 					</tr>
 					<tr>
@@ -144,18 +162,41 @@
 				</tbody>
 		</table>
 	</div>
+</div>
 <%
 		}
-	}
 %>
-</div>
 <!-- 페이지네이션 -->
-<section class="container">
+<div class="container">
 	<ul class="pagination justify-content-center mt-3">
-		<li class="page-item"><a class="page-link" href="#">이전</a></li>
-		<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		<li class="page-item">
+		<%
+			if(pageNumber <= 0) {
+		%>     
+			<a class="page-link disabled">이전</a>
+		<%
+			} else {
+		%>
+			<a class="page-link" href="review.jsp?movieGenre=<%=URLEncoder.encode(movieGenre, "UTF-8") %>&searchType=<%=URLEncoder.encode(searchType, "UTF-8") %>&search=<%=URLEncoder.encode(search, "UTF-8") %>&pageNumber=<%=pageNumber - 1 %>">이전</a>
+		<%
+			}
+		%>
+		</li>
+		<li class="page-item">
+		<%
+			if(reviewList.size() < 6) {
+		%>     
+			<a class="page-link disabled">다음</a>
+		<%
+			} else {
+		%>
+			<a class="page-link" href="review.jsp?movieGenre=<%=URLEncoder.encode(movieGenre, "UTF-8") %>&searchType=<%=URLEncoder.encode(searchType, "UTF-8") %>&search=<%=URLEncoder.encode(search, "UTF-8") %>&pageNumber=<%=pageNumber + 1 %>">다음</a>
+		<%
+			}
+		%>
+		</li>
 	</ul>
-</section>
+</div>
 <!-- 등록 모달창 -->
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog">
@@ -185,11 +226,11 @@
 						<div class="form-group col-sm-3">
 							<label>별점</label>
 							<select name="movieScore" class="form-control">
-								<option value="star1" selected>★☆☆☆☆</option>
-								<option value="star2">★★☆☆☆</option>
-								<option value="star3">★★★☆☆</option>
-								<option value="star4">★★★★☆</option>
-								<option value="star5">★★★★★</option>
+								<option value="★☆☆☆☆" selected>★☆☆☆☆</option>
+								<option value="★★☆☆☆">★★☆☆☆</option>
+								<option value="★★★☆☆">★★★☆☆</option>
+								<option value="★★★★☆">★★★★☆</option>
+								<option value="★★★★★">★★★★★</option>
 							</select>
 						</div>
 						<div class="form-group col-sm-3">
