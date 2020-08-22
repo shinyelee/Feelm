@@ -84,6 +84,80 @@ public class UserDAO {
 		return -1; // 회원가입 실패
 	}
 	
+	public int update(String userID, String userPassword, String userPhone, String userEmail) { // 회원정보 수정하는 함수
+		String SQL = "update user set userPassword = ?, userPhone = ?, userEmail = ? where userID = ?"; // 변경 가능한 항목만 표기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		// ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userPassword);
+			pstmt.setString(2, userPhone);
+			pstmt.setString(3, userEmail);
+			pstmt.setString(4, userID);
+			return pstmt.executeUpdate(); // 쿼리문 실행(데이터 삽입or삭제) 후 결과값 rs에 저장ㄴㄱ
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			/* try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} */
+		}
+		return -1; // DB 오류
+	}
+	
+	public UserDTO getUser(String userID) { // 회원정보 수정 위한 함수
+		UserDTO user = new UserDTO();
+		String SQL = "select * from user where userID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery(); // select는 Query, insert나 delete는 Update
+			if (rs.next()) {
+				user.setUserID(userID);
+				user.setUserPassword(rs.getString("userPassword"));
+				user.setUserPhone(rs.getString("userPhone"));
+				user.setUserEmail(rs.getString("userEmail"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+	
 	public String getUserEmail(String userID) { // 아이디값 -> 이메일 반환
 		String SQL = "select userEmail from user where userID = ?";
 		Connection conn = null;

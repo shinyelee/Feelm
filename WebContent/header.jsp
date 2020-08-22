@@ -36,13 +36,13 @@
 							<%
  								// if(userID == null) {
 							%>
-						    	<li><a href="join.jsp"><span class="glyphicon glyphicon-ok"></span> 회원가입</a></li>
-						    	<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						    	<li><a href="join.jsp"><span class="glyphicon glyphicon-ok"></span>&nbsp;회원가입</a></li>
+						    	<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
 						    <%
 								// } else {
 							%>
-								<li><a href="myPage.jsp"><span class="glyphicon glyphicon-user"></span> 회원정보</a></li>
-								<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+								<li><a href="myInfo.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;회원정보</a></li>
+								<li><a href="logoutAction.jsp"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 							<%
 								// }
 							%>

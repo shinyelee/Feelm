@@ -96,7 +96,7 @@
 			<option value="공감순" <% if(searchType.equals("공감순")) out.println("selected"); %>>공감순</option>
 		</select>
 		<!-- 검색창 -->
-		<input type="text" name="search" class="form-control mx-1 mt-2" value="<%=search %>" placeholder="리뷰를 검색해보세요!">
+		<input type="text" name="search" class="form-control mx-1 mt-2" value="<%=search %>" placeholder="리뷰를 검색해보세요!" autofocus>
 		<button type="submit" class="btn btn-default mx-1 mt-2">
 			<span class="glyphicon glyphicon-search"></span>검색
 		</button>
@@ -208,7 +208,7 @@
 				<form action="reviewAction.jsp" method="post">
 						<div class="form-group col-sm-12">
 							<label>영화제목</label>
-							<input type="text" name="movieTitle" class="form-control" maxlength="64">
+							<input type="text" name="movieTitle" class="form-control" maxlength="64" autofocus>
 						</div>
 					<div class="form-row">
 						<div class="form-group col-sm-3">
@@ -271,7 +271,7 @@
 				<form action="reportAction.jsp" method="post">
 					<div class="form-group col-sm-12">
 						<label>신고제목</label>
-						<input type="text" name="reportTitle" class="form-control" maxlength="64">
+						<input type="text" name="reportTitle" class="form-control" maxlength="64" autofocus>
 					</div>
 					<div class="form-group col-sm-12">
 						<label>신고내용</label>

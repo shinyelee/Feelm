@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="user.UserDTO"%>
 <%@ page import="user.UserDAO"%>
 <%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Moviehere | join</title>
+	<title>Moviehere | myInfo</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/custom.css">
@@ -32,45 +33,54 @@
 	if(session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID != null) {
+	if(userID == null) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('이미 로그인이 되어 있습니다.')");
-		script.println("location.href = 'index.jsp'");
+		script.println("alert('로그인이 필요합니다.')");
+		script.println("location.href = 'login.jsp'");
 		script.println("</script>");
 		script.close();
 		return;
 	}
+	UserDTO user = new UserDAO().getUser(userID);
+	if (!userID.equals(user.getUserID())) { // 접속자 정보가 다르면 
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('권한이 없습니다.')"); // 글 수정 권한 없음 
+		script.println("location.href = 'index.jsp'"); // 게시판 페이지로 보냄
+		script.println("</script>");
+	}
 %>
+
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
 
-	<!-- 회원가입 양식 -->
+	<!-- 회원정보 수정 양식 -->
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3">
 			<div class="jumbotron" style="padding-top: 20px;">
-			 	<form method="post" action="joinAction.jsp"> <!-- 데이터를 joinAction.jsp로 보냄 -->
-			 		<h3 style="text-align: center:">회원가입이 필요합니다.</h3>
-			 		<!-- 아이디, 비밀번호, 휴대전화, 이메일 입력창 -->
+			 	<form method="post" action="myInfoUpdate.jsp?userID=<%=userID %>" id="fr" name="fr"> <!-- 데이터를 joinAction.jsp로 보냄 -->
+			 		<h3 style="text-align: center:">회원정보 수정</h3>
+			 		<!-- 아이디, 비밀번호, 휴대전화 입력창 -->
 			 		<div class="form-group">
 			 			<label>아이디</label>
-			 			<input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="userID" maxlength="20" autofocus>	
+			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=user.getUserID() %>" disabled>
 			 		</div>
 			 		<div class="form-group">
-			 			<label>비밀번호</label>
-			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="64">	
+			 			<label>비밀번호 변경</label>
+			 			<input type="password" class="form-control" placeholder="변경할 비밀번호를 입력해주세요" name="userPassword" maxlength="64" value="<%=user.getUserPassword() %>" autofocus>	
 			 		</div>
 			 		<div class="form-group">
-			 			<label>휴대전화</label>
-			 			<input type="text" class="form-control" placeholder="휴대전화번호를 입력해주세요" name="userPhone" maxlength="20">	
+			 			<label>전화번호 변경</label>
+			 			<input type="text" class="form-control" placeholder="변경할 전화번호를 입력해주세요" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
 			 		</div>
 			 		<div class="form-group">
 			 			<label>이메일</label>
-			 			<input type="email" class="form-control" placeholder="이메일 주소를 입력해주세요" name="userEmail" maxlength="64">	
+			 			<input type="email" class="form-control" name="userEmail" maxlength="64" value="<%=user.getUserEmail() %>" disabled>	
 			 		</div>
-			 		<!-- 회원가입 버튼 -->
-			 		<input type="submit" class="btn btn-danger form-control" value="회원가입">
-			 		<a href="login.jsp">* 이미 Moviehere의 회원이신가요?</a>
+			 		<!-- 회원정보 수정 버튼 -->
+			 		<input type="reset" class="btn btn-default cancel" value="초기화">
+			 		<input type="submit" class="btn btn-danger" value="수정">
 			 	</form>
 			</div>
 		</div>
