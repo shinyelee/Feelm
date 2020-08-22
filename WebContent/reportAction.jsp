@@ -25,6 +25,7 @@
 			script.close();
 			return;
 		}
+		
 		request.setCharacterEncoding("UTF-8");
 		String reportTitle = null;
 		String reportContent = null;

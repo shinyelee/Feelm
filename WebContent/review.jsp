@@ -135,13 +135,13 @@
 								<a href="reviewUpdate.jsp?reviewID=<%=review.getReviewID() %>">수정</a>
 							</button>
 							<button type="button" class="btn btn-default btn-xs">
-								<a onclick="return confirm('게시글을 삭제합니다.')" href="reviewDeleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
+								<a onclick="return confirm('게시글을 삭제합니다.')" href="deleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
 							</button>
 							<%
 								} else {
 							%>
 							<button type="button" class="btn btn-default btn-xs">
-								<a onclick="return confirm('게시글에 공감합니다.')" href="reviewLikeAction.jsp?reviewID=<%=review.getReviewID() %>"><span class="glyphicon glyphicon-log-in"></span><%=review.getLikeCount() %></a>
+								<a onclick="return confirm('게시글에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>&nbsp;공감</a>
 							</button>
 							<%
 								}

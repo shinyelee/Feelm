@@ -23,9 +23,8 @@
 				<ul class="nav navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link" href="index.jsp">MovieHere</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">영화소개</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">영화예매</a></li>
 					<li class="nav-item"><a class="nav-link" href="review.jsp">영화리뷰</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">갤러리</a></li>
 				</ul>
 					<form class="navbar-form navbar-right">
 						<div class="btn-group">

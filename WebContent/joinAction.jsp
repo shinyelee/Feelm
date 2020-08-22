@@ -41,7 +41,6 @@
 			script.println("history.back()"); // 다음 단계로 넘어가지 않고 회원가입창에 머무름
 			script.println("</script>");
 			script.close();
-			return;
 		} else { // 다 입력했으면
 			UserDAO userDAO = new UserDAO(); // userDAO 객체로 선언
 			// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
@@ -53,7 +52,6 @@
 				script.println("history.back()");
 				script.println("</script>");
 				script.close();
-				return;
 			} else { // 입력사항 다 채웠고 아이디 중복이 아닌 경우
 				session.setAttribute("userID", userID); // 세션값 부여
 				PrintWriter script = response.getWriter();
@@ -62,7 +60,6 @@
 				script.println("location.href = 'emailSendAction.jsp'"); // 이메일 인증을 위해 이메일 발송 페이지로 넘어감
 				script.println("</script>");
 				script.close();
-				return;
 			}
 		}
 	%>

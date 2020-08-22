@@ -117,5 +117,104 @@ public class ReviewDAO {
 		}
 		return reviewList;
 	}
+	
+	public int like(String reviewID) { // 리뷰에 공감 적용하는 함수
+		String SQL = "update review set likeCount = likeCount + 1 where reviewID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, Integer.parseInt(reviewID));
+            return pstmt.executeUpdate(); // 공감
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1; // DB 오류
+	}
+	
+	public int delete(String reviewID) { // 리뷰 삭제하는 함수
+		String SQL = "delete from review where reviewID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, Integer.parseInt(reviewID));
+            return pstmt.executeUpdate(); // 삭제
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1; // DB 오류
+	}
+	
+	public String getUserID(String reviewID) { // 사용자 아이디 가져오는 함수
+		String SQL = "select userID from review where reviewID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, Integer.parseInt(reviewID));
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString(1); // 아이디 존재O
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null; // 아이디 존재X
+	}
 }
 
