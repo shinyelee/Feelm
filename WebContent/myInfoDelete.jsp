@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Moviehere | myInfo</title>
+	<title>Moviehere | myInfoDelete</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/custom.css">
@@ -42,46 +42,29 @@
 		script.close();
 		return;
 	}
-	UserDTO user = new UserDAO().getUser(userID);
-	if (!userID.equals(user.getUserID())) { // 접속자 정보가 다르면 
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('권한이 없습니다.')"); // 회원정보 수정 권한 없음 
-		script.println("location.href = 'index.jsp'"); // 메인 페이지로 보냄
-		script.println("</script>");
-	}
 %>
-
 <!-- 헤더 -->
 <jsp:include page="header.jsp" flush="false" />
 
-	<!-- 회원정보 수정 양식 -->
+	<!-- 탈퇴 요청 양식 -->
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3">
 			<div class="jumbotron" style="padding-top: 20px;">
-			 	<form method="post" action="myInfoUpdate.jsp?userID=<%=userID %>" id="fr" name="fr"> <!-- 데이터를 joinAction.jsp로 보냄 -->
-			 		<h3 style="text-align: center:">회원정보</h3>
-			 		<!-- 아이디, 비밀번호, 휴대전화 입력창 -->
+			 	<form action="myInfoDeleteAction.jsp" method="post"> <!-- 데이터를 myInfoDeleteAction.jsp로 보냄 -->
+			 		<h3 style="text-align: center:">회원탈퇴</h3>
+			 		<!-- 아이디, 비밀번호 입력창 -->
 			 		<div class="form-group">
-			 			<label>아이디</label>
-			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=user.getUserID() %>" disabled>
+			 			<label>아이디 확인</label>
+			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=userID %>" disabled>
 			 		</div>
 			 		<div class="form-group">
-			 			<label>비밀번호 변경</label>
-			 			<input type="password" class="form-control" placeholder="변경할 비밀번호를 입력해주세요" name="userPassword" maxlength="64" autofocus>	
+			 			<label>비밀번호 확인</label>
+			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="64" autofocus>	
 			 		</div>
-			 		<div class="form-group">
-			 			<label>전화번호 변경</label>
-			 			<input type="text" class="form-control" placeholder="변경할 전화번호를 입력해주세요" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
-			 		</div>
-			 		<div class="form-group">
-			 			<label>이메일</label>
-			 			<input type="email" class="form-control" name="userEmail" maxlength="64" value="<%=user.getUserEmail() %>" disabled>	
-			 		</div>
-			 		<!-- 회원정보 수정 버튼 -->
-			 		<input type="button" class="btn btn-default" onclick="location.href = 'myInfoDelete.jsp'" value="탈퇴">
-			 		<input type="reset" class="btn btn-default cancel" value="리셋">
-			 		<input type="submit" class="btn btn-danger" value="수정">
+					정말로 탈퇴하시겠습니까?
+			 		<!-- 탈퇴 요청 버튼 -->
+					<input type="button" class="btn btn-default" onclick="location.href = 'myInfo.jsp'" value="취소">
+					<input type="submit" class="btn btn-danger" value="탈퇴">
 			 	</form>
 			</div>
 		</div>

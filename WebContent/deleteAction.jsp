@@ -41,7 +41,7 @@
 			} else {
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("alert('오류로 인해 리뷰 삭제에 실패했습니다.');");
+				script.println("alert('오류로 인해 리뷰 삭제에 실패했습니다.')");
 				script.println("history.back();");
 				script.println("</script>");
 				script.close();
@@ -50,7 +50,7 @@
 		} else {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('삭제 권한이 없습니다.');");
+			script.println("alert('삭제 권한이 없습니다.')");
 			script.println("location.href = 'review.jsp'");
 			script.println("</script>");
 			script.close();

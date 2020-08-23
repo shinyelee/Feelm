@@ -48,6 +48,39 @@ public class UserDAO {
 		return -2; // DB 꺼져있거나 오류 발생 -> 로그인 실패
 	}
 	
+/*	
+	public int delete(String userID) {
+		String SQL = "delete from user where userID = ?";
+		Connection conn = null; // 자바와 DB 연결
+		PreparedStatement pstmt = null; // 특정한 SQL문 수행하도록 하는 클래스 
+		ResultSet rs = null; // SQL문 수행 후 나온 결과값 처리(?에 데이터 대입)
+		try {
+			conn = DatabaseUtil.getConnection(); // DatabaseUtil 통해 Connection 객체 초기화
+			pstmt = conn.prepareStatement(SQL); // SQL문 실행 준비
+			pstmt.setString(1, userID); //  userID 대입
+			return pstmt.executeUpdate(); // 탈퇴
+		} catch (Exception e) { // 예외 발생하면
+			e.printStackTrace(); // 오류 출력
+		} finally { // conn, pstmt, rs 자원 해제
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1; // DB 꺼져있거나 오류 발생 -> 탈퇴 실패
+	}
+*/		
 	public int join(UserDTO user) { // 회원가입 수행하는 함수
 		String SQL = "insert into user values (?, ?, ?, ?, ?, false)"; // 이메일체크 제외
 		Connection conn = null;
@@ -118,8 +151,8 @@ public class UserDAO {
 		}
 		return -1; // DB 오류
 	}
-	
-	public UserDTO getUser(String userID) { // 회원정보 수정 위한 함수
+
+	public UserDTO getUser(String userID) { // 회원정보 가져오는 함수
 		UserDTO user = new UserDTO();
 		String SQL = "select * from user where userID = ?";
 		Connection conn = null;
