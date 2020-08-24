@@ -50,16 +50,16 @@
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3">
 			<div class="jumbotron" style="padding-top: 20px;">
-			 	<form action="myInfoDeleteAction.jsp" method="post"> <!-- 데이터를 myInfoDeleteAction.jsp로 보냄 -->
+			 	<form action="myInfoDeleteAction.jsp" method="post" name="myInfoDelete"> <!-- 데이터를 myInfoDeleteAction.jsp로 보냄 -->
 			 		<h3 style="text-align: center:">회원탈퇴</h3>
 			 		<!-- 아이디, 비밀번호 입력창 -->
 			 		<div class="form-group">
 			 			<label>아이디 확인</label>
-			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=userID %>" disabled>
+			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=userID %>" readonly>
 			 		</div>
 			 		<div class="form-group">
 			 			<label>비밀번호 확인</label>
-			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="64" autofocus>	
+			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" value="" maxlength="64" autofocus>	
 			 		</div>
 					정말로 탈퇴하시겠습니까?
 			 		<!-- 탈퇴 요청 버튼 -->

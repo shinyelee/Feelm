@@ -63,20 +63,20 @@
 			 		<h3 style="text-align: center:">회원정보</h3>
 			 		<!-- 아이디, 비밀번호, 휴대전화 입력창 -->
 			 		<div class="form-group">
-			 			<label>아이디</label>
-			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=user.getUserID() %>" disabled>
+			 			<label>아이디 (변경 불가)</label>
+			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=user.getUserID() %>" readonly>
 			 		</div>
 			 		<div class="form-group">
 			 			<label>비밀번호 변경</label>
-			 			<input type="password" class="form-control" placeholder="변경할 비밀번호를 입력해주세요" name="userPassword" maxlength="64" autofocus>	
+			 			<input type="password" class="form-control" placeholder="변경할 비밀번호를 입력해주세요" name="userPassword" maxlength="64" value="<%=user.getUserPassword() %>"autofocus>	
 			 		</div>
 			 		<div class="form-group">
 			 			<label>전화번호 변경</label>
 			 			<input type="text" class="form-control" placeholder="변경할 전화번호를 입력해주세요" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
 			 		</div>
 			 		<div class="form-group">
-			 			<label>이메일</label>
-			 			<input type="email" class="form-control" name="userEmail" maxlength="64" value="<%=user.getUserEmail() %>" disabled>	
+			 			<label>이메일 (변경 불가)</label>
+			 			<input type="email" class="form-control" name="userEmail" maxlength="64" value="<%=user.getUserEmail() %>" readonly>	
 			 		</div>
 			 		<!-- 회원정보 수정 버튼 -->
 			 		<input type="button" class="btn btn-default" onclick="location.href = 'myInfoDelete.jsp'" value="탈퇴">
