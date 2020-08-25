@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="user.UserDTO"%>
 <%@ page import="user.UserDAO"%>
 <%@ page import="review.ReviewDAO"%>
 <%@ page import="review.ReviewDTO"%>
@@ -149,7 +150,7 @@
 						</th>
 					</tr>
 					<tr>
-						<!-- 한줄감상, 작성자, 작성일 -->
+						<!-- 한줄감상, 작성자, 관람일 -->
 						<td colspan="10" style="text-align: center;"><%=review.getShortReview() %></td>
 						<td colspan="1" style="text-align: center;"><%=review.getUserID() %></td>
 						<td colspan="1" style="text-align: center;"><%=review.getReviewDate() %></td>
@@ -238,7 +239,7 @@
 							<input type="text" name="userID" class="form-control" maxlength="20">
 						</div>
 						<div class="form-group col-sm-3">
-							<label>작성일</label>
+							<label>관람일</label>
 							<input type="text" name="reviewDate" class="form-control" maxlength="20">
 						</div>
 					</div>	
@@ -258,7 +259,7 @@
 			</div>
 		</div>
 	</div>
-</div>		
+</div>
 <!-- 신고 모달창 -->
 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog">

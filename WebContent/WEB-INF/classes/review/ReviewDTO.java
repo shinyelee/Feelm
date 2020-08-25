@@ -1,16 +1,16 @@
 package review;
-//DTO(Data Transfer Object): JSPì™€ MySQLì´ ì„œë¡œ ë°ì´í„°ë¥¼ ì „ë‹¬í•˜ëŠ” ë‹¨ìœ„(â‰’ìžë°”ë¹ˆì¦ˆ)
+//DTO(Data Transfer Object): JSP¿Í MySQLÀÌ ¼­·Î µ¥ÀÌÅÍ¸¦ Àü´ÞÇÏ´Â ´ÜÀ§(¡ÖÀÚ¹ÙºóÁî)
 public class ReviewDTO {
 	
-	int reviewID; // ë¦¬ë·° ê¸€ë²ˆí˜¸
-	String userID; // ì•„ì´ë””
-	String movieTitle; // ì˜í™”ì œëª©
-	String movieGenre; // ì˜í™”ìž¥ë¥´
-	String shortReview; // í•œì¤„ë¦¬ë·°
-	String fullReview; // ìž¥ë¬¸ë¦¬ë·°
-	String movieScore; // ë¦¬ë·°ë³„ì 
-	String reviewDate; // ê´€ëžŒì¼
-	int likeCount; // ë¦¬ë·°ê³µê°
+	int reviewID; // ¸®ºä ±Û¹øÈ£
+	String userID; // ¾ÆÀÌµð
+	String movieTitle; // ¿µÈ­Á¦¸ñ
+	String movieGenre; // ¿µÈ­Àå¸£
+	String shortReview; // ÇÑÁÙ¸®ºä
+	String fullReview; // Àå¹®¸®ºä
+	String movieScore; // ¸®ºäº°Á¡
+	String reviewDate; // ¸®ºä³¯Â¥
+	int likeCount; // ¸®ºä°ø°¨
 	
 	// alt+shift+s -> r -> Select All -> OK	
 	public int getReviewID() {
@@ -67,9 +67,9 @@ public class ReviewDTO {
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
-	// ìƒì„±ìž: ì´ˆê¸°í™”O, ìž…ë ¥O, ì¶œë ¥X(ë°˜í™˜ ì„ ì–¸X, ë¦¬í„´ê°’ ë°˜í™˜X) í´ëž˜ìŠ¤ì™€ ë™ì¼í•œ ì´ë¦„ì˜ ë©”ì†Œë“œ
-	// ìƒì„±ìž 2ê°œ ë§Œë“¦ 
-	public ReviewDTO() { // ë¹ˆ ìƒì„±ìž
+	// »ý¼ºÀÚ: ÃÊ±âÈ­O, ÀÔ·ÂO, Ãâ·ÂX(¹ÝÈ¯ ¼±¾ðX, ¸®ÅÏ°ª ¹ÝÈ¯X) Å¬·¡½º¿Í µ¿ÀÏÇÑ ÀÌ¸§ÀÇ ¸Þ¼Òµå
+	// »ý¼ºÀÚ 2°³ ¸¸µê 
+	public ReviewDTO() { // ºó »ý¼ºÀÚ
 	}
 	// alt+shift+s -> o -> OK
 	public ReviewDTO(int reviewID, String userID, String movieTitle, String movieGenre, String shortReview,

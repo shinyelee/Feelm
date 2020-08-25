@@ -65,7 +65,6 @@
 			return;
 		}
 			ReviewDAO reviewDAO = new ReviewDAO(); // reviewDAO 객체로 선언
-			// 회원가입 수행 -> 한 명의 사용자 객체를 담아줌
 			int result = reviewDAO.write(new ReviewDTO(0, userID, movieTitle, movieGenre, shortReview, fullReview, movieScore, reviewDate, 0));
 			if (result == -1) {
 				PrintWriter script = response.getWriter();

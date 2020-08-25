@@ -16,10 +16,10 @@ public class LikeyDAO {
 		try {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID); // ?1 (¾ÆÀÌµğ)
-			pstmt.setString(2, reviewID); // ?2 (¸®ºä¹øÈ£)
-			pstmt.setString(3, userIP); // ?3 (¾ÆÀÌÇÇ)
-			return pstmt.executeUpdate(); // Äõ¸®¹® ½ÇÇà(µ¥ÀÌÅÍ »ğÀÔor»èÁ¦) ÈÄ °á°ú°ª rs¿¡ ÀúÀå¤¤¤¡
+			pstmt.setString(1, userID); // ?1 (ì•„ì´ë””)
+			pstmt.setString(2, reviewID); // ?2 (ë¦¬ë·°ë²ˆí˜¸)
+			pstmt.setString(3, userIP); // ?3 (ì•„ì´í”¼)
+			return pstmt.executeUpdate(); // ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(ë°ì´í„° ì‚½ì…orì‚­ì œ) í›„ ê²°ê³¼ê°’ rsì— ì €ì¥ã„´ã„±
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -39,6 +39,6 @@ public class LikeyDAO {
 				e.printStackTrace();
 			}
 		}
-		return -1; // ÃßÃµ Áßº¹ ¿À·ù
+		return -1; // ì¶”ì²œ ì¤‘ë³µ ì˜¤ë¥˜
 	}
 }

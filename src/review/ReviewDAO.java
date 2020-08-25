@@ -6,33 +6,29 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import util.DatabaseUtil;
-// UserDAO¿¡¼­ ÀÏºÎ º¹ºÙ ÈÄ ¼öÁ¤
+// UserDAOì—ì„œ ì¼ë¶€ ë³µë¶™ í›„ ìˆ˜ì •
 public class ReviewDAO {
+	private Connection conn; // ë¬¸ì œì‹œ ì½”ë“œ ì‚­ì œ
 	
-	private Connection conn; // ¹®Á¦½Ã ÄÚµå »èÁ¦
-	
-	public int write(ReviewDTO reviewDTO) { // ±Û¾²±â ÇÔ¼ö
-		
+	public int write(ReviewDTO reviewDTO) { // ê¸€ì“°ê¸° í•¨ìˆ˜
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try {
-			String SQL = "insert into review values (null, ?, ?, ?, ?, ?, ?, ?, 0);"; // nullÀº reviewID, 0Àºlikey
-			
-			conn = DatabaseUtil.getConnection(); // DatabaseUtil ÅëÇØ Connection °´Ã¼ ÃÊ±âÈ­
-			pstmt = conn.prepareStatement(SQL); // SQL¹® ½ÇÇà ÁØºñ
-			// reviewID¿Í likeCount Á¦¿Ü -> ? 6°³
-			pstmt.setString(1, reviewDTO.getUserID()); // ?¿¡ ¾ÆÀÌµğ ´ëÀÔ
-			pstmt.setString(2, reviewDTO.getMovieTitle()); // ?¿¡ ¿µÈ­Á¦¸ñ ´ëÀÔ
-			pstmt.setString(3, reviewDTO.getMovieGenre()); // ?¿¡ ÇÑÁÙ¸®ºä ´ëÀÔ
-			pstmt.setString(4, reviewDTO.getShortReview()); // ?¿¡ ÇÑÁÙ¸®ºä ´ëÀÔ
-			pstmt.setString(5, reviewDTO.getFullReview()); // ?¿¡ Àå¹®¸®ºä ´ëÀÔ
-			pstmt.setString(6, reviewDTO.getMovieScore()); // ?¿¡ ¸®ºäº°Á¡ ´ëÀÔ
-			pstmt.setString(7, reviewDTO.getReviewDate()); // ?¿¡ ¸®ºä³¯Â¥ ´ëÀÔ
+			String SQL = "insert into review values (null, ?, ?, ?, ?, ?, ?, ?, 0);"; // nullì€ reviewID, 0ì€likey
+			conn = DatabaseUtil.getConnection(); // DatabaseUtil í†µí•´ Connection ê°ì²´ ì´ˆê¸°í™”
+			pstmt = conn.prepareStatement(SQL); // SQLë¬¸ ì‹¤í–‰ ì¤€ë¹„
+			// reviewIDì™€ likeCount ì œì™¸ -> ? 6ê°œ
+			pstmt.setString(1, reviewDTO.getUserID()); // ?ì— ì•„ì´ë”” ëŒ€ì…
+			pstmt.setString(2, reviewDTO.getMovieTitle()); // ?ì— ì˜í™”ì œëª© ëŒ€ì…
+			pstmt.setString(3, reviewDTO.getMovieGenre()); // ?ì— í•œì¤„ë¦¬ë·° ëŒ€ì…
+			pstmt.setString(4, reviewDTO.getShortReview()); // ?ì— í•œì¤„ë¦¬ë·° ëŒ€ì…
+			pstmt.setString(5, reviewDTO.getFullReview()); // ?ì— ì¥ë¬¸ë¦¬ë·° ëŒ€ì…
+			pstmt.setString(6, reviewDTO.getMovieScore()); // ?ì— ë¦¬ë·°ë³„ì  ëŒ€ì…
+			pstmt.setString(7, reviewDTO.getReviewDate()); // ?ì— ë¦¬ë·°ë‚ ì§œ ëŒ€ì…
 			return pstmt.executeUpdate();
-		} catch (Exception e) { // ¿¹¿Ü ¹ß»ıÇÏ¸é
-			e.printStackTrace(); // ¿À·ù Ãâ·Â
+		} catch (Exception e) { // ì˜ˆì™¸ ë°œìƒí•˜ë©´
+			e.printStackTrace(); // ì˜¤ë¥˜ ì¶œë ¥
 		} finally {
 			try {
 				if (conn != null)
@@ -53,23 +49,23 @@ public class ReviewDAO {
 				e.printStackTrace();
 			}
 		}
-		return -1; // DB ²¨Á®ÀÖ°Å³ª ¿À·ù
+		return -1; // DB êº¼ì ¸ìˆê±°ë‚˜ ì˜¤ë¥˜
 	}
 	
 	public ArrayList<ReviewDTO> getList (String movieGenre, String searchType, String search, int pageNumber) {
-		if(movieGenre.equals("ÀüÃ¼")) {
+		if(movieGenre.equals("ì „ì²´")) {
 			movieGenre = "";
 		}
-		ArrayList<ReviewDTO> reviewList = null; // ¸®ºä¸®½ºÆ® »ı¼º
+		ArrayList<ReviewDTO> reviewList = null; // ë¦¬ë·°ë¦¬ìŠ¤íŠ¸ ìƒì„±
 		String SQL = "";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			if(searchType.equals("ÃÖ½Å¼ø")) { // ¸®ºä ÃÖ½Å¼øÀ¸·Î Ãâ·Â
+			if(searchType.equals("ìµœì‹ ìˆœ")) { // ë¦¬ë·° ìµœì‹ ìˆœìœ¼ë¡œ ì¶œë ¥
 				SQL = "select * from review where movieGenre like ? and concat(userID, movieTitle, shortReview, fullReview) like "
 						+ "? order by reviewID desc limit " + pageNumber * 5 + ", " + pageNumber * 5 + 6;
-			} else if (searchType.equals("°ø°¨¼ø")) { // ¸®ºä °ø°¨¼øÀ¸·Î Ãâ·Â
+			} else if (searchType.equals("ê³µê°ìˆœ")) { // ë¦¬ë·° ê³µê°ìˆœìœ¼ë¡œ ì¶œë ¥
 				SQL = "select * from review where movieGenre like ? and concat(userID, movieTitle, shortReview, fullReview) like "
 						+ "? order by likeCount desc limit " + pageNumber * 5 + ", " + pageNumber * 5 + 6;
 			}
@@ -118,7 +114,7 @@ public class ReviewDAO {
 		return reviewList;
 	}
 	
-	public int like(String reviewID) { // ¸®ºä¿¡ °ø°¨ Àû¿ëÇÏ´Â ÇÔ¼ö
+	public int like(String reviewID) { // ë¦¬ë·°ì— ê³µê° ì ìš©í•˜ëŠ” í•¨ìˆ˜
 		String SQL = "update review set likeCount = likeCount + 1 where reviewID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -127,7 +123,7 @@ public class ReviewDAO {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, Integer.parseInt(reviewID));
-            return pstmt.executeUpdate(); // °ø°¨
+            return pstmt.executeUpdate(); // ê³µê°
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -147,10 +143,92 @@ public class ReviewDAO {
 				e.printStackTrace();
 			}
 		}
-		return -1; // DB ¿À·ù
+		return -1; // DB ì˜¤ë¥˜
 	}
 	
-	public int delete(String reviewID) { // ¸®ºä »èÁ¦ÇÏ´Â ÇÔ¼ö
+	public ReviewDTO getReview(String reviewID) { // ê¸€ í•˜ë‚˜ ë‚´ìš© ë¶ˆëŸ¬ì˜¤ëŠ” í•¨ìˆ˜
+		ReviewDTO review = new ReviewDTO();
+		String SQL = "select * from review where reviewID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, Integer.parseInt(reviewID));
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				review.setReviewID(rs.getInt("reviewID"));
+				review.setUserID(rs.getString("userID"));
+				review.setMovieTitle(rs.getString("movieTitle"));
+				review.setMovieGenre(rs.getString("movieGenre"));
+				review.setShortReview(rs.getString("shortReview"));
+				review.setFullReview(rs.getString("fullReview"));
+				review.setMovieScore(rs.getString("movieScore"));
+				review.setReviewDate(rs.getString("reviewDate"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return review;
+	}
+	
+	public int update(int reviewID, String userID, String movieTitle, String movieGenre, String shortReview, String fullReview, String movieScore, String reviewDate) { // ë¦¬ë·° ìˆ˜ì •í•˜ëŠ” í•¨ìˆ˜
+		String SQL = "update review set String userID = ?, String movieTitle = ?, String movieGenre = ?, String shortReview = ?, String fullReview = ?, String movieScore = ?, String reviewDate = ? where reviewID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			pstmt.setString(2, movieTitle);
+			pstmt.setString(3, movieGenre);
+			pstmt.setString(4, shortReview);
+			pstmt.setString(5, fullReview);
+			pstmt.setString(6, movieScore);
+			pstmt.setString(7, reviewDate);
+			pstmt.setInt(8, reviewID);
+            return pstmt.executeUpdate(); // ì‚­ì œ
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(rs != null) rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1; // DB ì˜¤ë¥˜
+	}
+	
+	public int delete(String reviewID) { // ë¦¬ë·° ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
 		String SQL = "delete from review where reviewID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -159,7 +237,7 @@ public class ReviewDAO {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, Integer.parseInt(reviewID));
-            return pstmt.executeUpdate(); // »èÁ¦
+            return pstmt.executeUpdate(); // ì‚­ì œ
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -179,10 +257,10 @@ public class ReviewDAO {
 				e.printStackTrace();
 			}
 		}
-		return -1; // DB ¿À·ù
+		return -1; // DB ì˜¤ë¥˜
 	}
 	
-	public String getUserID(String reviewID) { // »ç¿ëÀÚ ¾ÆÀÌµğ °¡Á®¿À´Â ÇÔ¼ö
+	public String getUserID(String reviewID) { // ì‚¬ìš©ì ì•„ì´ë”” ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
 		String SQL = "select userID from review where reviewID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -193,7 +271,7 @@ public class ReviewDAO {
 			pstmt.setInt(1, Integer.parseInt(reviewID));
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				return rs.getString(1); // ¾ÆÀÌµğ Á¸ÀçO
+				return rs.getString(1); // ì•„ì´ë”” ì¡´ì¬O
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,7 +292,6 @@ public class ReviewDAO {
 				e.printStackTrace();
 			}
 		}
-		return null; // ¾ÆÀÌµğ Á¸ÀçX
+		return null; // ì•„ì´ë”” ì¡´ì¬X
 	}
 }
-

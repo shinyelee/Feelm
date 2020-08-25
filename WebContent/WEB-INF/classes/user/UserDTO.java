@@ -1,9 +1,9 @@
 package user;
-// DTO(Data Transfer Object): JSPì™€ MySQLì´ ì„œë¡œ ë°ì´í„°ë¥¼ ì „ë‹¬í•˜ëŠ” ë‹¨ìœ„(â‰’ìžë°”ë¹ˆì¦ˆ)
+// DTO(Data Transfer Object): JSP¿Í MySQLÀÌ ¼­·Î µ¥ÀÌÅÍ¸¦ Àü´ÞÇÏ´Â ´ÜÀ§(¡ÖÀÚ¹ÙºóÁî)
 public class UserDTO {
-	// DBì™€ ë™ì¼í•œ ìˆœì„œë¡œ ìž‘ì„±
-	// ë©¤ë²„ë³€ìˆ˜ëŠ” private, getter(), setter()
-	// ì •ë³´ì€ë‹‰í™” ìœ„í•´ private ì‚¬ìš©
+	// DB¿Í µ¿ÀÏÇÑ ¼ø¼­·Î ÀÛ¼º
+	// ¸â¹öº¯¼ö´Â private, getter(), setter()
+	// Á¤º¸Àº´ÐÈ­ À§ÇØ private »ç¿ë
 	private String userID;
 	private String userPassword;
 	private String userPhone;
@@ -49,9 +49,9 @@ public class UserDTO {
 		this.userEmailChecked = userEmailChecked;
 	}	
 
-	// ìƒì„±ìž: ì´ˆê¸°í™”O, ìž…ë ¥O, ì¶œë ¥X(ë°˜í™˜ ì„ ì–¸X, ë¦¬í„´ê°’ ë°˜í™˜X) í´ëž˜ìŠ¤ì™€ ë™ì¼í•œ ì´ë¦„ì˜ ë©”ì†Œë“œ
-	// ìƒì„±ìž 2ê°œ ë§Œë“¦ -> ìœ ì € ì¸ìŠ¤í„´ìŠ¤ ì²˜ë¦¬
-	public UserDTO() { // ë¹ˆ ìƒì„±ìž
+	// »ý¼ºÀÚ: ÃÊ±âÈ­O, ÀÔ·ÂO, Ãâ·ÂX(¹ÝÈ¯ ¼±¾ðX, ¸®ÅÏ°ª ¹ÝÈ¯X) Å¬·¡½º¿Í µ¿ÀÏÇÑ ÀÌ¸§ÀÇ ¸Þ¼Òµå
+	// »ý¼ºÀÚ 2°³ ¸¸µê -> À¯Àú ÀÎ½ºÅÏ½º Ã³¸®
+	public UserDTO() { // ºó »ý¼ºÀÚ
 	}
 	// alt+shift+s -> o -> OK
 	public UserDTO(String userID, String userPassword, String userPhone, String userEmail, String userEmailHash,

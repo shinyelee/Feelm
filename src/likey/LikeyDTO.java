@@ -26,11 +26,11 @@ public class LikeyDTO {
 		this.userIP = userIP;
 	}
 	
-	public LikeyDTO() { // ºó »ý¼ºÀÚ
+	public LikeyDTO() { // ë¹ˆ ìƒì„±ìž
 	}
 	
 	// alt+shift+s -> o -> OK
-	public LikeyDTO(String userID, int reviewID, String userIP) { // º¯¼ö ÃÊ±âÈ­
+	public LikeyDTO(String userID, int reviewID, String userIP) {
 		super();
 		this.userID = userID;
 		this.reviewID = reviewID;
