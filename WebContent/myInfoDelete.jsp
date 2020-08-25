@@ -55,11 +55,11 @@
 			 		<!-- 아이디, 비밀번호 입력창 -->
 			 		<div class="form-group">
 			 			<label>아이디 확인</label>
-			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=userID %>" readonly>
+			 			<input type="text" class="form-control" name="userID" maxlength="12" value="<%=userID %>" readonly>
 			 		</div>
 			 		<div class="form-group">
 			 			<label>비밀번호 확인</label>
-			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" value="" maxlength="64" autofocus>	
+			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" value="" maxlength="20" autofocus>	
 			 		</div>
 					정말로 탈퇴하시겠습니까?
 			 		<!-- 탈퇴 요청 버튼 -->

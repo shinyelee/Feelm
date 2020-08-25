@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="user.UserDTO"%>
 <%@ page import="user.UserDAO"%>
 <%@ page import="review.ReviewDAO"%>
 <%@ page import="review.ReviewDTO"%>
@@ -21,6 +22,9 @@
 		a, a:hover {
 			color: #000000;
 			text-decoration: none;
+		}
+		table th {
+  			background-color: #eeeeee;
 		}
 	</style>
 </head>
@@ -75,7 +79,7 @@
 <jsp:include page="header.jsp" flush="false" />
 <!-- 한줄리뷰 목록 -->
 <div class="container">
-	<form method="get" action="reviewAction.jsp" class="form-inline mt-3">
+	<form method="get" action="review.jsp" class="form-inline mt-3">
 		<!-- 장르 드롭다운 -->
 		<select name="movieGenre" class="form-control mx-1 mt-2">
 			<option value="전체">전체</option>
@@ -93,7 +97,7 @@
 			<option value="공감순" <% if(searchType.equals("공감순")) out.println("selected"); %>>공감순</option>
 		</select>
 		<!-- 검색창 -->
-		<input type="text" name="search" class="form-control mx-1 mt-2" value="<%=search %>" placeholder="리뷰를 검색해보세요!">
+		<input type="text" name="search" class="form-control mx-1 mt-2" value="<%=search %>" placeholder="리뷰를 검색해보세요!" autofocus>
 		<button type="submit" class="btn btn-default mx-1 mt-2">
 			<span class="glyphicon glyphicon-search"></span>검색
 		</button>
@@ -117,28 +121,30 @@
 			<table class="table table-default" style="border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<!-- 영화제목, 장르 -->
-						<th colspan="10" style="text-align: center;"><%=review.getMovieTitle() %>&nbsp;<small>&nbsp;(<%=review.getMovieGenre() %>)</small></th>
 						<!-- 별점 -->
-						<th colspan="1" style="text-align: center;">
+						<th colspan="1">
 							<span style="color: red;"><%=review.getMovieScore() %></span>
 						</th>
+						<!-- 영화제목, 장르 -->
+						<th colspan="10">
+							<%=review.getMovieTitle() %>&nbsp;<small>&nbsp;(<%=review.getMovieGenre() %>)</small>
+						</th>
 						<!-- 다른 사람 리뷰에 공감하기 -->
-						<th colspan="1" style="text-align: center;">
+						<th colspan="1">
 							<%
  								if(userID.equals(review.getUserID())) {
 							%>
-							<button type="button" class="btn btn-default btn-xs">
-								<a onclick="return confirm('게시글을 수정합니다.')" href="reviewUpdateAction.jsp?reviewID=<%=review.getReviewID() %>">수정</a>
+							<button type="button" class="btn btn-default btn-xs pull-right">
+								<a href="reviewUpdate.jsp?reviewID=<%=review.getReviewID() %>">수정</a>
 							</button>
-							<button type="button" class="btn btn-default btn-xs">
-								<a onclick="return confirm('게시글을 삭제합니다.')" href="reviewDeleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
+							<button type="button" class="btn btn-default btn-xs pull-right">
+								<a onclick="return confirm('게시글을 삭제합니다.')" href="deleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
 							</button>
 							<%
 								} else {
 							%>
-							<button type="button" class="btn btn-default btn-xs">
-								<a onclick="return confirm('게시글에 공감합니다.')" href="reviewLikeAction.jsp?reviewID=<%=review.getReviewID() %>"><span class="glyphicon glyphicon-log-in"></span><%=review.getLikeCount() %></a>
+							<button type="button" class="btn btn-default btn-xs pull-right">
+								<a onclick="return confirm('게시글에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>&nbsp;공감</a>
 							</button>
 							<%
 								}
@@ -146,15 +152,15 @@
 						</th>
 					</tr>
 					<tr>
-						<!-- 한줄감상, 작성자, 작성일 -->
-						<td colspan="10" style="text-align: center;"><%=review.getShortReview() %></td>
-						<td colspan="1" style="text-align: center;"><%=review.getUserID() %></td>
-						<td colspan="1" style="text-align: center;"><%=review.getReviewDate() %></td>
+						<!-- 한줄감상, 작성자, 관람일 -->
+						<td colspan="10"><%=review.getShortReview() %></td>
+						<td colspan="1" style="text-align: right;"><%=review.getUserID() %></td>
+						<td colspan="1" style="text-align: right;"><%=review.getReviewDate().substring(2, 11) %></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr> <!-- 장문감상 -->
-						<td colspan="12" style="text-align: left;"><%=review.getFullReview() %></td>
+						<td colspan="12"><%=review.getFullReview() %></td>
 					</tr>
 				</tbody>
 		</table>
@@ -163,55 +169,34 @@
 <%
 		}
 %>
-
-
-
-<div class="container">
-<div class="panel-group">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
-      </h4>
-    </div>
-    <div id="collapse1" class="panel-collapse collapse">
-      <div class="panel-body">Panel Body</div>
-      <div class="panel-footer">Panel Footer</div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-
 <!-- 페이지네이션 -->
 <div class="container">
 	<ul class="pagination justify-content-center mt-3">
 		<li class="page-item">
-<%
-	if(pageNumber <= 0) {
-%>     
+		<%
+			if(pageNumber <= 0) {
+		%>     
 			<a class="page-link disabled">이전</a>
-<%
-	} else {
-%>
+		<%
+			} else {
+		%>
 			<a class="page-link" href="review.jsp?movieGenre=<%=URLEncoder.encode(movieGenre, "UTF-8") %>&searchType=<%=URLEncoder.encode(searchType, "UTF-8") %>&search=<%=URLEncoder.encode(search, "UTF-8") %>&pageNumber=<%=pageNumber - 1 %>">이전</a>
-<%
-	}
-%>
+		<%
+			}
+		%>
 		</li>
 		<li class="page-item">
-<%
-	if(reviewList.size() < 6) {
-%>     
+		<%
+			if(reviewList.size() < 6) {
+		%>     
 			<a class="page-link disabled">다음</a>
-<%
-	} else {
-%>
+		<%
+			} else {
+		%>
 			<a class="page-link" href="review.jsp?movieGenre=<%=URLEncoder.encode(movieGenre, "UTF-8") %>&searchType=<%=URLEncoder.encode(searchType, "UTF-8") %>&search=<%=URLEncoder.encode(search, "UTF-8") %>&pageNumber=<%=pageNumber + 1 %>">다음</a>
-<%
-	}
-%>
+		<%
+			}
+		%>
 		</li>
 	</ul>
 </div>
@@ -226,7 +211,7 @@
 				<form action="reviewAction.jsp" method="post">
 						<div class="form-group col-sm-12">
 							<label>영화제목</label>
-							<input type="text" name="movieTitle" class="form-control" maxlength="64">
+							<input type="text" name="movieTitle" class="form-control" maxlength="64" autofocus>
 						</div>
 					<div class="form-row">
 						<div class="form-group col-sm-3">
@@ -253,11 +238,11 @@
 						</div>
 						<div class="form-group col-sm-3">
 							<label>작성자</label>
-							<input type="text" name="userID" class="form-control" maxlength="20">
+							<input type="text" name="userID" class="form-control" maxlength="20" value="<%=userID %>" readonly>
 						</div>
 						<div class="form-group col-sm-3">
-							<label>작성일</label>
-							<input type="text" name="reviewDate" class="form-control" maxlength="20">
+							<label>관람일</label>
+							<input type="date" name="reviewDate" class="form-control" maxlength="20" placeholder="선택" >
 						</div>
 					</div>	
 						<div class="form-group col-sm-12">
@@ -276,7 +261,7 @@
 			</div>
 		</div>
 	</div>
-</div>		
+</div>
 <!-- 신고 모달창 -->
 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog">
@@ -289,7 +274,7 @@
 				<form action="reportAction.jsp" method="post">
 					<div class="form-group col-sm-12">
 						<label>신고제목</label>
-						<input type="text" name="reportTitle" class="form-control" maxlength="64">
+						<input type="text" name="reportTitle" class="form-control" maxlength="64" autofocus>
 					</div>
 					<div class="form-group col-sm-12">
 						<label>신고내용</label>

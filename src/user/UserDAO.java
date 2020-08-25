@@ -1,5 +1,5 @@
 package user;
-// DAO(Data Access Object): ë°ì´í„°ë² ì´ìŠ¤ì— ì§ì ‘ ì ‘ê·¼í•´ ë°ì´í„° ì²˜ë¦¬
+// DAO(Data Access Object): µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á÷Á¢ Á¢±ÙÇØ µ¥ÀÌÅÍ Ã³¸®
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,27 +8,27 @@ import util.DatabaseUtil;
 
 public class UserDAO {
 	
-	public int login(String userID, String userPassword) { // ë¡œê·¸ì¸ ì‹œë„ í•¨ìˆ˜
+	public int login(String userID, String userPassword) { // ·Î±×ÀÎ ½Ãµµ ÇÔ¼ö
 		String SQL = "select userPassword from user where userID = ?";
-		Connection conn = null; // ìë°”ì™€ DB ì—°ê²°
-		PreparedStatement pstmt = null; // íŠ¹ì •í•œ SQLë¬¸ ìˆ˜í–‰í•˜ë„ë¡ í•˜ëŠ” í´ë˜ìŠ¤ 
-		ResultSet rs = null; // SQLë¬¸ ìˆ˜í–‰ í›„ ë‚˜ì˜¨ ê²°ê³¼ê°’ ì²˜ë¦¬(?ì— ë°ì´í„° ëŒ€ì…)
+		Connection conn = null; // ÀÚ¹Ù¿Í DB ¿¬°á
+		PreparedStatement pstmt = null; // Æ¯Á¤ÇÑ SQL¹® ¼öÇàÇÏµµ·Ï ÇÏ´Â Å¬·¡½º 
+		ResultSet rs = null; // SQL¹® ¼öÇà ÈÄ ³ª¿Â °á°ú°ª Ã³¸®(?¿¡ µ¥ÀÌÅÍ ´ëÀÔ)
 		try {
-			conn = DatabaseUtil.getConnection(); // DatabaseUtil í†µí•´ Connection ê°ì²´ ì´ˆê¸°í™”
-			pstmt = conn.prepareStatement(SQL); // SQLë¬¸ ì‹¤í–‰ ì¤€ë¹„
-			pstmt.setString(1, userID); // ì²«ë²ˆì§¸ ?ì— userID ëŒ€ì…
-			rs = pstmt.executeQuery(); // ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(ë°ì´í„° ê²€ìƒ‰) í›„ ê²°ê³¼ê°’ rsì— ì €ì¥ã„´ã„±
-			if (rs.next()) { // SQLë¬¸ ì‹¤í–‰ ê²°ê³¼ userIDê°€ DBì— ì¡´ì¬í•˜ê³ 
-				if(rs.getString(1).equals(userPassword)) {// userPasswordê¹Œì§€ DB ë‚´ ì •ë³´ì™€ ì¼ì¹˜í•˜ë©´
-					return 1; // ë¡œê·¸ì¸ ì„±ê³µ
-				} else { // userPasswordê°€ DB ë‚´ ì •ë³´ì™€ ë¶ˆì¼ì¹˜í•˜ë©´
-					return 0; // ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜ -> ë¡œê·¸ì¸ ì‹¤íŒ¨
+			conn = DatabaseUtil.getConnection(); // DatabaseUtil ÅëÇØ Connection °´Ã¼ ÃÊ±âÈ­
+			pstmt = conn.prepareStatement(SQL); // SQL¹® ½ÇÇà ÁØºñ
+			pstmt.setString(1, userID); // Ã¹¹øÂ° ?¿¡ userID ´ëÀÔ
+			rs = pstmt.executeQuery(); // Äõ¸®¹® ½ÇÇà(µ¥ÀÌÅÍ °Ë»ö) ÈÄ °á°ú°ª rs¿¡ ÀúÀå¤¤¤¡
+			if (rs.next()) { // SQL¹® ½ÇÇà °á°ú userID°¡ DB¿¡ Á¸ÀçÇÏ°í
+				if(rs.getString(1).equals(userPassword)) {// userPassword±îÁö DB ³» Á¤º¸¿Í ÀÏÄ¡ÇÏ¸é
+					return 1; // ·Î±×ÀÎ ¼º°ø
+				} else { // userPassword°¡ DB ³» Á¤º¸¿Í ºÒÀÏÄ¡ÇÏ¸é
+					return 0; // ºñ¹Ğ¹øÈ£ ºÒÀÏÄ¡ -> ·Î±×ÀÎ ½ÇÆĞ
 				}
 			}
-			return -1; // userIDê°€ DBì— ì—†ìœ¼ë©´(ë¶ˆì¼ì¹˜) -> ë¡œê·¸ì¸ ì‹¤íŒ¨
-		} catch (Exception e) { // ì˜ˆì™¸ ë°œìƒí•˜ë©´
-			e.printStackTrace(); // ì˜¤ë¥˜ ì¶œë ¥
-		} finally { // conn, pstmt, rs ìì› í•´ì œ
+			return -1; // userID°¡ DB¿¡ ¾øÀ¸¸é(ºÒÀÏÄ¡) -> ·Î±×ÀÎ ½ÇÆĞ
+		} catch (Exception e) { // ¿¹¿Ü ¹ß»ıÇÏ¸é
+			e.printStackTrace(); // ¿À·ù Ãâ·Â
+		} finally { // conn, pstmt, rs ÀÚ¿ø ÇØÁ¦
 			try {
 				if(conn != null) conn.close();
 			} catch (Exception e) {
@@ -45,23 +45,23 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return -2; // DB êº¼ì ¸ìˆê±°ë‚˜ ì˜¤ë¥˜ ë°œìƒ -> ë¡œê·¸ì¸ ì‹¤íŒ¨
+		return -2; // DB ²¨Á®ÀÖ°Å³ª ¿À·ù ¹ß»ı -> ·Î±×ÀÎ ½ÇÆĞ
 	}
 	
-	public int join(UserDTO user) { // íšŒì›ê°€ì… ìˆ˜í–‰í•˜ëŠ” í•¨ìˆ˜
-		String SQL = "insert into user values (?, ?, ?, ?, ?, false)"; // ì´ë©”ì¼ì²´í¬ ì œì™¸
+	public int join(UserDTO user) { // È¸¿ø°¡ÀÔ ¼öÇàÇÏ´Â ÇÔ¼ö
+		String SQL = "insert into user values (?, ?, ?, ?, ?, false)"; // ÀÌ¸ŞÀÏÃ¼Å© Á¦¿Ü
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, user.getUserID()); // ?1 (ì•„ì´ë””)
-			pstmt.setString(2, user.getUserPassword()); // ?2 (ë¹„ë°€ë²ˆí˜¸)
-			pstmt.setString(3, user.getUserPhone()); // ?3 (íœ´ëŒ€ì „í™”)
-			pstmt.setString(4, user.getUserEmail()); // ?4 (ì´ë©”ì¼)
-			pstmt.setString(5, user.getUserEmailHash()); // ?5 (ì´ë©”ì¼í•´ì‹œ)
-			return pstmt.executeUpdate(); // ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(ë°ì´í„° ì‚½ì…orì‚­ì œ) í›„ ê²°ê³¼ê°’ rsì— ì €ì¥ã„´ã„±
+			pstmt.setString(1, user.getUserID()); // ?1 (¾ÆÀÌµğ)
+			pstmt.setString(2, user.getUserPassword()); // ?2 (ºñ¹Ğ¹øÈ£)
+			pstmt.setString(3, user.getUserPhone()); // ?3 (ÈŞ´ëÀüÈ­)
+			pstmt.setString(4, user.getUserEmail()); // ?4 (ÀÌ¸ŞÀÏ)
+			pstmt.setString(5, user.getUserEmailHash()); // ?5 (ÀÌ¸ŞÀÏÇØ½Ã)
+			return pstmt.executeUpdate(); // Äõ¸®¹® ½ÇÇà(µ¥ÀÌÅÍ »ğÀÔor»èÁ¦) ÈÄ °á°ú°ª rs¿¡ ÀúÀå¤¤¤¡
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -81,11 +81,11 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return -1; // íšŒì›ê°€ì… ì‹¤íŒ¨
+		return -1; // È¸¿ø°¡ÀÔ ½ÇÆĞ
 	}
 	
-	public int update(String userID, String userPassword, String userPhone, String userEmail) { // íšŒì›ì •ë³´ ìˆ˜ì •í•˜ëŠ” í•¨ìˆ˜
-		String SQL = "update user set userPassword = ?, userPhone = ?, userEmail = ? where userID = ?"; // ë³€ê²½ ê°€ëŠ¥í•œ í•­ëª©ë§Œ í‘œê¸°
+	public int update(String userID, String userPassword, String userPhone, String userEmail) { // È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ´Â ÇÔ¼ö
+		String SQL = "update user set userPassword = ?, userPhone = ?, userEmail = ? where userID = ?"; // º¯°æ °¡´ÉÇÑ Ç×¸ñ¸¸ Ç¥±â
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		// ResultSet rs = null;
@@ -96,7 +96,7 @@ public class UserDAO {
 			pstmt.setString(2, userPhone);
 			pstmt.setString(3, userEmail);
 			pstmt.setString(4, userID);
-			return pstmt.executeUpdate(); // ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(ë°ì´í„° ì‚½ì…orì‚­ì œ) í›„ ê²°ê³¼ê°’ rsì— ì €ì¥ã„´ã„±
+			return pstmt.executeUpdate(); // Äõ¸®¹® ½ÇÇà(µ¥ÀÌÅÍ »ğÀÔor»èÁ¦) ÈÄ °á°ú°ª rs¿¡ ÀúÀå¤¤¤¡
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -116,32 +116,32 @@ public class UserDAO {
 				e.printStackTrace();
 			} */
 		}
-		return -1; // DB ì˜¤ë¥˜
+		return -1; // DB ¿À·ù
 	}
 
 	public int userCheck(String userID, String userPassword) throws Exception {
-		Connection conn = null; // ìë°”ì™€ DB ì—°ê²°
-		PreparedStatement pstmt = null; // íŠ¹ì •í•œ SQLë¬¸ ìˆ˜í–‰í•˜ë„ë¡ í•˜ëŠ” í´ë˜ìŠ¤ 
+		Connection conn = null; // ÀÚ¹Ù¿Í DB ¿¬°á
+		PreparedStatement pstmt = null; // Æ¯Á¤ÇÑ SQL¹® ¼öÇàÇÏµµ·Ï ÇÏ´Â Å¬·¡½º 
 		ResultSet rs = null;
 		String SQL = "";
 		String dbPassword = "";
 		int x = -1;
 		try {
-			conn = DatabaseUtil.getConnection(); // DatabaseUtil í†µí•´ Connection ê°ì²´ ì´ˆê¸°í™”
+			conn = DatabaseUtil.getConnection(); // DatabaseUtil ÅëÇØ Connection °´Ã¼ ÃÊ±âÈ­
 			SQL = "select userPassword from user where userID = ?";
-			pstmt = conn.prepareStatement(SQL); // SQLë¬¸ ì‹¤í–‰ ì¤€ë¹„
-			pstmt.setString(1, userID); //  userID ëŒ€ì…
+			pstmt = conn.prepareStatement(SQL); // SQL¹® ½ÇÇà ÁØºñ
+			pstmt.setString(1, userID); //  userID ´ëÀÔ
 			rs = pstmt.executeQuery();
-			if (rs.next()) { // DBì— ìˆìœ¼ë©´ ë‹¤ìŒìœ¼ë¡œ ë„˜ì–´ê°
-				if (userPassword.equals(rs.getString("userPassword"))) { // DBì˜ userPasswordì™€ myInfoDeleteì˜ userPassword ì¼ì¹˜
-					x = 1; // ì¸ì¦ ì„±ê³µ
+			if (rs.next()) { // DB¿¡ ÀÖÀ¸¸é ´ÙÀ½À¸·Î ³Ñ¾î°¨
+				if (userPassword.equals(rs.getString("userPassword"))) { // DBÀÇ userPassword¿Í myInfoDeleteÀÇ userPassword ÀÏÄ¡
+					x = 1; // ÀÎÁõ ¼º°ø
 				}else
-					x = 0; // ë¹„ë°€ë²ˆí˜¸ ë‹¤ë¦„	
+					x = 0; // ºñ¹Ğ¹øÈ£ ´Ù¸§	
 			} else
-				x = -1; // ì•„ì´ë”” ì¡´ì¬X
-		} catch (Exception e) { // ì˜ˆì™¸ ë°œìƒí•˜ë©´
-			e.printStackTrace(); // ì˜¤ë¥˜ ì¶œë ¥
-		} finally { // conn, pstmt, rs ìì› í•´ì œ
+				x = -1; // ¾ÆÀÌµğ Á¸ÀçX
+		} catch (Exception e) { // ¿¹¿Ü ¹ß»ıÇÏ¸é
+			e.printStackTrace(); // ¿À·ù Ãâ·Â
+		} finally { // conn, pstmt, rs ÀÚ¿ø ÇØÁ¦
 			try {
 				if(conn != null) conn.close();
 			} catch (Exception e) {
@@ -158,22 +158,22 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return x; // ì²´í¬ê°’ ë¦¬í„´
+		return x; // Ã¼Å©°ª ¸®ÅÏ
 	}
 	
 	public void deleteUser(String userID) throws Exception {
-		Connection conn = null; // ìë°”ì™€ DB ì—°ê²°
-		PreparedStatement pstmt = null; // íŠ¹ì •í•œ SQLë¬¸ ìˆ˜í–‰í•˜ë„ë¡ í•˜ëŠ” í´ë˜ìŠ¤ 
+		Connection conn = null; // ÀÚ¹Ù¿Í DB ¿¬°á
+		PreparedStatement pstmt = null; // Æ¯Á¤ÇÑ SQL¹® ¼öÇàÇÏµµ·Ï ÇÏ´Â Å¬·¡½º 
 		String SQL = null;
 		try {
-			conn = DatabaseUtil.getConnection(); // DatabaseUtil í†µí•´ Connection ê°ì²´ ì´ˆê¸°í™”
+			conn = DatabaseUtil.getConnection(); // DatabaseUtil ÅëÇØ Connection °´Ã¼ ÃÊ±âÈ­
 			SQL = "delete from user where userID = ?";
-			pstmt = conn.prepareStatement(SQL); // SQLë¬¸ ì‹¤í–‰ ì¤€ë¹„
-			pstmt.setString(1, userID); //  userID ëŒ€ì…
+			pstmt = conn.prepareStatement(SQL); // SQL¹® ½ÇÇà ÁØºñ
+			pstmt.setString(1, userID); //  userID ´ëÀÔ
 			pstmt.executeUpdate();
-		} catch (Exception e) { // ì˜ˆì™¸ ë°œìƒí•˜ë©´
-			e.printStackTrace(); // ì˜¤ë¥˜ ì¶œë ¥
-		} finally { // conn, pstmt, rs ìì› í•´ì œ
+		} catch (Exception e) { // ¿¹¿Ü ¹ß»ıÇÏ¸é
+			e.printStackTrace(); // ¿À·ù Ãâ·Â
+		} finally { // conn, pstmt, rs ÀÚ¿ø ÇØÁ¦
 			try {
 				if(conn != null) conn.close();
 			} catch (Exception e) {
@@ -187,7 +187,7 @@ public class UserDAO {
 		}
 	}
 	
-	public UserDTO getUser(String userID) { // íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
+	public UserDTO getUser(String userID) { // È¸¿øÁ¤º¸ °¡Á®¿À´Â ÇÔ¼ö
 		UserDTO user = new UserDTO();
 		String SQL = "select * from user where userID = ?";
 		Connection conn = null;
@@ -197,7 +197,7 @@ public class UserDAO {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
-			rs = pstmt.executeQuery(); // selectëŠ” Query, insertë‚˜ deleteëŠ” Update
+			rs = pstmt.executeQuery(); // select´Â Query, insert³ª delete´Â Update
 			if (rs.next()) {
 				user.setUserID(userID);
 				user.setUserPassword(rs.getString("userPassword"));
@@ -226,7 +226,7 @@ public class UserDAO {
 		return user;
 	}
 	
-	public String getUserEmail(String userID) { // ì•„ì´ë””ê°’ -> ì´ë©”ì¼ ë°˜í™˜
+	public String getUserEmail(String userID) { // ¾ÆÀÌµğ°ª -> ÀÌ¸ŞÀÏ ¹İÈ¯
 		String SQL = "select userEmail from user where userID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -235,7 +235,7 @@ public class UserDAO {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
-			rs = pstmt.executeQuery(); // selectëŠ” Query, insertë‚˜ deleteëŠ” Update
+			rs = pstmt.executeQuery(); // select´Â Query, insert³ª delete´Â Update
 			if (rs.next()) {
 				return rs.getString(1);
 			}
@@ -258,10 +258,10 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return null; // DB ì˜¤ë¥˜
+		return null; // DB ¿À·ù
 	}
 	
-	public boolean getUserEmailChecked(String userID) { // ì´ë©”ì¼ ì¸ì¦ì—¬ë¶€ í™•ì¸ í•¨ìˆ˜
+	public boolean getUserEmailChecked(String userID) { // ÀÌ¸ŞÀÏ ÀÎÁõ¿©ºÎ È®ÀÎ ÇÔ¼ö
 		String SQL = "select userEmailChecked from user where userID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -293,18 +293,18 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return false; // DB ì˜¤ë¥˜
+		return false; // DB ¿À·ù
 	}
 	
-	public boolean setUserEmailChecked(String userID) { // íŠ¹ì • ìœ ì € ì´ë©”ì¼ ì¸ì¦ ìˆ˜í–‰ í•¨ìˆ˜
+	public boolean setUserEmailChecked(String userID) { // Æ¯Á¤ À¯Àú ÀÌ¸ŞÀÏ ÀÎÁõ ¼öÇà ÇÔ¼ö
 		String SQL = "update user set userEmailChecked = true where userID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			conn = DatabaseUtil.getConnection();
-			pstmt = conn.prepareStatement(SQL); // SQL ì„¸íŒ…
-			pstmt.setString(1, userID); // ? (ì•„ì´ë””)
+			pstmt = conn.prepareStatement(SQL); // SQL ¼¼ÆÃ
+			pstmt.setString(1, userID); // ? (¾ÆÀÌµğ)
 			pstmt.executeUpdate();
             return true;
 		} catch (Exception e) {
@@ -326,6 +326,6 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return false; // DB ì˜¤ë¥˜
+		return false; // DB ¿À·ù
 	}
 }

@@ -27,7 +27,7 @@
 	if(request.getParameter("reviewID") != null) {
 		reviewID = request.getParameter("reviewID");
 	}
-	ReviewDAO reviewDAO = new ReviewDAO();
+/*	ReviewDAO reviewDAO = new ReviewDAO();
 	if(userID.equals(reviewDAO.getUserID(reviewID))) {
 		int result = new ReviewDAO().update(reviewID);
 		if (result == 1) { // 수정 성공
@@ -55,5 +55,5 @@
 		script.println("location.href = 'review.jsp'");
 		script.println("</script>");
 		script.close();
-	}
+	}	*/
 %>

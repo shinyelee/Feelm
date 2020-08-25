@@ -64,15 +64,15 @@
 			 		<!-- 아이디, 비밀번호, 휴대전화 입력창 -->
 			 		<div class="form-group">
 			 			<label>아이디 (변경 불가)</label>
-			 			<input type="text" class="form-control" name="userID" maxlength="20" value="<%=user.getUserID() %>" readonly>
+			 			<input type="text" class="form-control" name="userID" maxlength="12" value="<%=user.getUserID() %>" readonly>
 			 		</div>
 			 		<div class="form-group">
 			 			<label>비밀번호 변경</label>
-			 			<input type="password" class="form-control" placeholder="변경할 비밀번호를 입력해주세요" name="userPassword" maxlength="64" value="<%=user.getUserPassword() %>"autofocus>	
+			 			<input type="password" class="form-control" placeholder="20자 이내여야 합니다" name="userPassword" maxlength="20" value="<%=user.getUserPassword() %>"autofocus>	
 			 		</div>
 			 		<div class="form-group">
 			 			<label>전화번호 변경</label>
-			 			<input type="text" class="form-control" placeholder="변경할 전화번호를 입력해주세요" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
+			 			<input type="tel" class="form-control" placeholder="변경할 전화번호를 입력해주세요" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
 			 		</div>
 			 		<div class="form-group">
 			 			<label>이메일 (변경 불가)</label>

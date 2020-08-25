@@ -30,7 +30,7 @@ public class LikeyDTO {
 	}
 	
 	// alt+shift+s -> o -> OK
-	public LikeyDTO(String userID, int reviewID, String userIP) {
+	public LikeyDTO(String userID, int reviewID, String userIP) { // 변수 초기화
 		super();
 		this.userID = userID;
 		this.reviewID = reviewID;

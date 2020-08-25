@@ -54,10 +54,10 @@
 			 	<form method="post" action="loginAction.jsp"> <!-- 해당 페이지로 정보 전송 -->
 			 		<h3 style="text-align: center:">로그인이 필요합니다.</h3> <!-- 가운데 정렬 -->
 			 		<div class="form-group"> <!-- 아이디 -->
-			 			<input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="userID" maxlength="25" autofocus>	
+			 			<input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="userID" maxlength="12" autofocus>	
 			 		</div>
 			 		<div class="form-group"> <!-- 비밀번호 -->
-			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="25">	
+			 			<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="userPassword" maxlength="20">	
 			 		</div>
 			 		<!-- 로그인 버튼 -->
 			 		<input type="submit" class="btn btn-danger form-control" value="로그인">
