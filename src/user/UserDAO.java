@@ -88,7 +88,6 @@ public class UserDAO {
 		String SQL = "update user set userPassword = ?, userPhone = ?, userEmail = ? where userID = ?"; // 변경 가능한 항목만 표기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		// ResultSet rs = null;
 		try {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -110,11 +109,6 @@ public class UserDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			/* try {
-				if(rs != null) rs.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} */
 		}
 		return -1; // DB 오류
 	}

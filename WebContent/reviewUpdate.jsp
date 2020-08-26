@@ -72,21 +72,21 @@
 		<!-- 장르 드롭다운 -->
 		<select name="movieGenre" class="form-control mx-1 mt-2">
 			<option value="전체">전체</option>
-			<option value="드라마/멜로" <% if(movieGenre.equals("드라마/멜로")) out.println("selected"); %>>드라마/멜로</option>
-			<option value="가족/코미디" <% if(movieGenre.equals("가족/코미디")) out.println("selected"); %>>가족/코미디</option>
-			<option value="느와르/액션" <% if(movieGenre.equals("느와르/액션")) out.println("selected"); %>>느와르/액션</option>
-			<option value="스릴러/공포" <% if(movieGenre.equals("스릴러/공포")) out.println("selected"); %>>스릴러/공포</option>
-			<option value="SF/판타지" <% if(movieGenre.equals("SF/판타지")) out.println("selected"); %>>SF/판타지</option>
-			<option value="애니메이션" <% if(movieGenre.equals("애니메이션")) out.println("selected"); %>>애니메이션</option>
-			<option value="다큐멘터리" <% if(movieGenre.equals("다큐멘터리")) out.println("selected"); %>>다큐멘터리</option>
+			<option value="드라마/멜로" <% //if(movieGenre.equals("드라마/멜로")) out.println("selected"); %>>드라마/멜로</option>
+			<option value="가족/코미디" <% //if(movieGenre.equals("가족/코미디")) out.println("selected"); %>>가족/코미디</option>
+			<option value="느와르/액션" <% //if(movieGenre.equals("느와르/액션")) out.println("selected"); %>>느와르/액션</option>
+			<option value="스릴러/공포" <% //if(movieGenre.equals("스릴러/공포")) out.println("selected"); %>>스릴러/공포</option>
+			<option value="SF/판타지" <% //if(movieGenre.equals("SF/판타지")) out.println("selected"); %>>SF/판타지</option>
+			<option value="애니메이션" <% //if(movieGenre.equals("애니메이션")) out.println("selected"); %>>애니메이션</option>
+			<option value="다큐멘터리" <% //if(movieGenre.equals("다큐멘터리")) out.println("selected"); %>>다큐멘터리</option>
 		</select>
 		<!-- 최신/공감 드롭다운 -->
 		<select name="searchType" class="form-control mx-1 mt-2">
 			<option value="최신순">최신순</option>
-			<option value="공감순" <% if(searchType.equals("공감순")) out.println("selected"); %>>공감순</option>
+			<option value="공감순" <% //if(searchType.equals("공감순")) out.println("selected"); %>>공감순</option>
 		</select>
 		<!-- 검색창 -->
-		<input type="text" name="search" class="form-control mx-1 mt-2" value="<%=search %>" placeholder="리뷰를 검색해보세요!" autofocus>
+		<input type="text" name="search" class="form-control mx-1 mt-2" value="<%=//search %>" placeholder="리뷰를 검색해보세요!" autofocus>
 		<button type="submit" class="btn btn-default mx-1 mt-2">
 			<span class="glyphicon glyphicon-search"></span>검색
 		</button>
@@ -97,12 +97,12 @@
 </div>
 <br>
 <%
-	ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
+/*	ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
 	reviewList = new ReviewDAO().getList(movieGenre, searchType, search, pageNumber);
 	if(reviewList != null)
 		for(int i = 0; i < reviewList.size(); i++) {
 			if(i == 5) break;
-			ReviewDTO review = reviewList.get(i);
+			ReviewDTO review = reviewList.get(i);	*/
 %>
 <!-- 등록된 리뷰 양식 -->
 <div class="container">
@@ -113,11 +113,11 @@
 					<tr>
 						<!-- 별점 -->
 						<th colspan="1" style="color: red;">
-							<%=review.getMovieScore() %>
+							<%=//review.getMovieScore() %>
 						</th>
 						<!-- 영화제목, 장르 -->
 						<th colspan="10" style="text-align: center;">
-							<%=review.getMovieTitle() %>&nbsp;<small>&nbsp;(<%=review.getMovieGenre() %>)</small>
+							<%=//review.getMovieTitle() %>&nbsp;<small>&nbsp;(<%=//review.getMovieGenre() %>)</small>
 						</th>
 						<!-- 취소, 등록 버튼 -->
 						<th colspan="1">
@@ -132,14 +132,14 @@
 					</tr>
 					<tr>
 						<!-- 한줄감상, 작성자, 관람일 -->
-						<td colspan="1"><%=review.getUserID() %></td>
-						<td colspan="10" style="text-align: center;"><%=review.getShortReview() %></td>
-						<td colspan="1" style="text-align: right;"><%=review.getReviewDate().substring(2, 11) %></td>
+						<td colspan="1"><%=//review.getUserID() %></td>
+						<td colspan="10" style="text-align: center;"><%=//review.getShortReview() %></td>
+						<td colspan="1" style="text-align: right;"><%=//review.getReviewDate().substring(2, 11) %></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr> <!-- 장문감상 -->
-						<td colspan="12"><%=review.getFullReview() %></td>
+						<td colspan="12"><%=//review.getFullReview() %></td>
 					</tr>
 				</tbody>
 			</table>
