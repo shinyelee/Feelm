@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="bbs.Bbs" %> <!-- write.jsp 일부 수정해 만듦 -->
+<%@ page import="bbs.BbsDAO" %> <!-- 데이터베이스 접근 위해 추가 -->
 <%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 <html>
@@ -37,31 +39,43 @@
 			script.close();
 			return;
 		}
+		
+		// 매개변수, 기본세팅 처리
+			int bbsID = 0; // 존재하는 글
+			if (request.getParameter("bbsID") != null) {
+				bbsID = Integer.parseInt(request.getParameter("bbsID"));
+			}
+			if (bbsID == 0) { // 존재하지 않는 글
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('존재하지 않는 글입니다.')"); 
+				script.println("location.href = 'bbs.jsp'"); 
+				script.println("</script>");
+			}
+			Bbs bbs = new BbsDAO().getBbs(bbsID);	
 	%>
 <!-- 헤더 -->
 <jsp:include page="/header.jsp" flush="false" />
 <div class="container">
 	<div class="row">
-		<form method="post" action="bbsWriteAction.jsp">
-			<table class="table table-default" style="text-align: center; border: 1px solid #dddddd">
-				<thead>
-					<tr> <!-- 양식 -->
-						<th colspan="2" style="background-color: #eeeeee; text-align: center;">게시판 글쓰기 양식</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr> <!-- 내용 -->
-						<td><input type="text" class="form-control" placeholder="제목을 입력하세요. 45자까지 작성 가능합니다." name="bbsTitle" maxlength="45"></td>
-					</tr>
-					<tr>
-						<td><textarea class="form-control" placeholder="내용을 입력하세요. 2048자까지 작성 가능합니다." name="bbsContent" maxlength="2048" style="height: 300px;"></textarea></td>
-					</tr>
-				</tbody>
-			</table>
-			<input type="submit" class="btn btn-danger pull-right" value="등록">
-		</form>
+		<table class="table table-default" style="text-align: center; border: 1px solid #dddddd">
+			<thead>
+				<tr> <!-- 양식 -->
+					<th colspan="2" style="background-color: #eeeeee; text-align: center;">게시판 글쓰기 양식</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr> <!-- 내용 -->
+					<td><input type="text" class="form-control" placeholder="제목을 입력하세요. 45자까지 작성 가능합니다." name="bbsTitle" maxlength="45"></td>
+				</tr>
+				<tr>
+					<td><textarea class="form-control" placeholder="내용을 입력하세요. 2048자까지 작성 가능합니다." name="bbsContent" maxlength="2048" style="height: 300px;"></textarea></td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="submit" class="btn btn-danger pull-right" value="등록">
 	</div>
-	</div>
+</div>
 <!-- 푸터 -->
 <jsp:include page="/footer.jsp" flush="false" />
 <!-- popper, jQuery, 부트스트랩 JS 추가 -->

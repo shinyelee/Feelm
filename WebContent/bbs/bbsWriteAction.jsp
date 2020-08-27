@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- * 이 파일은 이 아래로 joinAction.jsp를 일부 수정해 만들었음 -->
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -22,7 +21,7 @@
 		if (userID == null) { // 로그아웃 -> 로그인 페이지로 이동
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('게시글을 작성하려면 로그인이 필요합니다.')"); 
+			script.println("alert('로그인이 필요합니다.')"); 
 			script.println("location.href = '../login.jsp'"); 
 			script.println("</script>");			
 		} else {

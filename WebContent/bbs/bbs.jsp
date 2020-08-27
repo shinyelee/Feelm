@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
+<%@ page import="bbs.BbsDAO" %>
+<%@ page import="bbs.Bbs" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +31,20 @@
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
+		if(userID == null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인이 필요합니다.')");
+			script.println("location.href = '../login.jsp'");
+			script.println("</script>");
+			script.close();
+			return;
+		}
+		// 페이징
+		int pageNumber = 1; // 1은 기본 페이지
+		if (request.getParameter("pageNumber") != null) { // 현재 페이지가 몇 페이지인지 알려주기 위해
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
 	%>
 <!-- 헤더 -->
 <jsp:include page="/header.jsp" flush="false" />
@@ -43,14 +60,39 @@
 					</tr>
 				</thead>
 				<tbody>
+					<%  // 게시글 가져오기
+						BbsDAO bbsDAO = new BbsDAO();
+						ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
+						for(int i = 0; i < list.size(); i++) {
+					%>
 					<tr><!-- 내용 -->
-						<td colspan="1" style="text-align: left;">1</td>
-						<td colspan="10" style="text-align: center;">안녕하세요</td>
-						<td colspan="1" style="text-align: right;">20-08-26</td>
+						<td colspan="1" style="text-align: left;">
+							<%= list.get(i).getBbsID() %>
+						</td>
+						<td colspan="10" style="text-align: center;">
+							<a href="bbsView.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%= list.get(i).getBbsTitle() %></a>
+						</td>
+						<td colspan="1" style="text-align: right;">
+						<%= list.get(i).getBbsDate().substring(2, 10) %>
+						</td>
+						<%		
+						}
+						%>
 					</tr>
 				</tbody>
 			</table>
-			<a href="bbsWrite.jsp" class="btn btn-danger pull-right">등록</a>
+			<%	// 페이징 - 이전버튼, 다음버튼 생성
+				if(pageNumber != 1) {
+			%>
+				<a href="bbs.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-default btn-arraw-left">이전</a>
+			<%
+				} if(bbsDAO.nextPage(pageNumber + 1)) {
+			%>
+				<a href="bbs.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-default btn-arraw-left">다음</a>
+			<%		
+				}
+			%>
+			<a href="bbsWrite.jsp" class="btn btn-danger pull-right">쓰기</a>
 		</div>
 	</div>
 <!-- 푸터 -->

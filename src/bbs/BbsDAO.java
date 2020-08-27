@@ -63,12 +63,6 @@ public class BbsDAO {
 			pstmt.setString(4, getDate());
 			pstmt.setString(5, bbsContent);
 			pstmt.setInt(6, 1); // bbsAvailable
-		/*	pstmt.setInt(7, 0); // bbsReadcount
-			pstmt.setInt(8, num); // bbsRef
-			pstmt.setInt(9, 0); // bbsLev
-			pstmt.setInt(10, 0); // bbsSeq
-			pstmt.setString(11, bbsFile);
-			pstmt.setString(12, bbsIp);	*/
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
