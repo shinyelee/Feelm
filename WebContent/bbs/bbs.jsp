@@ -81,18 +81,45 @@
 					</tr>
 				</tbody>
 			</table>
-			<%	// 페이징 - 이전버튼, 다음버튼 생성
-				if(pageNumber != 1) {
-			%>
-				<a href="bbs.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-default btn-arraw-left">이전</a>
-			<%
-				} if(bbsDAO.nextPage(pageNumber + 1)) {
-			%>
-				<a href="bbs.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-default btn-arraw-left">다음</a>
-			<%		
-				}
-			%>
-			<a href="bbsWrite.jsp" class="btn btn-danger pull-right">쓰기</a>
+				<div class="button-group" style="margin: 0 auto;">
+					<%	// 페이징
+						int startPage = ((pageNumber) / 10) * 10 + 1;
+						if ((pageNumber) % 10 == 0) startPage -= 10;
+						int targetPage = new BbsDAO().targetPage(pageNumber);
+						if (startPage != 1) {
+					%>
+						<a href="bbs.jsp?pageNumber=<%=startPage - 1 %>" class="btn btn-default btn-sm">이전</a>
+					<%
+						} else {
+					%>
+						<button type="button" class="btn btn-basic btn-sm">이전</button>
+					<%	
+						} for (int i = startPage; i < pageNumber; i++) {
+					%>
+						<a href="bbs.jsp?pageNumber=<%=i %>" class="btn btn-default btn-sm"><%=i %></a>
+					<%
+						} 
+					%>
+						<a href="bbs.jsp?pageNumber=<%=pageNumber %>" class="btn btn-danger btn-sm"><%=pageNumber %></a>
+					<%
+						for (int i = (pageNumber) + 1; i <= targetPage + pageNumber; i++) {
+							if (i < startPage + 10) {
+					%>
+						<a href="bbs.jsp?pageNumber=<%=i %>" class="btn btn-default btn-sm"><%=i %></a>
+					<% 
+							}
+						} if (targetPage + (pageNumber) > startPage + 9) {
+					%>
+						<a href="bbs.jsp?pageNumber=<%=startPage + 10 %>" class="btn btn-default btn-sm">다음</a>
+					<%
+						} else {
+					%>
+						<button type="button" class="btn btn-basic btn-sm">다음</button>
+					<%
+						}
+					%>
+					<a href="bbsWrite.jsp" class="btn btn-danger pull-right btn-sm">쓰기</a>
+				</div>
 		</div>
 	</div>
 <!-- 푸터 -->

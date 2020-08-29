@@ -92,6 +92,7 @@ public class BbsDAO {
 		}
 		return list;
 	}
+	
 	public boolean nextPage(int pageNumber) { // 10개 단위로 딱 떨어지면 다음 페이지 만들지 않음
 		String SQL = "select * from bbs where bbsID < ? and bbsAvailable = 1";
 		try {
@@ -105,6 +106,21 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public int targetPage(int pageNumber) {
+		String SQL = "select count(bbsID) from bbs where bbsID < ? and bbsAvailable = 1";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) / 10;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	public Bbs getBbs(int bbsID) { // 글 하나 내용 불러오는 함수
