@@ -102,7 +102,7 @@
 			<span class="glyphicon glyphicon-search"></span>검색
 		</button>
 		<!-- 작성, 신고 버튼 -->
-		<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#registerModal">등록</a>
+		<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#registerModal">쓰기</a>
 		<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	</form>
 </div>

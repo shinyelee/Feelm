@@ -73,26 +73,26 @@
 							<a href="bbsView.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%= list.get(i).getBbsTitle() %></a>
 						</td>
 						<td colspan="1" style="text-align: right;">
-						<%= list.get(i).getBbsDate().substring(2, 10) %>
+							<%= list.get(i).getBbsDate().substring(2, 10) %>
 						</td>
-						<%		
+					<%		
 						}
-						%>
+					%>
 					</tr>
 				</tbody>
 			</table>
-				<div class="button-group" style="margin: 0 auto;">
+				<div class="container">
 					<%	// 페이징
 						int startPage = ((pageNumber) / 10) * 10 + 1;
 						if ((pageNumber) % 10 == 0) startPage -= 10;
 						int targetPage = new BbsDAO().targetPage(pageNumber);
 						if (startPage != 1) {
 					%>
-						<a href="bbs.jsp?pageNumber=<%=startPage - 1 %>" class="btn btn-default btn-sm">이전</a>
+						<a href="bbs.jsp?pageNumber=<%=startPage - 1 %>" class="btn btn-default btn-sm">&lt;</a>
 					<%
 						} else {
 					%>
-						<button type="button" class="btn btn-basic btn-sm">이전</button>
+						<button type="button" class="btn btn-default btn-sm" disabled>&lt;</button>
 					<%	
 						} for (int i = startPage; i < pageNumber; i++) {
 					%>
@@ -110,18 +110,18 @@
 							}
 						} if (targetPage + (pageNumber) > startPage + 9) {
 					%>
-						<a href="bbs.jsp?pageNumber=<%=startPage + 10 %>" class="btn btn-default btn-sm">다음</a>
+						<a href="bbs.jsp?pageNumber=<%=startPage + 10 %>" class="btn btn-default btn-sm">&gt;</a>
 					<%
 						} else {
 					%>
-						<button type="button" class="btn btn-basic btn-sm">다음</button>
+						<button type="button" class="btn btn-default btn-sm" disabled>&gt;</button>
 					<%
 						}
 					%>
-					<a href="bbsWrite.jsp" class="btn btn-danger pull-right btn-sm">쓰기</a>
-				</div>
+				<a href="bbsWrite.jsp" class="btn btn-danger btn-sm pull-right">쓰기</a><br>
+			</div>
 		</div>
-	</div>
+	</div><br>
 <!-- 푸터 -->
 <jsp:include page="/footer.jsp" flush="false" />
 <!-- popper, jQuery, 부트스트랩 JS 추가 -->
