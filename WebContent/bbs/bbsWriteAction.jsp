@@ -13,7 +13,9 @@
 <title>JSP 게시판 웹 사이트</title>
 </head>
 <body>
-	<%  // 게시글 작성 기능 구현
+	<%  
+		request.setCharacterEncoding("UTF-8");
+		// 게시글 작성 기능 구현
 		String userID = null;
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");

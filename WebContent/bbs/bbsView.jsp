@@ -62,7 +62,7 @@
 			<table class="table table-default" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr> <!-- 글 제목 -->
-						<th colspan="2" style="background-color: #eeeeee; text-align: center;"><%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %></th>
+						<th colspan="2" style="background-color: #eeeeee; text-align: center;"><%=bbs.getBbsTitle() %></th>
 					</tr>
 				</thead>
 				<tbody> <!-- 작성자, 작성일 -->
@@ -79,7 +79,7 @@
 			<%	// 글 수정/삭제기능
 				if(userID != null && userID.equals(bbs.getUserID())) { // 접속한 userID가 빈 값이 아닌 로그인 상태인 동시에 작성자와 일치할 때
 			%>
-					<a href="BbsUpdate.jsp?bbsID=<%=bbsID %>" class="btn btn-default pull-right">수정</a> <!-- 글 수정 페이지로 보냄 -->
+					<a href="bbsUpdate.jsp?bbsID=<%=bbsID %>" class="btn btn-default pull-right">수정</a> <!-- 글 수정 페이지로 보냄 -->
 					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="bbsDeleteAction.jsp?bbsID=<%=bbsID %>" class="btn btn-default pull-right">삭제</a> <!-- 글 삭제 페이지로 보냄 -->
 			<%
 				}

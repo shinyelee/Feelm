@@ -40,13 +40,14 @@
 	%>
 <!-- 헤더 -->
 <jsp:include page="../header.jsp" flush="false" />
+<!-- 게시글 작성 영역 -->
 <div class="container">
 	<div class="row">
 		<form method="post" action="bbsWriteAction.jsp">
 			<table class="table table-default" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr> <!-- 양식 -->
-						<th colspan="2" style="background-color: #eeeeee; text-align: center;">게시판 글쓰기 양식</th>
+						<th colspan="2" style="background-color: #eeeeee; text-align: center;">글쓰기</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -59,6 +60,7 @@
 				</tbody>
 			</table>
 			<input type="submit" class="btn btn-danger pull-right" value="등록">
+			<input type="submit" class="btn btn-default pull-right" value="취소">
 		</form>
 	</div>
 	</div>
