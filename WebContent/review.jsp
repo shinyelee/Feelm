@@ -127,16 +127,17 @@
 						</th>
 						<!-- 영화제목, 장르 -->
 						<th colspan="10" style="text-align: center;">
-							<%=review.getMovieTitle() %>&nbsp;<small>&nbsp;(<%=review.getMovieGenre() %>)</small>
+							<%=review.getMovieTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %>&nbsp;
+							<small>&nbsp;(<%=review.getMovieGenre() %>)</small>
 						</th>
 						<!-- 다른 사람 리뷰에 공감하기 -->
 						<th colspan="1">
 							<%
  								if(userID.equals(review.getUserID())) {
 							%>
-							<button type="button" class="btn btn-default btn-xs pull-right">
+							<!-- <button type="button" class="btn btn-default btn-xs pull-right">
 								<a href="reviewUpdate.jsp?reviewID=<%=review.getReviewID() %>">수정</a>
-							</button>
+							</button> -->
 							<button type="button" class="btn btn-default btn-xs pull-right">
 								<a onclick="return confirm('게시글을 삭제합니다.')" href="deleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
 							</button>
@@ -154,13 +155,13 @@
 					<tr>
 						<!-- 작성자, 한줄감상, 관람일 -->
 						<td colspan="1"><%=review.getUserID() %></td>
-						<td colspan="10" style="text-align: center;"><%=review.getShortReview() %></td>
+						<td colspan="10" style="text-align: center;"><%=review.getShortReview().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %></td>
 						<td colspan="1" style="text-align: right;"><%=review.getReviewDate().substring(2, 11) %></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr> <!-- 장문감상 -->
-						<td colspan="12"><%=review.getFullReview() %></td>
+						<td colspan="12"><%=review.getFullReview().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %></td>
 					</tr>
 				</tbody>
 		</table>
@@ -255,7 +256,7 @@
 						</div>&nbsp;&nbsp;&nbsp;
 					<div class="modal-footer">	
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-danger">등록</button> 
+						<button type="submit" class="btn btn-danger">쓰기</button> 
 					</div>
 				</form>
 			</div>

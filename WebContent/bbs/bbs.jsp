@@ -47,7 +47,7 @@
 		}
 	%>
 <!-- 헤더 -->
-<jsp:include page="/header.jsp" flush="false" />
+<jsp:include page="../header.jsp" flush="false" />
 	<!-- 게시판(게시글 목록) 영역 -->
 	<div class="container">
 		<div class="row">

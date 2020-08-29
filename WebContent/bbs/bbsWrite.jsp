@@ -39,7 +39,7 @@
 		}
 	%>
 <!-- 헤더 -->
-<jsp:include page="/header.jsp" flush="false" />
+<jsp:include page="../header.jsp" flush="false" />
 <div class="container">
 	<div class="row">
 		<form method="post" action="bbsWriteAction.jsp">
