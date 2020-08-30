@@ -146,49 +146,6 @@ public class ReviewDAO {
 		return -1; // DB 오류
 	}
 	
-/*	public ReviewDTO getReview(String reviewID) { // 글 하나 내용 불러오는 함수
-		ReviewDTO review = new ReviewDTO();
-		String SQL = "select * from review where reviewID = ?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DatabaseUtil.getConnection();
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, Integer.parseInt(reviewID));
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				review.setReviewID(rs.getInt("reviewID"));
-				review.setUserID(rs.getString("userID"));
-				review.setMovieTitle(rs.getString("movieTitle"));
-				review.setMovieGenre(rs.getString("movieGenre"));
-				review.setShortReview(rs.getString("shortReview"));
-				review.setFullReview(rs.getString("fullReview"));
-				review.setMovieScore(rs.getString("movieScore"));
-				review.setReviewDate(rs.getString("reviewDate"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(conn != null) conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
-				if(pstmt != null) pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
-				if(rs != null) rs.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return review;
-	}	*/
-	
 	public int update(int reviewID, String userID, String movieTitle, String movieGenre, String shortReview, String fullReview, String movieScore, String reviewDate) { // 리뷰 수정하는 함수
 		String SQL = "update review set String userID = ?, String movieTitle = ?, String movieGenre = ?, String shortReview = ?, String fullReview = ?, String movieScore = ?, String reviewDate = ? where reviewID = ?";
 		Connection conn = null;

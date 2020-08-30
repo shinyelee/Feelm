@@ -26,37 +26,38 @@
 	</style>
 </head>
 <body>
-	<%
-		String userID = null;
-		if (session.getAttribute("userID") != null) {
-			userID = (String) session.getAttribute("userID");
-		}
-		if(userID == null) {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인이 필요합니다.')");
-			script.println("location.href = '../login.jsp'");
-			script.println("</script>");
-			script.close();
-			return;
-		}
-		// 페이징
-		int pageNumber = 1; // 1은 기본 페이지
-		if (request.getParameter("pageNumber") != null) { // 현재 페이지가 몇 페이지인지 알려주기 위해
-			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-		}
-	%>
+<%
+	String userID = null;
+	// 로그인 여부 확인
+	if (session.getAttribute("userID") != null) {
+		userID = (String) session.getAttribute("userID");
+	}
+	if(userID == null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인이 필요합니다.')");
+		script.println("location.href = '../user/login.jsp'");
+		script.println("</script>");
+		script.close();
+		return;
+	}
+	// 페이징
+	int pageNumber = 1; // 1은 기본 페이지
+	if (request.getParameter("pageNumber") != null) { // 현재 페이지가 몇 페이지인지 알려주기 위해
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	}
+%>
 <!-- 헤더 -->
-<jsp:include page="../header.jsp" flush="false" />
+<jsp:include page="../inc/header.jsp" flush="false" />
 	<!-- 게시판(게시글 목록) 영역 -->
 	<div class="container">
 		<div class="row">
 			<table class="table table-default" style="border: 1px solid #dddddd">
 				<thead>
 					<tr><!-- 양식 -->
-						<th colspan="1" style="background-color: #eeeeee; text-align: left;">번호</th>
-						<th colspan="10" style="background-color: #eeeeee; text-align: center;">제목</th>
-						<th colspan="1" style="background-color: #eeeeee; text-align: right;">작성일&nbsp;&nbsp;</th>
+						<th colspan="1" style="text-align: left;">번호</th>
+						<th colspan="10" style="text-align: center;">제목</th>
+						<th colspan="1" style="text-align: right;">작성일&nbsp;&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -83,8 +84,8 @@
 			</table>
 				<div class="container">
 					<%	// 페이징
-						int startPage = ((pageNumber) / 10) * 10 + 1;
-						if ((pageNumber) % 10 == 0) startPage -= 10;
+						int startPage = (pageNumber / 10) * 10 + 1;
+						if (pageNumber % 10 == 0) startPage -= 10;
 						int targetPage = new BbsDAO().targetPage(pageNumber);
 						if (startPage != 1) {
 					%>
@@ -102,13 +103,13 @@
 					%>
 						<a href="bbs.jsp?pageNumber=<%=pageNumber %>" class="btn btn-danger btn-sm"><%=pageNumber %></a>
 					<%
-						for (int i = (pageNumber) + 1; i <= targetPage + pageNumber; i++) {
+						for (int i = pageNumber + 1; i <= targetPage + pageNumber; i++) {
 							if (i < startPage + 10) {
 					%>
 						<a href="bbs.jsp?pageNumber=<%=i %>" class="btn btn-default btn-sm"><%=i %></a>
 					<% 
 							}
-						} if (targetPage + (pageNumber) > startPage + 9) {
+						} if (targetPage + pageNumber > startPage + 9) {
 					%>
 						<a href="bbs.jsp?pageNumber=<%=startPage + 10 %>" class="btn btn-default btn-sm">&gt;</a>
 					<%
@@ -123,11 +124,10 @@
 		</div>
 	</div><br>
 <!-- 푸터 -->
-<jsp:include page="/footer.jsp" flush="false" />
-<!-- popper, jQuery, 부트스트랩 JS 추가 -->
+<jsp:include page="../inc/footer.jsp" flush="false" />
+	<!-- popper, jQuery, 부트스트랩 JS 추가 -->
 	<script src="../js/jquery-3.5.1.min.js"></script>
 	<script src="../js/popper.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-	
 </body>
 </html>

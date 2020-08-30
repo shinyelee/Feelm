@@ -11,12 +11,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<title>Moviehere | myInfo</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
-	<link rel="stylesheet" href="./css/bootstrap.min.css">
-	<link rel="stylesheet" href="./css/custom.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/custom.css">
 	<!-- 점보트론 내 폰트 설정 -->
 	<style type="text/css">
 		.jumbotron {
-			background-image: url('images/cover_sf.jpg');
+			background-image: url('../images/cover_sf.jpg');
 			background-size: cover;
 			text-shadow: black 0.2em 0.2em 0.2em;
 			color: white;
@@ -30,6 +30,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
+	// 로그인 여부 확인
 	if(session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
 	}
@@ -37,7 +38,7 @@
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인이 필요합니다.')");
-		script.println("location.href = 'login.jsp'");
+		script.println("location.href = '../user/login.jsp'");
 		script.println("</script>");
 		script.close();
 		return;
@@ -53,8 +54,7 @@
 %>
 
 <!-- 헤더 -->
-<jsp:include page="header.jsp" flush="false" />
-
+<jsp:include page="../inc/header.jsp" flush="false" />
 	<!-- 회원정보 수정 양식 -->
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3">
@@ -72,7 +72,7 @@
 			 		</div>
 			 		<div class="form-group">
 			 			<label>전화번호 변경</label>
-			 			<input type="tel" class="form-control" placeholder="변경할 전화번호를 입력해주세요" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
+			 			<input type="tel" class="form-control" placeholder="010-XXXX-XXXX" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
 			 		</div>
 			 		<div class="form-group">
 			 			<label>이메일 (변경 불가)</label>
@@ -81,17 +81,16 @@
 			 		<!-- 회원정보 수정 버튼 -->
 			 		<input type="button" class="btn btn-default" onclick="location.href = 'myInfoDelete.jsp'" value="탈퇴">
 			 		<input type="reset" class="btn btn-default cancel" value="리셋">
-			 		<input type="submit" class="btn btn-danger" value="수정">
+			 		<input type="submit" class="btn btn-danger pull-right" value="수정">
 			 	</form>
 			</div>
 		</div>
 	</div>
-	
 <!-- 푸터 -->
-<jsp:include page="footer.jsp" flush="false" />
-<!-- popper, jQuery, 부트스트랩 JS 추가 -->
-	<script src="./js/popper.min.js"></script>
-	<script src="./js/jquery-3.5.1.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
+<jsp:include page="../inc/footer.jsp" flush="false" />
+	<!-- popper, jQuery, 부트스트랩 JS 추가 -->
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/jquery-3.5.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
