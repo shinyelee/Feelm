@@ -2,7 +2,7 @@ package bbs;
 
 public class Bbs {
 	
-	// 게시판 자바빈즈
+	//
 	private int bbsID;
 	private String bbsTitle;
 	private String userID;

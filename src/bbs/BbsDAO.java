@@ -7,9 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class BbsDAO {
-	// * 이 파일은 이 아래로 UserDAO.java를 일부 수정해 만들었음
 	private Connection conn;
-	// PrivatePreparedStatement rs; // 삭제
+	// PrivatePreparedStatement rs; 삭제
 	private ResultSet rs;
 	
 	public BbsDAO() {
@@ -24,7 +23,7 @@ public class BbsDAO {
 		}
 	}
 	
-	public String getDate() { // 현재 시간(서버 시간)을 가져오는 함수
+	public String getDate() { // 현재 날짜(서버 시간)을 가져오는 함수
 		String SQL = "select now()";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL); // SQL문 실행 준비단계로 만듦
@@ -35,7 +34,7 @@ public class BbsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ""; // 데이터베이스 오류
+		return ""; // DB 오류
 	}
 	
 	public int getNext() { // 게시글 번호를 가져오는 함수
@@ -50,13 +49,13 @@ public class BbsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1; // 데이터베이스 오류
+		return -1; // DB 오류
 	}
 	
 	public int write(String bbsTitle, String userID, String bbsContent) { // 게시글 작성하는 함수
-		String SQL = "insert into bbs values (?, ?, ?, ?, ?, ?)"; // ? 12개 -> 6개로 줄임
+		String SQL = "insert into bbs values (?, ?, ?, ?, ?, ?)"; // ? 6개
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL); // SQL문 실행 준비단계로 만듦
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext());
 			pstmt.setString(2, bbsTitle);
 			pstmt.setString(3, userID);
@@ -67,7 +66,7 @@ public class BbsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1; // 데이터베이스 오류
+		return -1; // DB 오류
 	}
 	
 	public ArrayList<Bbs> getList(int pageNumber) { // 페이징 처리
@@ -78,7 +77,7 @@ public class BbsDAO {
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10); // 한 페이지에 글 10개씩 출력
 			rs = pstmt.executeQuery();
 			while (rs.next()) { // 게시글에 출력할 데이터
-				Bbs bbs = new Bbs(); // ? 6개임
+				Bbs bbs = new Bbs(); // ? 6개
 				bbs.setBbsID(rs.getInt(1));
 				bbs.setBbsTitle(rs.getString(2));
 				bbs.setUserID(rs.getString(3));
@@ -127,10 +126,10 @@ public class BbsDAO {
 		String SQL = "select * from bbs where bbsID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, bbsID); // 
+			pstmt.setInt(1, bbsID);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				Bbs bbs = new Bbs(); // ? 6개임
+				Bbs bbs = new Bbs();
 				bbs.setBbsID(rs.getInt(1));
 				bbs.setBbsTitle(rs.getString(2));
 				bbs.setUserID(rs.getString(3));
@@ -156,7 +155,7 @@ public class BbsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1; // 데이터베이스 오류
+		return -1; // DB 오류
 	}
 	
 	public int delete(int bbsID) {
@@ -168,7 +167,8 @@ public class BbsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1; // 데이터베이스 오류
+		return -1; // DB 오류
+	
 	}
 	
 }

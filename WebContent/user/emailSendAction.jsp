@@ -38,12 +38,13 @@
 		return;
 	}	
 	// 사용자에게 보내는 이메일 메시지
-	String host = "http://localhost:8088/Moviehere/"; // 로컬호스트 주소
-	String from = "구글이메일계정"; // 인증메일 발송하는 이메일
+	// String host = "http://localhost:8088/Moviehere/"; // 로컬호스트 주소 : 이 주소면 다른 컴퓨터에서 메일 인증 안 됨
+	String host = "http://192.168.7.20:8088/Moviehere/";
+	String from = "구글아이디@gmail.com"; // 인증메일 발송하는 이메일
 	String to = userDAO.getUserEmail(userID); // 인증메일 받는 이메일(신규유저)
 	String subject = "Moviehere 가입 확인 이메일입니다.";
 	String content = "다음 링크를 클릭해 인증을 완료하세요." +
-	"<a href='" + host + "emailCheckAction.jsp?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
+	"<a href='" + host + "user/emailCheckAction.jsp?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 	// 구글 SMTP 서버에 접속하기 위한 정보
 	Properties p = new Properties();
 	p.put("mail.smtp.user", from);
@@ -97,7 +98,7 @@
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3">
 			<div class="alert alert-danger mt-4" role="alert">
-				이메일을 확인해주세요. 게시판은 메일 인증 후 접근 가능합니다.
+				이메일을 확인해주세요. 리뷰 게시판은 메일 인증 후 접근 가능합니다.
 			</div>
 		</div>
 	</div>	

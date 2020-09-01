@@ -111,9 +111,7 @@
 			<span class="glyphicon glyphicon-chevron-right"></span>
 		</a>
 	</div>
-</div>
-<!-- 메인 콘텐츠 -->
-
+</div><br>
 <!-- 푸터 -->
 <jsp:include page="../inc/footer.jsp" flush="false" />
 	<!-- popper, jQuery, 부트스트랩 JS 추가 -->

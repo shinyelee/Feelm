@@ -3,10 +3,10 @@ package util;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
-public class Gmail extends Authenticator { // SMTP·Î ÀÌ¸ŞÀÏ ÀÎÁõÀ» ¼öÇàÇÏ´Â Å¬·¡½º »ó¼Ó
-// Authenticator ctl+shift -> enter(javax.mail ¼±ÅÃ)
+public class Gmail extends Authenticator { // SMTPë¡œ ì´ë©”ì¼ ì¸ì¦ì„ ìˆ˜í–‰í•˜ëŠ” í´ë˜ìŠ¤ ìƒì†
+// Authenticator ctl+shift -> enter(javax.mail ì„ íƒ)
 	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {
-		return new PasswordAuthentication("±¸±Û¾ÆÀÌµğ", "±¸±Ûºñ¹Ğ¹øÈ£"); // "±¸±ÛID", "±¸±ÛPassword" ÀÔ·Â
+		return new PasswordAuthentication("êµ¬ê¸€ì•„ì´ë””@gmail.com", "êµ¬ê¸€ë¹„ë°€ë²ˆí˜¸"); // "êµ¬ê¸€ì•„ì´ë””(ì§€ë©”ì¼)", "êµ¬ê¸€ë¹„ë°€ë²ˆí˜¸" ì…ë ¥
 	}
 }

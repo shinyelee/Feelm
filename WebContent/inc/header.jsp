@@ -31,22 +31,23 @@
 			<!-- 로그인/로그아웃 버튼 -->
 			<form class="navbar-form navbar-right">
 				<div class="btn-group">
-					<button type="button" class="btn btn-danger">설정</button>
-					<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>&nbsp;&nbsp;&nbsp;
+				<%
+					if(userID == null) {
+				%>
+				<button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">로그인</button>&nbsp;&nbsp;&nbsp;
 					<ul class="dropdown-menu" role="menu">
-						<%
- 							if(userID == null) {
-						%>
-					    <li><a href="../user/join.jsp"><span class="glyphicon glyphicon-ok"></span>&nbsp;회원가입</a></li>
-					    <li><a href="../user/login.jsp"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-					    <%
-							} else {
-						%>
-						<li><a href="../my/myInfo.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;회원정보</a></li>
+						<li><a href="../user/login.jsp"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+						<li><a href="../user/join.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
+				<%
+					} else {
+				%>
+				<button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">로그아웃</button>&nbsp;&nbsp;&nbsp;
+					<ul class="dropdown-menu" role="menu">
 						<li><a href="../user/logoutAction.jsp"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
-						<%
-							}
-						%>
+						<li><a href="../my/myInfo.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;회원정보</a></li>
+				<%
+					}
+				%>
 					</ul>
 				</div>
 			</form>	

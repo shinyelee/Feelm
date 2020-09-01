@@ -214,7 +214,7 @@
 					<form action="reviewAction.jsp" method="post">
 							<div class="form-group col-sm-12">
 								<label>영화제목</label>
-								<input type="text" name="movieTitle" class="form-control" maxlength="28" placeholder="최대 2048자까지 작성 가능합니다." autofocus>
+								<input type="text" name="movieTitle" class="form-control" maxlength="28" placeholder="최대 28자까지 작성 가능합니다." autofocus>
 							</div>
 						<div class="form-row">
 							<div class="form-group col-sm-3">
@@ -277,11 +277,11 @@
 					<form action="reportAction.jsp" method="post">
 						<div class="form-group col-sm-12">
 							<label>신고제목</label>
-							<input type="text" name="reportTitle" class="form-control" maxlength="64" autofocus>
+							<input type="text" name="reportTitle" class="form-control" maxlength="64" autofocus required>
 						</div>
 						<div class="form-group col-sm-12">
 							<label>신고내용</label>
-							<textarea name="reportContent" class="form-control" maxlength="2048" placeholder="신고 내용을 구체적으로 적어주세요." style="height: 125px;"></textarea>
+							<textarea name="reportContent" class="form-control" maxlength="2048" placeholder="신고 내용을 구체적으로 적어주세요." style="height: 125px;" required></textarea>
 						</div>&nbsp;&nbsp;&nbsp;
 					<div class="modal-footer">	
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>

@@ -1,4 +1,3 @@
-<!-- emailSendAction.jsp 복붙 후 수정 -->
 <%@ page import="javax.mail.internet.InternetAddress"%>
 <%@ page import="javax.mail.internet.MimeMessage"%>
 <%@ page import="javax.mail.*"%>
@@ -21,7 +20,7 @@
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인이 필요합니다.')");
-		script.println("location.href = 'login.jsp'");
+		script.println("location.href = '../user/login.jsp'");
 		script.println("</script>");
 		script.close();
 		return;
@@ -55,9 +54,9 @@
 		script.close();
 	}
 	// 관리자에게 보내는 이메일 메시지
-	String host = "http://localhost:8088/Moviehere/"; // 로컬호스트 주소
-	String from = "구글ID"; // 신고 접수해 메일로 발송하는 아이디(총 관리자)
-	String to = "네이버ID"; // 신고메일 받는 아이디(게시판 관리자)
+	String host = "http://localhost:8088/Moviehere/review"; // 로컬호스트 주소
+	String from = "구글아이디@gmail.com"; // 구글이메일, 신고 접수해 메일로 발송하는 아이디(총 관리자)
+	String to = "네이버아이디@naver.com"; // 신고메일 받는 이메일(게시판 관리자)
 	String subject = "Moviehere에서 신고 메일이 접수되었습니다.";
 	String content = "신고자: " + userID +
 					 "<br>신고 제목: " + reportTitle +
