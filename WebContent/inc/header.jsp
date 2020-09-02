@@ -24,7 +24,7 @@
 			<!-- 제목 옆에 들어가는 탭 -->
 			<ul class="nav navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="../index.jsp">MovieHere</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">영화소개</a></li>
+				<li class="nav-item"><a class="nav-link" href="../new/poster.jsp">영화소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="../review/review.jsp">영화리뷰</a></li>
 				<li class="nav-item"><a class="nav-link" href="../bbs/bbs.jsp">자유게시판</a></li>
 			</ul>

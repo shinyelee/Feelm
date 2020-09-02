@@ -132,7 +132,7 @@
 								<%=review.getMovieTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %>&nbsp;
 								<small>&nbsp;(<%=review.getMovieGenre() %>)</small>
 							</th>
-							<!-- 리뷰 공감/삭제 -->
+							<!-- 리뷰 공감/비공감/삭제 -->
 							<th colspan="1">
 								<%
 	 								if(userID.equals(review.getUserID())) {

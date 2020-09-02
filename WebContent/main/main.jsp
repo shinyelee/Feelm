@@ -40,10 +40,7 @@
 </div>
 <!-- 유튜브 예고편 삽입 -->
 	<div class="container">
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/xUDhdCsLkjU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/MoMd7ae98hk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/xUDhdCsLkjU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/MoMd7ae98hk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		<iframe src="https://www.youtube.com/embed/xUDhdCsLkjU"></iframe>
 	</div>
 <!-- 공지사항 -->
 <div class="container">
