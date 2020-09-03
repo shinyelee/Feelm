@@ -38,44 +38,6 @@
 		<p class="text-center"><a class="btn btn-danger btn-lg" href="../review/review.jsp">바로가기</a></p>
 	</div>
 </div>
-<!-- 유튜브 예고편 삽입 -->
-	<div class="container">
-		<iframe src="https://www.youtube.com/embed/xUDhdCsLkjU"></iframe>
-	</div>
-<!-- 공지사항 -->
-<div class="container">
-	<table class="table table-default">
-		<thead>
-			<tr>
-				<th class="mobile" style="width:55px; text-align:center;">번호</th>
-				<th style="text-align:center;">공지사항</th>
-				<th class="mobile" style="width:80px; text-align:center;">작성자</th>
-				<th class="mobile" style="width:120px; text-align:center;">날짜</th>
-			</tr>
-		</thead>
-		<!-- 글의 순서에 따라 번호를 붙이는 게시물 형식 만들기 -->
-		<tbody>
-			<tr>
-				<td style="text-align: center;">3</td>
-				<td>신규 영화 시사회 참여자를 모집합니다.</td>
-				<td style="text-align: center;">운영자</td>
-				<td style="text-align: center;">2018-05-05</td>
-			</tr>
-			<tr>
-				<td style="text-align: center;">2</td>
-				<td>영화 예매 웹 사이트에 오신 것을 환영합니다.</td>
-				<td style="text-align: center;">운영자</td>
-				<td style="text-align: center;">2018-05-04</td>
-			</tr>
-			<tr>
-				<td style="text-align: center;">1</td>
-				<td>영화 예매 웹 사이트가 개설되었습니다.</td>
-				<td style="text-align: center;">운영자</td>
-				<td style="text-align: center;">2018-05-03</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
 <!-- 스틸컷 돌아가는 부분-->
 <div class="container">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
