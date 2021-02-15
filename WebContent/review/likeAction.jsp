@@ -6,7 +6,7 @@
 <%@ page import="java.io.PrintWriter" %>
 	
 <%!	// 스크립틀릿 아니고 표현식(=) 아니고 선언(!)임 느낌표에 주의
-	// 공감 중복/주작 막기 위해 사용자 IP주소 가져옴
+	// 공감 중복&주작 막기 위해 사용자 IP주소 가져옴
 	public static String getClientIP(HttpServletRequest request) {
 		String ip = request.getHeader("X-FORWARDED-FOR");
 		if(ip == null || ip.length() == 0) {

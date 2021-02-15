@@ -51,13 +51,6 @@
 					</ul>
 				</div>
 			</form>	
-			<!-- 검색창 -->
-			<form action="review.jsp" method="get" class="navbar-form mr-auto">
-				<input type="text" name="search" class="form-control" placeholder="리뷰를 검색해보세요!">
-				<button type="submit" class="btn btn-default">
-					<span class="glyphicon glyphicon-search"></span>검색
-				</button>
-			</form>
 		</div>
 	</nav>
 </header>

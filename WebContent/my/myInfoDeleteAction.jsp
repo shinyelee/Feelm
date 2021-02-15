@@ -32,7 +32,7 @@
 		<script type="text/javascript">
 			alert("오류로 인해 탈퇴에 실패했습니다.");
 			location.href="myInfoDelete.jsp";
-			</script>	  
+		</script>	  
 	<%
 		}
 %>

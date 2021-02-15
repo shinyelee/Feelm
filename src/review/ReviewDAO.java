@@ -63,11 +63,11 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		try {
 			if(searchType.equals("최신순")) { // 리뷰 최신순으로 출력
-				SQL = "select * from review where movieGenre like ? and concat(userID, movieTitle, shortReview, fullReview) like "
-						+ "? order by reviewID desc limit " + pageNumber * 5 + ", " + pageNumber * 5 + 6;
+				SQL = "select * from review where movieGenre like ? and concat(userID, movieTitle, shortReview, fullReview)"
+						+ " like ? order by reviewID desc limit " + pageNumber * 5 + ", " + pageNumber * 5 + 6;
 			} else if (searchType.equals("공감순")) { // 리뷰 공감순으로 출력
-				SQL = "select * from review where movieGenre like ? and concat(userID, movieTitle, shortReview, fullReview) like "
-						+ "? order by likeCount desc limit " + pageNumber * 5 + ", " + pageNumber * 5 + 6;
+				SQL = "select * from review where movieGenre like ? and concat(userID, movieTitle, shortReview, fullReview)"
+						+ " like ? order by likeCount desc limit " + pageNumber * 5 + ", " + pageNumber * 5 + 6;
 			}
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -124,45 +124,6 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, Integer.parseInt(reviewID));
             return pstmt.executeUpdate(); // 공감
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(conn != null) conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
-				if(pstmt != null) pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
-				if(rs != null) rs.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return -1; // DB 오류
-	}
-	
-	public int update(int reviewID, String userID, String movieTitle, String movieGenre, String shortReview, String fullReview, String movieScore, String reviewDate) { // 리뷰 수정하는 함수
-		String SQL = "update review set String userID = ?, String movieTitle = ?, String movieGenre = ?, String shortReview = ?, String fullReview = ?, String movieScore = ?, String reviewDate = ? where reviewID = ?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DatabaseUtil.getConnection();
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			pstmt.setString(2, movieTitle);
-			pstmt.setString(3, movieGenre);
-			pstmt.setString(4, shortReview);
-			pstmt.setString(5, fullReview);
-			pstmt.setString(6, movieScore);
-			pstmt.setString(7, reviewDate);
-			pstmt.setInt(8, reviewID);
-            return pstmt.executeUpdate(); // 삭제
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -38,8 +38,8 @@
 		return;
 	}	
 	// 사용자에게 보내는 이메일 메시지
-	// String host = "http://localhost:8088/Moviehere/"; // 로컬호스트 주소 : 이 주소면 다른 컴퓨터에서 메일 인증 안 됨
-	String host = "http://192.168.7.20:8088/Moviehere/";
+	String host = "http://localhost:8088/Moviehere/"; // 로컬호스트 주소 : 이 주소면 다른 컴퓨터에서는 메일 인증 안 됨
+	// String host = "http://192.168.7.20:8088/Moviehere/"; // 학원 발표용 주소
 	String from = "구글아이디@gmail.com"; // 인증메일 발송하는 이메일
 	String to = userDAO.getUserEmail(userID); // 인증메일 받는 이메일(신규유저)
 	String subject = "Moviehere 가입 확인 이메일입니다.";

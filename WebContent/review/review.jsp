@@ -138,16 +138,16 @@
 	 								if(userID.equals(review.getUserID())) {
 								%>
 								<button type="button" class="btn btn-default btn-xs pull-right">
-									<a onclick="return confirm('게시글을 삭제합니다.')" href="deleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
+									<a onclick="return confirm('이 리뷰를 삭제합니다.')" href="deleteAction.jsp?reviewID=<%=review.getReviewID() %>">삭제</a>
 								</button>
 								<button type="button" class="btn btn-default btn-xs pull-right" disabled>
-									<a onclick="return confirm('게시글에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>&nbsp;공감</a>
+									<a onclick="return confirm('이 리뷰에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>&nbsp;공감</a>
 								</button>
 								<%
 									} else {
 								%>
 								<button type="button" class="btn btn-default btn-xs pull-right">
-									<a onclick="return confirm('게시글에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>&nbsp;공감</a>
+									<a onclick="return confirm('이 리뷰에 공감합니다.')" href="likeAction.jsp?reviewID=<%=review.getReviewID() %>"><%=review.getLikeCount() %>&nbsp;공감</a>
 								</button>
 								<%
 									}
