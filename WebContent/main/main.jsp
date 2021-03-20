@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Moviehere | index</title>
+	<title>Feelm</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/custom.css">
@@ -31,9 +31,9 @@
 <!-- 커버 페이지 -->
 <div class="container">
 	<div class="jumbotron">
-		<h1 class="text-center">Moviehere</h1>
-		<p class="text-center">Moviehere는 국내 최대 규모 영화 리뷰 커뮤니티입니다.</p>
-		<p class="text-center">다른 사람들과 의견을 자유롭게 교환하고 다양한 영화도 함께 만나보세요!</p>
+		<h1 class="text-center">Feelm</h1>
+		<p class="text-center">다른 사람들과 의견을 자유롭게 교환하고</p>
+		<p class="text-center">다양한 영화도 함께 만나보세요!</p>
 		<!-- 로그인 페이지로 이동하는 버튼 -->
 		<p class="text-center"><a class="btn btn-danger btn-lg" href="../review/review.jsp">바로가기</a></p>
 	</div>

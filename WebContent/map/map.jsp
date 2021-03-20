@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Moviehere | index</title>
+	<title>오시는 길</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/custom.css">
@@ -81,7 +81,7 @@
 	<div class="container form-group col-sm-8">
 		<input type="text" class="form-control mx-1 mt-2" id="sample2_address" placeholder="부산 부산진구 동천로 109">
 		<input type="text" class="form-control mx-1 mt-2" id="sample2_detailAddress" placeholder="삼한골든게이트 7층">
-		<input type="text" class="form-control mx-1 mt-2" id="sample2_extraAddress" placeholder=" (부전동)">
+		<input type="text" class="form-control mx-1 mt-2" id="sample2_extraAddress" placeholder="(부전동)">
 	</div>
 	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -177,7 +177,7 @@
 	    }
 	</script>
 </div>
-	<br><br><br><br><br><br>
+	<br>
 <!-- 푸터 -->
 <jsp:include page="../inc/footer.jsp" flush="false" />
 	<!-- popper, jQuery, 부트스트랩 JS 추가 -->

@@ -23,9 +23,10 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- 제목 옆에 들어가는 탭 -->
 			<ul class="nav navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="../index.jsp">MovieHere</a></li>
-				<li class="nav-item"><a class="nav-link" href="../new/movieList.jsp">영화소개</a></li>
-				<li class="nav-item"><a class="nav-link" href="../review/review.jsp">영화리뷰</a></li>
+				<li class="nav-item"><a class="nav-link" href="../index.jsp"><strong>Feelm</strong></a></li>
+				<li class="nav-item"><a class="nav-link" href="../map/map.jsp">오시는 길</a></li>
+				<li class="nav-item"><a class="nav-link" href="../new/movieList.jsp">영화 소개</a></li>
+				<li class="nav-item"><a class="nav-link" href="../review/review.jsp">영화 리뷰</a></li>
 				<li class="nav-item"><a class="nav-link" href="../bbs/bbs.jsp">자유게시판</a></li>
 			</ul>
 			<!-- 로그인/로그아웃 버튼 -->

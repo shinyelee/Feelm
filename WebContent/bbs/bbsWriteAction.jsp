@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Moviehere | bbsWriteAction</title>
+<title>글 등록하기</title>
 </head>
 <body>
 <%  
