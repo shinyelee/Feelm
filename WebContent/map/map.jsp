@@ -25,7 +25,6 @@
 <jsp:include page="../inc/header.jsp" flush="false" />
 	<!-- 지도를 표시할 div 입니다 -->
 <div class="container">
-	<h3>오시는 길</h3>
 	<div id="map" style="width:100%;height:600px;">
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60ed69c2fa2726aa0155932a27f26fe1"></script>
 		<script>

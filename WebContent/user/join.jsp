@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Moviehere | join</title>
+	<title>회원가입</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/custom.css">
@@ -70,7 +70,7 @@
 			 		</div>
 			 		<!-- 회원가입 버튼 -->
 			 		<input type="submit" class="btn btn-danger form-control" value="가입하기">
-			 		<a href="login.jsp">* Moviehere의 회원입니다</a>
+			 		<a href="login.jsp">* 이미 Feelm의 회원입니다</a>
 			 	</form>
 			</div>
 		</div>

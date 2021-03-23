@@ -61,7 +61,7 @@
 			 		</div>
 			 		<!-- 로그인 버튼 -->
 			 		<input type="submit" class="btn btn-danger form-control" value="로그인">
-			 		<a href="join.jsp">* Moviehere의 회원이 아닙니다</a>
+			 		<a href="join.jsp">* 아직 Feelm의 회원이 아닙니다</a>
 			 	</form>
 			</div>
 		</div>
