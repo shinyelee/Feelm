@@ -28,55 +28,12 @@
 			<li><a data-toggle="tab" href="#trailer">트레일러</a></li>
 		</ul>
 		<div class="tab-content">
-	  		<div id="week" class="tab-pane fade in active">
-	  			<br><jsp:include page="newFilm.html" flush="false" />
+	  		<div id="week" class="tab-pane fade in active"><br>
+	  			<jsp:include page="newFilm.html" flush="false" />
 			</div>
-			<div id="trailer" class="tab-pane fade">
-				<br><iframe 
-					width="840" 
-					height="472" 
-					src="https://www.youtube.com/embed/L_NTRuDvV0U" 
-					title="YouTube video player" 
-					frameborder="0" 
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen>
-				</iframe>
-				<br><iframe 
-					width="840" 
-					height="472" 
-					src="https://www.youtube.com/embed/qMogMln7xsw" 
-					title="YouTube video player" 
-					frameborder="0" 
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen>
-				</iframe>
-				<iframe 
-					width="840" 
-					height="472" 
-					src="https://www.youtube.com/embed/a2cowVH03Xo" 
-					title="YouTube video player" 
-					frameborder="0" 
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen>
-				</iframe>
-				<iframe 
-					width="840" 
-					height="472" 
-					src="https://www.youtube.com/embed/3WzKmk-EiCc" 
-					title="YouTube video player" 
-					frameborder="0" 
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen>
-				</iframe>
-				<iframe 
-					width="840" 
-					height="472" 
-					src="https://www.youtube.com/embed/VrYCbzGE7DY" 
-					title="YouTube video player" 
-					frameborder="0" 
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen>
-				</iframe>
+			<div id="trailer" class="tab-pane fade"><br>
+				<div class='container'>
+				</div>				
 			</div>
 		</div>
 	</div>
