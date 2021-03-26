@@ -34,15 +34,15 @@
 	crossorigin="anonymous">
 	</script>
 	
-	<script src="newFilm.js"></script>
+	<script src="weekly.js"></script>
 	<script>
-	for(var i=0; i<newFilm.length; i++) {
+	for(var i=0; i<weekly.length; i++) {
 		$('tbody').append('<tr>');
-		$('tbody').append('<td>'+newFilm[i]['rank']+'</td>')
-		$('tbody').append('<td>'+newFilm[i]['rankOldAndNew']+'</td>')
-		$('tbody').append('<td>'+newFilm[i]['openDt']+'</td>')
-		$('tbody').append('<td>'+newFilm[i]['movieNm']+'</td>')
-		$('tbody').append('<td>'+newFilm[i]['audiCnt']+'</td>')
+		$('tbody').append('<td>'+weekly[i]['rank']+'</td>')
+		$('tbody').append('<td>'+weekly[i]['rankOldAndNew']+'</td>')
+		$('tbody').append('<td>'+weekly[i]['openDt']+'</td>')
+		$('tbody').append('<td>'+weekly[i]['movieNm']+'</td>')
+		$('tbody').append('<td>'+weekly[i]['audiCnt']+'</td>')
 		$('tbody').append('</tr>');
 	}
 	</script>

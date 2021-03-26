@@ -29,11 +29,10 @@
 		</ul>
 		<div class="tab-content">
 	  		<div id="week" class="tab-pane fade in active"><br>
-	  			<jsp:include page="newFilm.html" flush="false" />
+	  			<jsp:include page="weekly.html" flush="false" />
 			</div>
 			<div id="trailer" class="tab-pane fade"><br>
-				<div class='container'>
-				</div>				
+				<jsp:include page="trailer.html" flush="false" />
 			</div>
 		</div>
 	</div>

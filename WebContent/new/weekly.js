@@ -1,4 +1,4 @@
-var newFilm = [
+var weekly = [
 	{"rnum":"1","rank":"1","rankInten":"0","rankOldAndNew":"OLD","movieCd":"20205144","movieNm":"미나리","openDt":"2021-03-03","salesAmt":"1236983170","salesShare":"31.5","salesInten":"6601770","salesChange":"0.5","salesAcc":"6384981890","audiCnt":"131774","audiInten":"1446","audiChange":"1.1","audiAcc":"702945","scrnCnt":"1012","showCnt":"9193"},
 	{"rnum":"2","rank":"2","rankInten":"0","rankOldAndNew":"OLD","movieCd":"20200703","movieNm":"극장판 귀멸의 칼날: 무한열차편","openDt":"2021-01-27","salesAmt":"910619120","salesShare":"23.2","salesInten":"5446550","salesChange":"0.6","salesAcc":"13018957600","audiCnt":"94083","audiInten":"1020","audiChange":"1.1","audiAcc":"1349311","scrnCnt":"758","showCnt":"5972"},
 	{"rnum":"3","rank":"3","rankInten":"0","rankOldAndNew":"OLD","movieCd":"20200263","movieNm":"라야와 마지막 드래곤","openDt":"2021-03-04","salesAmt":"405968020","salesShare":"10.3","salesInten":"-240026800","salesChange":"-37.2","salesAcc":"2569899600","audiCnt":"44334","audiInten":"-25064","audiChange":"-36.1","audiAcc":"276768","scrnCnt":"761","showCnt":"3690"},
