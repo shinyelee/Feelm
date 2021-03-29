@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Moviehere | myInfo</title>
+	<title>회원정보</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/custom.css">
@@ -63,7 +63,7 @@
 			 		<h3 style="text-align: center:">회원정보</h3>
 			 		<!-- 아이디, 비밀번호, 휴대전화 입력창 -->
 			 		<div class="form-group">
-			 			<label>아이디 (변경 불가)</label>
+			 			<label>아이디</label>
 			 			<input type="text" class="form-control" name="userID" maxlength="12" value="<%=user.getUserID() %>" readonly>
 			 		</div>
 			 		<div class="form-group">
@@ -75,9 +75,27 @@
 			 			<input type="tel" class="form-control" placeholder="010-XXXX-XXXX" name="userPhone" maxlength="20" value="<%=user.getUserPhone() %>">	
 			 		</div>
 			 		<div class="form-group">
-			 			<label>이메일 (변경 불가)</label>
+			 			<label>이메일</label>
 			 			<input type="email" class="form-control" name="userEmail" maxlength="64" value="<%=user.getUserEmail() %>" readonly>	
 			 		</div>
+			 	<%
+				 	boolean emailChecked = new UserDAO().getUserEmailChecked(userID);
+					if(emailChecked == true) { 
+				%>
+					<div class="form-group">
+			 			<label>회원등급</label>
+			 			<input type="text" class="form-control" name="userLevel" maxlength="64" value="정회원" readonly>	
+			 		</div>
+				<%
+					} else {
+				%>
+					<div class="form-group">
+			 			<label>회원등급</label>
+			 			<input type="text" class="form-control" name="userLevel" maxlength="64" value="준회원" readonly>	
+			 		</div>
+		 		<%
+					}
+				%>
 			 		<!-- 회원정보 수정 버튼 -->
 			 		<input type="button" class="btn btn-default" onclick="location.href = 'myInfoDelete.jsp'" value="탈퇴">
 			 		<input type="reset" class="btn btn-default cancel" value="리셋">

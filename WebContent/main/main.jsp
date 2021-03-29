@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- 반응형 웹으로 설정 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Feelm</title>
+	<title>메인페이지</title>
 	<!-- 부트스트랩, 커스텀 CSS 추가 -->
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/custom.css">

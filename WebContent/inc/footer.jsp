@@ -6,7 +6,7 @@
 			<div class="row" style="text-align: center;">
 				<!-- <div class="col-sm-6" style="text-align: center;"> -->
 					<p>영화 리뷰 커뮤니티 Feelm</p>
-					<p>&copy; 2020, shinyelee, All rights reserved</p>
+					<p>&copy; 2020. shinyelee. All rights reserved.</p>
 				<!-- </div> -->
 				<!-- <div class="col-sm-6" style="text-align: center;">
 					<div class="list-group">
