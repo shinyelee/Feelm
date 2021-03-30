@@ -13,7 +13,7 @@ public class BbsDAO {
 	
 	public BbsDAO() {
 		try {
-			String dbURL="jdbc:mysql://localhost:3306/moviehere";
+			String dbURL="jdbc:mysql://localhost:3306/feelm";
 			String dbID = "root";
 			String dbPassword = "1234";
 			Class.forName("com.mysql.jdbc.Driver");

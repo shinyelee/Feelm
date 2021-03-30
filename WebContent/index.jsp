@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Moviehere | index</title>
+	<title>인덱스</title>
 </head>
 <body>
 
