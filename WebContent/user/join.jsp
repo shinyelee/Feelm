@@ -54,7 +54,7 @@
 			 		<!-- 아이디, 비밀번호, 휴대전화, 이메일 입력창 -->
 			 		<div class="form-group">
 			 			<label>아이디</label>
-			 			<input type="text" class="form-control" placeholder="12자 이내여야 합니다" name="userID" maxlength="12" autofocus>	
+			 			<input type="text" class="form-control" placeholder="20자 이내여야 합니다" name="userID" maxlength="20" autofocus>	
 			 		</div>
 			 		<div class="form-group">
 			 			<label>비밀번호</label>
@@ -62,11 +62,11 @@
 			 		</div>
 			 		<div class="form-group">
 			 			<label>휴대전화</label>
-			 			<input type="tel" class="form-control" placeholder="양식 : 010-XXXX-XXXX" name="userPhone" maxlength="20">	
+			 			<input type="tel" class="form-control" placeholder="010-XXXX-XXXX" name="userPhone" maxlength="20">	
 			 		</div>
 			 		<div class="form-group">
 			 			<label>이메일</label>
-			 			<input type="email" class="form-control" placeholder="가입하려면 이메일 인증이 필요합니다" name="userEmail" maxlength="64">	
+			 			<input type="email" class="form-control" placeholder="현재 사용중인 이메일 주소를 입력해 주세요(@포함)" name="userEmail" maxlength="64">	
 			 		</div>
 			 		<!-- 회원가입 버튼 -->
 			 		<input type="submit" class="btn btn-danger form-control" value="가입하기">
