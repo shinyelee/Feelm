@@ -44,7 +44,7 @@
 		if (result == -1) { // 아이디 중복이면 회원가입 불가
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('이미 존재하는 아이디입니다.')");
+			script.println("alert('아이디 또는 이메일이 이미 존재합니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 			script.close();

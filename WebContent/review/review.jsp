@@ -208,13 +208,13 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" style="text-align: center;" id="modal">리뷰 등록</h5>
+					<h5 class="modal-title" style="text-align: center;" id="modal">리뷰 작성하기</h5>
 				</div>
 				<div class="modal-body">
 					<form action="reviewAction.jsp" method="post">
 							<div class="form-group col-sm-12">
 								<label>영화제목</label>
-								<input type="text" name="movieTitle" class="form-control" maxlength="28" placeholder="최대 28자까지 작성 가능합니다." autofocus>
+								<input type="text" name="movieTitle" class="form-control" maxlength="100" placeholder="최대 100자까지 작성 가능합니다." autofocus>
 							</div>
 						<div class="form-row">
 							<div class="form-group col-sm-3">
@@ -250,11 +250,11 @@
 						</div>	
 							<div class="form-group col-sm-12">
 								<label>한줄감상</label>
-								<input type="text" name="shortReview" class="form-control" maxlength="28" placeholder="최대 28자까지 작성 가능합니다.">
+								<input type="text" name="shortReview" class="form-control" maxlength="100" placeholder="최대 100자까지 작성 가능합니다.">
 							</div>
 							<div class="form-group col-sm-12">
 								<label>장문감상</label>
-								<textarea type="text" name="fullReview" class="form-control" maxlength="2048" placeholder="최대 2048자까지 작성 가능합니다." style="height: 250px;"></textarea>
+								<textarea type="text" name="fullReview" class="form-control" maxlength="3000" placeholder="최대 3000자까지 작성 가능합니다." style="height: 250px;"></textarea>
 							</div>&nbsp;&nbsp;&nbsp;
 						<div class="modal-footer">	
 							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -270,18 +270,18 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" style="text-align: center;" id="modal">리뷰 신고</h5>
+					<h5 class="modal-title" style="text-align: center;" id="modal">리뷰 신고하기</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="close"></button>
 				</div>
 				<div class="modal-body">
 					<form action="reportAction.jsp" method="post">
 						<div class="form-group col-sm-12">
-							<label>신고제목</label>
-							<input type="text" name="reportTitle" class="form-control" maxlength="64" autofocus required>
+							<label>리뷰 제목</label>
+							<input type="text" name="reportTitle" class="form-control" maxlength="100" placeholder="해당 리뷰의 제목을 작성해 주세요." autofocus required>
 						</div>
 						<div class="form-group col-sm-12">
 							<label>신고내용</label>
-							<textarea name="reportContent" class="form-control" maxlength="2048" placeholder="신고 내용을 구체적으로 적어주세요." style="height: 125px;" required></textarea>
+							<textarea name="reportContent" class="form-control" maxlength="3000" placeholder="신고 내용을 구체적으로 작성해 주세요." style="height: 125px;" required></textarea>
 						</div>&nbsp;&nbsp;&nbsp;
 					<div class="modal-footer">	
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>

@@ -48,18 +48,18 @@
 	} else { // 빈 값 없으면 신고 성공
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('신고메일을 접수했습니다.')");
+		script.println("alert('신고가 완료되었습니다.')");
 		script.println("history.back()");
 		script.println("</script>");
 		script.close();
 	}
 	// 관리자에게 보내는 이메일 메시지
-	String host = "http://localhost:8088/Moviehere/review/review"; // 로컬호스트 주소
+	String host = "http://localhost:8088/Feelm/review/review"; // 로컬호스트 주소
 	String from = "구글아이디@gmail.com"; // 구글이메일, 신고 접수해 메일로 발송하는 아이디(총 관리자)
-	String to = "구글아이디2@gmail.com"; // 꼭 구글 아니어도 됨, 신고메일 받는 이메일(게시판 관리자)
-	String subject = "Moviehere에서 신고 메일이 접수되었습니다.";
+	String to = "이메일@주소.com"; // 꼭 구글 아니어도 됨, 신고메일 받는 이메일(게시판 관리자)
+	String subject = "Feelm에서 신고 메일이 접수되었습니다.";
 	String content = "신고자: " + userID +
-					 "<br>신고 제목: " + reportTitle +
+					 "<br>리뷰 제목: " + reportTitle +
 					 "<br>신고 내용: " + reportContent;
 	// 구글 SMTP 서버에 접속하기 위한 정보
 	Properties p = new Properties();

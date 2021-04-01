@@ -24,7 +24,7 @@
 	if(userID == null) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요합니다.')");
+		script.println("alert('정회원만 접근 가능한 게시판 입니다.')");
 		script.println("location.href = 'login.jsp'");
 		script.println("</script>");
 		script.close();
@@ -37,7 +37,7 @@
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3">
 			<div class="alert alert-danger mt-4" role="alert">
-				미인증된 아이디입니다. 인증 메일을 받지 못하셨나요?
+				메일 인증 후 정회원으로 자동 등업됩니다. 아직 인증 메일을 받지 못하셨나요?
 				<a href="emailSendAction.jsp" class="btn btn-danger">재요청</a>
 			</div>
 		</div>

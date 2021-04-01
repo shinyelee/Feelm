@@ -54,10 +54,10 @@
 					</thead>
 					<tbody>
 						<tr> <!-- 내용 -->
-							<td><input type="text" class="form-control" placeholder="제목을 입력하세요. 45자까지 작성 가능합니다." name="bbsTitle" maxlength="45"></td>
+							<td><input type="text" class="form-control" placeholder="제목을 입력하세요. 100자까지 작성 가능합니다." name="bbsTitle" maxlength="100"></td>
 						</tr>
 						<tr>
-							<td><textarea class="form-control" placeholder="내용을 입력하세요. 2048자까지 작성 가능합니다." name="bbsContent" maxlength="2048" style="height: 300px;"></textarea></td>
+							<td><textarea class="form-control" placeholder="내용을 입력하세요. 3000자까지 작성 가능합니다." name="bbsContent" maxlength="3000" style="height: 300px;"></textarea></td>
 						</tr>
 					</tbody>
 				</table>

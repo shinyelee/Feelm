@@ -29,7 +29,7 @@
 		userDAO.setUserEmailChecked(userID);
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('회원가입이 완료되었습니다.')");
+		script.println("alert('인증이 완료되었습니다.')");
 		script.println("location.href = '../index.jsp'");
 		script.println("</script>");
 		script.close();		
@@ -37,7 +37,7 @@
 	} else { // 메일 인증 실패하면 회원가입 불가
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('유효하지 않은 코드입니다.')");
+		script.println("alert('인증에 실패했습니다.')");
 		script.println("location.href = '../index.jsp'");
 		script.println("</script>");
 		script.close();		
