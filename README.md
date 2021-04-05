@@ -20,8 +20,8 @@ __4. DB설계__
 ---
 ## 개발환경
 + __2.1 사용 언어__
-  - HTML5/CSS3
-  - JavaScript ES6
+  - HTML/CSS
+  - JavaScript
   - Java 8
 + __2.2 라이브러리/프레임워크__
   - jQuery
