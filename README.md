@@ -6,7 +6,8 @@
 __1. 개요__  
 __2. 개발환경__  
 __3. 기능__  
-__4. DB설계__  
+__4. 시연__
+__5. DB설계__
 
 ---
 
@@ -76,6 +77,15 @@ __4. DB설계__
   - 탈퇴시 비밀번호 재확인
 + __3.9 기타__
   - 반응형 화면 지원
+
+---
+
+## 시연
++ __4. 유튜브__
+  - [로그인, 로그아웃](https://www.youtube.com/watch?v=LD7oE93kO_s)
+  - [회원가입, 메일인증](https://www.youtube.com/watch?v=eB0ALhptLC8)
+  - [회원정보, 회원탈퇴](https://www.youtube.com/watch?v=Kq-JueTqzu0)
+  - [영화리뷰, 리뷰신고](https://www.youtube.com/watch?v=5qdetW070NM)
 
 ---
 
