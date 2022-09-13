@@ -183,9 +183,9 @@
 
 ### 주간 박스오피스 순위
 
-- [영화진흥위원회 OPEN API][영화 api]을 이용해 주간 박스오피스 순위를 받아옵니다.
+- [영화진흥위원회 OPEN API][영화 api]를 이용해 주간 박스오피스 순위를 받아옵니다.
 
-  ![score](https://user-images.githubusercontent.com/68595933/189843111-8d92988f-386f-4769-978d-6a756263a109.png)
+  ![box_office](https://user-images.githubusercontent.com/68595933/189843111-8d92988f-386f-4769-978d-6a756263a109.png)
 
 ```javascript
 <!-- weekly.html -->
@@ -218,20 +218,70 @@ var weekly = [
 ### 인증
 
 - 로그인/로그아웃
-- 회원가입
-- 메일인증(구글이메일 api)/회원등급
+- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+
+  ![login_logout](https://user-images.githubusercontent.com/68595933/189851704-a27ed709-2e7a-4ee2-9b41-2593d75679f6.png)
+
+```java
+
+```
+
+- 회원가입/메일인증(구글이메일 api)/회원등급
+- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+
+  ![join](https://user-images.githubusercontent.com/68595933/189851810-55f3b5e0-57a0-4480-87f9-a54b39ae4fce.png)
+
+```java
+
+```
+
 - 회원정보 수정(비밀번호, 전화번호)
 - 회원탈퇴(비밀번호 재확인)
+- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+
+  ![withdrawal](https://user-images.githubusercontent.com/68595933/189850244-ffb7f5ae-856b-4eec-bb2c-1f6c79c44e5a.PNG)
+
+```java
+
+```
 
 ### 게시판
- 
+
 - crud
-- 페이징
-- 카테고리별 필터링
-- 검색
-- 게시글 정렬
-- 공감
-- 신고(구글이메일)
+- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+
+  ![review](https://user-images.githubusercontent.com/68595933/189850663-30281a18-c80c-438e-b194-e91e4bd276ea.PNG)
+
+```java
+
+```
+
+- 공감/게시글 정렬/페이징
+- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+
+  ![arrange](https://user-images.githubusercontent.com/68595933/189850775-ba4b6f65-5bd8-4fde-b65b-c285b6ef1581.PNG)
+
+```java
+
+```
+
+- 카테고리별 필터링/검색
+- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+
+  ![category](https://user-images.githubusercontent.com/68595933/189852394-3c6ea5d0-0788-48ad-b6a2-a4a91647fd37.png)
+
+```java
+
+```
+
+- 신고(구글이메일 api)
+- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+
+  ![report](https://user-images.githubusercontent.com/68595933/189850487-53a3d8d2-0b4d-4039-b8d1-55eae8c941c3.PNG)
+
+```java
+
+```
 
 ---
 
