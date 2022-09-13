@@ -1379,6 +1379,26 @@ Bbs bbs = new BbsDAO().getBbs(bbsID);
 
 ---
 
+## DB 설계
+
+![user_table](https://user-images.githubusercontent.com/68595933/189946961-56a5baae-4746-4894-a5b0-0fef95c8d7a9.png)
+
+- user(회원정보)
+
+![review_table](https://user-images.githubusercontent.com/68595933/189947046-6f4fb68f-8645-4fc0-a012-f129f3268971.png)
+
+- review(영화리뷰)
+
+![likey_table](https://user-images.githubusercontent.com/68595933/189947110-a9762988-dec2-41c3-acb0-745db00b3395.png)
+
+- likey(공감)
+
+![bbs_table](https://user-images.githubusercontent.com/68595933/189947158-521bc4dc-595d-4829-b9d6-7b7faab9d03a.png)
+
+- bbs(자유게시판)
+
+---
+
 ## 피드백
 
 ### 문제점
