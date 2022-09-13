@@ -507,7 +507,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 	}
 	String userEmail = userDAO.getUserEmail(userID);
 	boolean rightCode = (new SHA256().getSHA256(userEmail).equals(code)) ? true : false;
-	if (rightCode == true) { // 메일 인증 확인되면 회원가입 수행
+	if (rightCode == true) { // 메일 인증 확인되면 정회원으로
 		userDAO.setUserEmailChecked(userID);
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
@@ -516,7 +516,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 		script.println("</script>");
 		script.close();		
 		// return;
-	} else { // 메일 인증 실패하면 회원가입 불가
+	} else { // 메일 인증 실패하면 준회원으로
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('인증에 실패했습니다.')");
@@ -544,11 +544,118 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 	}
 ```
 
-- 회원정보 수정(비밀번호, 전화번호)
-- 회원탈퇴(비밀번호 재확인)
-- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+![my_info](https://user-images.githubusercontent.com/68595933/189902639-041e95ce-7e68-43bf-a5bc-d5950522f1f5.png)
 
-  ![withdrawal](https://user-images.githubusercontent.com/68595933/189850244-ffb7f5ae-856b-4eec-bb2c-1f6c79c44e5a.PNG)
+- 회원정보 페이지에서 비밀번호와 전화번호를 수정합니다.
+
+```java
+// UserDAO.java
+	public int update(String userID, String userPassword, String userPhone, String userEmail) { // 회원정보 수정하는 함수
+		String SQL = "update user set userPassword = ?, userPhone = ?, userEmail = ? where userID = ?"; // 변경 가능한 항목만 표기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userPassword);
+			pstmt.setString(2, userPhone);
+			pstmt.setString(3, userEmail);
+			pstmt.setString(4, userID);
+			return pstmt.executeUpdate(); // 쿼리문 실행(데이터 삽입or삭제) 후 결과값 rs에 저장ㄴㄱ
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// try-catch 이하 생략
+		}
+		return -1; // DB 오류
+	}
+```
+```javascript
+// myInfoUpdate.jsp
+	// 회원정보 수정
+	UserDTO user = new UserDAO().getUser(userID);
+	if (!userID.equals(user.getUserID())) { // 접속ID 정보와 DB ID 정보 불일치하면 회원정보 수정 불가
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('권한이 없습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+	} else { // 정보 같으나 빈 칸 남아있어도 수정 불가
+		if (request.getParameter("userPassword") == null || request.getParameter("userPhone") == null || request.getParameter("userEmail") == null || 
+			request.getParameter("userPassword").equals("") || request.getParameter("userPhone").equals("") || request.getParameter("userEmail").equals("")) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('입력하지 않은 항목이 있습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else { // 정보 같음
+			UserDAO userDAO = new UserDAO();
+			int result = userDAO.update(userID, request.getParameter("userPassword"), request.getParameter("userPhone"), request.getParameter("userEmail"));
+			if (result == -1) { // DB 꺼져있거나 오류 발생해도 수정 불가
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('회원정보 수정에 실패했습니다.')");
+				script.println("history.back()");
+				script.println("</script>");
+			} else { // 회원정보 수정 성공
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('회원정보가 수정되었습니다.')");
+				script.println("location.href = 'myInfo.jsp'");
+				script.println("</script>");
+			} 
+		}
+	}
+```
+
+![withdrawal](https://user-images.githubusercontent.com/68595933/189905116-a1cc2197-eed4-4012-8869-b63da5a47563.png)
+
+- 비밀번호 재확인 후 회원탈퇴를 진행합니다.
+
+```java
+// UserDAO.java
+	public void deleteUser(String userID) throws Exception {
+		Connection conn = null; // 자바와 DB 연결
+		PreparedStatement pstmt = null; // 특정한 SQL문 수행하도록 하는 클래스 
+		String SQL = null;
+		try {
+			conn = DatabaseUtil.getConnection(); // DatabaseUtil 통해 Connection 객체 초기화
+			SQL = "delete from user where userID = ?";
+			pstmt = conn.prepareStatement(SQL); // SQL문 실행 준비
+			pstmt.setString(1, userID); //  userID 대입
+			pstmt.executeUpdate();
+		} catch (Exception e) { // 예외 발생하면
+			e.printStackTrace(); // 오류 출력
+		} finally { // conn, pstmt, rs 자원 해제
+			// try-catch 이하 생략
+		}
+	}
+```
+```javascript
+// myInfoDeleteAction
+	request.setCharacterEncoding("UTF-8");
+	// 회원정보 삭제 전 비밀번호 확인
+	String userID = request.getParameter("userID");
+	String userPassword = request.getParameter("userPassword");
+	UserDAO userDAO = new UserDAO();
+	int check = userDAO.userCheck(userID, userPassword);
+		if (check == 1) { // 비밀번호 일치하면 정상 탈퇴
+			userDAO.deleteUser(userID);
+			session.invalidate();
+// html 생략
+		} else if (check == 0) { // 비밀번호 불일치하면 탈퇴 불가
+// html 생략
+		} else { // result == -1, 오류 발생해도 탈퇴 불가
+// html 생략
+		}
+```
+
+### 영화리뷰(게시판1)
+
+![review](https://user-images.githubusercontent.com/68595933/189850663-30281a18-c80c-438e-b194-e91e4bd276ea.PNG)
+
+- 리뷰의 작성/읽기/삭제가 가능합니다.
+- 리뷰는 한 페이지에 5개씩 출력되며 이전/다음 버튼을 통해 다른 페이지로 이동합니다.
 
 ```java
 
@@ -557,41 +664,49 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 
 ```
 
-### 게시판
+![suggestion](https://user-images.githubusercontent.com/68595933/189912278-a581416d-058a-4fdb-bdd9-5ba0fa460110.png)
 
-- crud
-- [기능 이름][요약]를 이용해 ~를 받아옵니다.
-
-  ![review](https://user-images.githubusercontent.com/68595933/189850663-30281a18-c80c-438e-b194-e91e4bd276ea.PNG)
+- 공감 버튼으로 리뷰를 추천합니다.
+- 공감은 1회만 가능하며, 내가 쓴 리뷰는 공감할 수 없습니다.
 
 ```java
 
 ```
+```javascript
 
-- 공감/게시글 정렬/페이징
-- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+```
+  
+![dropdown](https://user-images.githubusercontent.com/68595933/189911005-01a838d9-90ed-4ebf-a96d-62d4082d9b39.png)
 
-  ![arrange](https://user-images.githubusercontent.com/68595933/189850775-ba4b6f65-5bd8-4fde-b65b-c285b6ef1581.PNG)
+- 드롭다운 메뉴를 통해 리뷰를 최신순/공감순으로 정렬합니다.
+- 드롭다운 메뉴를 통해 리뷰를 장르별로 필터링합니다.
 
 ```java
 
 ```
+```javascript
 
-- 카테고리별 필터링/검색
-- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+```
 
-  ![category](https://user-images.githubusercontent.com/68595933/189852394-3c6ea5d0-0788-48ad-b6a2-a4a91647fd37.png)
+![search](https://user-images.githubusercontent.com/68595933/189910690-2f959bdc-d332-4b98-abf1-66266cde48e5.png)
+
+- 검색창을 통해 리뷰를 검색합니다.
 
 ```java
 
 ```
+```javascript
 
-- 신고(구글이메일 api)
-- [기능 이름][요약]를 이용해 ~를 받아옵니다.
+```
 
-  ![report](https://user-images.githubusercontent.com/68595933/189850487-53a3d8d2-0b4d-4039-b8d1-55eae8c941c3.PNG)
+![report](https://user-images.githubusercontent.com/68595933/189850487-53a3d8d2-0b4d-4039-b8d1-55eae8c941c3.PNG)
+
+- [구글이메일][이메일 api]로 신고 이메일을 보냅니다.
 
 ```java
+
+```
+```javascript
 
 ```
 
@@ -601,13 +716,13 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 
 ### 문제점
 
-1. 로그아웃시 이름만 삭제되고 할 일 목록은 남아있음.
-2. 할 일 수정 불가.
+1. JSP Model1의 단점
+2. API 남발
 
 ### 개선점
 
-1. 로그아웃시 이름과 할 일 목록을 함께 삭제할 것.
-2. 수정 기능 추가.
+1. Model2로 만들기
+2. 다음엔 직접 구현하기
 
 ---
 
