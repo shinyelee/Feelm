@@ -21,19 +21,18 @@
 
 ### 목표
 
-- JSP Model1 이해하기.
-- 반응형으로 만들기.
+- JSP Model1로 구현해 봅니다.
+- 반응형 화면으로 구현해 봅니다.
 
 ### 사용
 
-- HTML/CSS
-- JavaScript
+- HTML5/CSS3
+- JavaScript ES6
 - Java 8
 - jQuery 3.5
 - Bootstrap 3
 - MySQL 5.6
 - Tomcat 8.5
-- GitHub
 
 ---
 
@@ -104,7 +103,7 @@ var weekly = [
 
 ![login_logout](https://user-images.githubusercontent.com/68595933/189851704-a27ed709-2e7a-4ee2-9b41-2593d75679f6.png)
 
-- ID와 비밀번호의 유효성을 검사 후 로그인합니다.
+- ID와 비밀번호의 유효성을 검사 후 로그인 합니다.
 
 ```java
 // UserDAO.java
@@ -441,7 +440,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 ![email_check](https://user-images.githubusercontent.com/68595933/189893188-36295453-37f0-422e-b0e7-8d794ad09f77.png)
 
 - 이메일 인증을 진행하면 회원등급이 준회원에서 정회원으로 변경됩니다.
-- 이메일 인증을 진행하지 않으면 준회원으로 가입되며, 게시판 접근이 제한됩니다.
+- 인증하지 않으면 준회원으로 가입되며, 게시판 접근이 제한됩니다.
 
 ```java
 // UserDAO.java
@@ -1408,8 +1407,8 @@ Bbs bbs = new BbsDAO().getBbs(bbsID);
 
 ### 개선점
 
-1. JSP Model2로 개발하기.
-2. 다음에 게시판 개발할 때 댓글 구현하기.
+1. JSP Model2로 개발할 것.
+2. 다음에 게시판 개발할 때 댓글 구현할 것.
 
 ---
 
@@ -1427,6 +1426,7 @@ Bbs bbs = new BbsDAO().getBbs(bbsID);
 <!-- 링크 -->
 
 [유튜브]: https://www.youtube.com/playlist?list=PLu_M-qKXkbvNLg5dgwucHSp10Szb51ZE-
+
 [지도 api]: https://apis.map.kakao.com/web/guide/
 [영화 api]: https://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do
 [이메일 api]: https://developers.google.com/gmail/api
