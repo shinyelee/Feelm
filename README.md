@@ -8,7 +8,7 @@
 
 ## 시작
 
-- 영화 커뮤니티 프로젝트입니다.
+- 각종 API를 활용한 영화 커뮤니티 웹 프로젝트입니다.
 - [시연영상 바로가기][유튜브]
 
 ---
@@ -17,7 +17,7 @@
 
 ### 기간
 
-- 20.08.04.~20.09.05.
+- 20.08.04. ~ 20.09.05.
 
 ### 목표
 
@@ -38,14 +38,15 @@
 
 ## 기능
 
-### 지도
+### 1. 지도(KakaoMaps API)
 
 ![map](https://user-images.githubusercontent.com/68595933/189836242-5b3aed24-a5b2-4b7b-aeba-35ffe9b14c4e.png)
 
-- [KakaoMaps API][지도 api]를 이용해 지도에 특정 위치를 표시합니다.
+- [카카오맵 API][지도 api]를 이용해 지도에 특정 위치를 표시합니다.
 
 ```javascript
 // map.jsp
+
 // 이미지 지도에 표시할 마커입니다
 // 이미지 지도에 표시할 마커를 아래와 같이 배열로 넣어주면 여러개의 마커를 표시할 수 있습니다 
 var markers = [
@@ -67,14 +68,15 @@ var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지
 var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 ```
 
-### 주간 박스오피스 순위
+### 2. 주간 박스오피스 순위(영화진흥위원회 OPEN API)
 
 ![box_office](https://user-images.githubusercontent.com/68595933/189843111-8d92988f-386f-4769-978d-6a756263a109.png)
 
-- [영화진흥위원회 OPEN API][영화 api]를 이용해 주간 박스오피스 순위를 받아옵니다.
+- [영진위 API][영화 api]를 이용해 주간 박스오피스 순위를 받아옵니다.
 
 ```javascript
 // weekly.html
+
 	src="https://code.jquery.com/jquery-3.5.1.js" 
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 	crossorigin="anonymous">
@@ -93,20 +95,23 @@ var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 	}
   
 // weekly.json
+
 var weekly = [
 	{"rnum":"1","rank":"1","rankInten":"0","rankOldAndNew":"OLD","movieCd":"20205144","movieNm":"미나리","openDt":"2021-03-03","salesAmt":"1236983170","salesShare":"31.5","salesInten":"6601770","salesChange":"0.5","salesAcc":"6384981890","audiCnt":"131774","audiInten":"1446","audiChange":"1.1","audiAcc":"702945","scrnCnt":"1012","showCnt":"9193"},
   // 이하 생략
 ]
 ```
 
-### 인증
+### 3. 인증(Auth)
 
 ![login_logout](https://user-images.githubusercontent.com/68595933/189851704-a27ed709-2e7a-4ee2-9b41-2593d75679f6.png)
 
-- ID와 비밀번호의 유효성을 검사 후 로그인 합니다.
+- 3.1. 로그인/로그아웃
+  - 유효성 검사 후 로그인합니다.
 
 ```java
 // UserDAO.java
+
 	public int login(String userID, String userPassword) { // 로그인 시도 함수
 		String SQL = "select userPassword from user where userID = ?";
 		Connection conn = null; // 자바와 DB 연결
@@ -135,6 +140,7 @@ var weekly = [
 ```
 ```javascript
 // login.jsp
+
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
 	// 로그인 여부 확인
@@ -152,6 +158,7 @@ var weekly = [
 	}
 	
 // loginAction.jsp
+
         request.setCharacterEncoding("UTF-8"); // 한글 인코딩
 	String userID = null;
 	String userPassword = null;
@@ -216,15 +223,18 @@ var weekly = [
 ```
 ```javascript
 // logoutAction.jsp
+
         session.invalidate(); // 로그아웃 (세션 빼앗음)
 ```
 
 ![join](https://user-images.githubusercontent.com/68595933/189851810-55f3b5e0-57a0-4480-87f9-a54b39ae4fce.png)
 
-- 유효성 검사 후 회원가입을 진행합니다.
+- 3.2. 회원가입
+  - 유효성 검사 후 가입합니다.
 
 ```java
 // UserDAO.java
+
 	public int join(UserDTO user) { // 회원가입 수행하는 함수
 		String SQL = "insert into user values (?, ?, ?, ?, ?, false)"; // 이메일체크 제외
 		Connection conn = null;
@@ -249,6 +259,7 @@ var weekly = [
 ```
 ```javascript
 // joinAction.jsp
+
 	request.setCharacterEncoding("UTF-8");
 	// 회원가입
 	String userID = null;
@@ -305,10 +316,12 @@ var weekly = [
 
 ![email](https://user-images.githubusercontent.com/68595933/189889641-ece1d236-4c41-42c7-81e9-beefb9a10f7a.png)
 
-- [구글이메일][이메일 api]로 가입 인증 이메일을 보냅니다.
+- 3.3. 이메일 인증
+  - [구글이메일][이메일 api]로 가입 인증 이메일을 보냅니다.
 
 ```java
 // Gmail.java
+
 public class Gmail extends Authenticator { // SMTP로 이메일 인증을 수행하는 클래스 상속
 // Authenticator ctl+shift -> enter(javax.mail 선택)
 	@Override
@@ -318,6 +331,7 @@ public class Gmail extends Authenticator { // SMTP로 이메일 인증을 수행
 }
 
 // SHA256.java
+
 public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 데이터를 생성하는 클래스
 
 	public static String getSHA256(String input) { // 해시 값 구하는 함수
@@ -344,6 +358,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 }
 
 // UserDAO.java
+
 	public String getUserEmail(String userID) { // 아이디값 -> 이메일 반환
 		String SQL = "select userEmail from user where userID = ?";
 		Connection conn = null;
@@ -367,6 +382,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 ```
 ```javascript
 // emailSendAction.jsp
+
 	request.setCharacterEncoding("UTF-8");
 	UserDAO userDAO = new UserDAO();
 	String userID = null;
@@ -439,11 +455,13 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 
 ![email_check](https://user-images.githubusercontent.com/68595933/189893188-36295453-37f0-422e-b0e7-8d794ad09f77.png)
 
-- 이메일 인증을 진행하면 회원등급이 준회원에서 정회원으로 변경됩니다.
-- 인증하지 않으면 준회원으로 가입되며, 게시판 접근이 제한됩니다.
+- 3.4. 회원 등급
+  - 이메일 인증을 진행하면 회원등급이 준회원에서 정회원으로 변경됩니다.
+  - 인증하지 않으면 준회원으로 가입되며, 게시판 접근이 제한됩니다.
 
 ```java
 // UserDAO.java
+
 	public boolean getUserEmailChecked(String userID) { // 이메일 인증여부 확인 함수
 		String SQL = "select userEmailChecked from user where userID = ?";
 		Connection conn = null;
@@ -486,6 +504,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 ```
 ```javascript
 // emailCheckAction.jsp
+
 	request.setCharacterEncoding("UTF-8");
 	// 메일 인증 절차
 	String code = request.getParameter("code"); // 메일 인증 위한 해시 코드
@@ -526,6 +545,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 	}
 	
 // emailSendConfirm.jsp
+
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
 	// 로그인 여부 확인
@@ -545,10 +565,12 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 
 ![my_info](https://user-images.githubusercontent.com/68595933/189902639-041e95ce-7e68-43bf-a5bc-d5950522f1f5.png)
 
-- 회원정보 페이지에서 비밀번호와 전화번호를 수정합니다.
+- 3.5. 회원정보 수정
+  - 회원정보 페이지에서 비밀번호와 전화번호를 수정합니다.
 
 ```java
 // UserDAO.java
+
 	public int update(String userID, String userPassword, String userPhone, String userEmail) { // 회원정보 수정하는 함수
 		String SQL = "update user set userPassword = ?, userPhone = ?, userEmail = ? where userID = ?"; // 변경 가능한 항목만 표기
 		Connection conn = null;
@@ -571,6 +593,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 ```
 ```javascript
 // myInfoUpdate.jsp
+
 	// 회원정보 수정
 	UserDTO user = new UserDAO().getUser(userID);
 	if (!userID.equals(user.getUserID())) { // 접속ID 정보와 DB ID 정보 불일치하면 회원정보 수정 불가
@@ -609,10 +632,12 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 
 ![withdrawal](https://user-images.githubusercontent.com/68595933/189905116-a1cc2197-eed4-4012-8869-b63da5a47563.png)
 
-- 비밀번호 재확인 후 회원탈퇴를 진행합니다.
+- 3.6. 회원탈퇴
+  - 비밀번호 재확인 후 회원탈퇴합니다.
 
 ```java
 // UserDAO.java
+
 	public void deleteUser(String userID) throws Exception {
 		Connection conn = null; // 자바와 DB 연결
 		PreparedStatement pstmt = null; // 특정한 SQL문 수행하도록 하는 클래스 
@@ -632,6 +657,7 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 ```
 ```javascript
 // myInfoDeleteAction
+
 	request.setCharacterEncoding("UTF-8");
 	// 회원정보 삭제 전 비밀번호 확인
 	String userID = request.getParameter("userID");
@@ -649,15 +675,18 @@ public class SHA256 { // 회원가입과 이메일 인증에 사용할 해시 �
 		}
 ```
 
-### 영화리뷰(게시판1)
+### 4. 영화리뷰(게시판1)
 
 ![review](https://user-images.githubusercontent.com/68595933/189850663-30281a18-c80c-438e-b194-e91e4bd276ea.PNG)
 
-- 리뷰의 작성/읽기/삭제가 가능합니다.
-- 리뷰는 한 페이지에 5개씩 출력되며 이전/다음 버튼을 통해 다른 페이지로 이동합니다.
+- 4.1. 게시글 CRUD
+  - 리뷰 작성/읽기/삭제 가능합니다.
+  - 내가 쓴 게시글만 삭제 버튼을 보여줍니다.
+  - 리뷰는 한 페이지에 5개씩 출력되며 이전/다음 버튼을 통해 다른 페이지로 이동합니다.
 
 ```java
 // ReviewDAO.java
+
 public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -724,7 +753,8 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 ```
 ```javascript
 // deleteAction.jsp
-// 리뷰 삭제
+
+	// 리뷰 삭제
 	request.setCharacterEncoding("UTF-8");
 	String reviewID = null;
 	if(request.getParameter("reviewID") != null) {
@@ -761,6 +791,7 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 	}
 	
 // review.jsp
+
 		ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
 		reviewList = new ReviewDAO().getList(movieGenre, searchType, search, pageNumber);
 		if(reviewList != null)
@@ -769,7 +800,8 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 				ReviewDTO review = reviewList.get(i);
 
 // reviewAction.jsp
-// ?에 해당하는 항목들
+
+	// ?에 해당하는 항목들
 	// reviewID(리뷰 번호)는 자동+1 증가하니 제외
 	// userID는 위에서 정의했으니 제외
 	// reviewDate(리뷰 공감)는 기본값이 0이니 제외
@@ -832,11 +864,13 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 
 ![suggestion](https://user-images.githubusercontent.com/68595933/189912278-a581416d-058a-4fdb-bdd9-5ba0fa460110.png)
 
-- 공감 버튼으로 리뷰를 추천합니다.
-- 공감은 1회만 가능하며, 내가 쓴 리뷰는 공감할 수 없습니다.
+- 4.2. 공감하기
+  - 공감 버튼으로 리뷰를 추천합니다.
+  - 공감은 1회만 가능하며, 내가 쓴 리뷰는 공감할 수 없습니다.
 
 ```java
 // ReviewDAO.java
+
 	public int like(String reviewID) { // 리뷰에 공감 적용하는 함수
 		String SQL = "update review set likeCount = likeCount + 1 where reviewID = ?";
 		Connection conn = null;
@@ -856,6 +890,7 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 	}
 
 // LikeyDAO.java
+
 	public int like(String userID, String reviewID, String userIP) {
 		String SQL = "insert into likey values (?, ?, ?)";
 		Connection conn = null;
@@ -878,6 +913,7 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 ```
 ```javascript
 // likeAction.jsp
+
 	// 공감 중복&조작 막기 위해 사용자 IP주소 가져옴
 	public static String getClientIP(HttpServletRequest request) {
 		String ip = request.getHeader("X-FORWARDED-FOR");
@@ -931,12 +967,14 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 ![dropdown](https://user-images.githubusercontent.com/68595933/189911005-01a838d9-90ed-4ebf-a96d-62d4082d9b39.png)
 ![search](https://user-images.githubusercontent.com/68595933/189910690-2f959bdc-d332-4b98-abf1-66266cde48e5.png)
 
-- 드롭다운 메뉴를 통해 리뷰를 최신순/공감순으로 정렬합니다.
-- 드롭다운 메뉴를 통해 리뷰를 장르별로 필터링합니다.
-- 검색창을 통해 리뷰를 검색합니다.
+- 4.3. 정렬
+  - 드롭다운 메뉴를 통해 리뷰를 최신순/공감순으로 정렬합니다.
+  - 드롭다운 메뉴를 통해 리뷰를 장르별로 필터링합니다.
+  - 검색창을 통해 리뷰를 검색합니다.
 
 ```java
 // ReviewDAO.java
+
 	public ArrayList<ReviewDTO> getList (String movieGenre, String searchType, String search, int pageNumber) {
 		if(movieGenre.equals("전체")) { // 리뷰 리스트 보여주는 함수
 			movieGenre = "";
@@ -1001,6 +1039,7 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 ```
 ```javascript
 // review.jsp
+
 	request.setCharacterEncoding("UTF-8");	
 	String movieGenre = "전체"; // 검색창 기본 정렬 순서
 	String searchType = "최신순";
@@ -1026,11 +1065,13 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 
 ![report](https://user-images.githubusercontent.com/68595933/189850487-53a3d8d2-0b4d-4039-b8d1-55eae8c941c3.PNG)
 
-- [구글이메일][이메일 api]로 신고 이메일을 보냅니다.
+- 4.4. 신고
+  - [구글이메일][이메일 api]로 신고 이메일을 보냅니다.
 
 ```javascript
 // reportAction.jsp
-// 신고 수행
+
+	// 신고 수행
 	request.setCharacterEncoding("UTF-8");
 	String reportTitle = null;
 	String reportContent = null;
@@ -1101,15 +1142,17 @@ public int write(ReviewDTO reviewDTO) { // 글쓰기 함수
 	}
 ```
 
-### 자유게시판(게시판2)
+### 5. 자유게시판(게시판2)
 
 ![board](https://user-images.githubusercontent.com/68595933/189918861-15e449a3-f073-46c3-a84c-6323ba2c15c6.png)
 
-- 게시글 작성/읽기/수정/삭제 가능합니다.
-- 내가 쓴 글만 수정/삭제 버튼이 보입니다.
+- 5.1. 게시글 CRUD
+  - 게시글 작성/읽기/수정/삭제 가능합니다.
+  - 내가 쓴 게시글만 수정/삭제 버튼을 보여줍니다.
 
 ```java
 // BbsDAO.java
+
 public String getDate() { // 현재 날짜(서버 시간)을 가져오는 함수
 		String SQL = "select now()";
 		try {
@@ -1208,6 +1251,7 @@ public String getDate() { // 현재 날짜(서버 시간)을 가져오는 함수
 ```
 ```javascript
 // bbsDeleteAction.jsp
+
 	Bbs bbs = new BbsDAO().getBbs(bbsID);
 	if (!userID.equals(bbs.getUserID())) { // 접속자와 작성자가 다르면 게시글 삭제 권한 없음 
 		PrintWriter script = response.getWriter();
@@ -1234,6 +1278,7 @@ public String getDate() { // 현재 날짜(서버 시간)을 가져오는 함수
 	}
 	
 // bbsUpdateAction.jsp
+
 Bbs bbs = new BbsDAO().getBbs(bbsID);
 	if (!userID.equals(bbs.getUserID())) { // 접속자와 작성자가 다르면 글 수정 권한 없음
 		PrintWriter script = response.getWriter();
@@ -1269,6 +1314,7 @@ Bbs bbs = new BbsDAO().getBbs(bbsID);
 	}
 	
 // bbsWriteAction.jsp
+
 	String userID = null;
 	// 로그인 여부 확인
 	if (session.getAttribute("userID") != null) {
@@ -1309,11 +1355,13 @@ Bbs bbs = new BbsDAO().getBbs(bbsID);
 
 ![page](https://user-images.githubusercontent.com/68595933/189917806-8066ce8a-eaf8-4c2b-bd6a-787c10e1e076.png)
 
-- 게시글은 한 페이지에 10개씩 출력되며 페이지 숫자 버튼을 통해 해당 페이지로 이동합니다.
-- 페이지 목록 양 옆의 화살표 버튼을 통해 10페이지 단위로 이동합니다.
+- 5.1. 게시글 CRUD
+  - 게시글은 한 페이지에 10개씩 출력되며 페이지 숫자 버튼을 통해 해당 페이지로 이동합니다.
+  - 페이지 목록 양 옆의 화살표 버튼을 통해 10페이지 단위로 이동합니다.
 
 ```java
 // BbsDAO.java
+
 	public ArrayList<Bbs> getList(int pageNumber) { // 페이징 처리
 		String SQL = "select * from bbs where bbsID < ? and bbsAvailable = 1 order by bbsID desc limit 10";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
@@ -1369,7 +1417,8 @@ Bbs bbs = new BbsDAO().getBbs(bbsID);
 ```
 ```javascript
 // bbs.jsp
-// 페이징
+
+	// 페이징
 	int pageNumber = 1; // 1은 기본 페이지
 	if (request.getParameter("pageNumber") != null) { // 현재 페이지가 몇 페이지인지 알려주기 위해
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
